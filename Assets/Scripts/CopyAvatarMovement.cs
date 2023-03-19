@@ -17,6 +17,7 @@ public class CopyAvatarMovement : MonoBehaviour
     private GameObject Panda_J5;
     private GameObject Panda_J6;
     private GameObject Panda_J7;
+
     private float J1,
         J2,
         J3,
@@ -48,24 +49,56 @@ public class CopyAvatarMovement : MonoBehaviour
     void Update()
     {
         // assuming T pose is the origin pose
-        J1 = right_arm.transform.localEulerAngles.x;
-        J2 = right_arm.transform.localEulerAngles.z;
-        J3 = right_arm.transform.localEulerAngles.y;
-        J4 = right_forearm.transform.localEulerAngles.z;
-        J5 = right_forearm.transform.localEulerAngles.y;
-        J6 = right_hand.transform.localEulerAngles.z;
-        J7 = right_hand.transform.localEulerAngles.y;
+        Quaternion arm_rotation = right_arm.transform.localRotation;
+        Quaternion forearm_rotation = right_forearm.transform.localRotation;
+        Quaternion hand_rotation = right_hand.transform.localRotation;
+        // J1 = right_arm.transform.localEulerAngles.y;
+        J1 = Quaternion.FromToRotation(Vector3.left, arm_rotation * Vector3.left).eulerAngles.y;
+        J2 = Quaternion.FromToRotation(Vector3.right, arm_rotation * Vector3.right).eulerAngles.z;
+        J3 = Quaternion.FromToRotation(Vector3.up, arm_rotation * Vector3.up).eulerAngles.x;
+        // J2 = right_arm.transform.localEulerAngles.z;
+        // J3 = right_arm.transform.localEulerAngles.x;
+        J4 = Quaternion
+            .FromToRotation(Vector3.right, forearm_rotation * Vector3.right)
+            .eulerAngles.z;
+        J5 = Quaternion
+            .FromToRotation(Vector3.right, forearm_rotation * Vector3.right)
+            .eulerAngles.y;
+        J6 = Quaternion.FromToRotation(Vector3.right, hand_rotation * Vector3.right).eulerAngles.z;
+        J7 = Quaternion.FromToRotation(Vector3.right, hand_rotation * Vector3.right).eulerAngles.y;
+
         //right_shoulder.transform.localEulerAngles = new Vector3(0, 0, 50);
         // joint angle constraint
+        Debug.Log(J6);
         List<float> jointAngles = new List<float> { J1, J2, J3, J4, J5, J6, J7 };
         jointAngleConstraint(jointAngles);
-        Panda_J1.transform.localEulerAngles = new Vector3(0, jointAngles[0], 0);
-        Panda_J2.transform.localEulerAngles = new Vector3(jointAngles[1], 0, 90);
-        Panda_J3.transform.localEulerAngles = new Vector3(jointAngles[2], 0, -90);
-        Panda_J4.transform.localEulerAngles = new Vector3(jointAngles[3], 0, -90);
-        Panda_J5.transform.localEulerAngles = new Vector3(jointAngles[4], 0, 90);
-        Panda_J6.transform.localEulerAngles = new Vector3(jointAngles[5], 0, -90);
-        Panda_J7.transform.localEulerAngles = new Vector3(jointAngles[6], 0, -90);
+
+        // Debug.Log(jointAngles[1]);
+
+        // Panda_J1.transform.localEulerAngles = new Vector3(0, jointAngles[0], 0);
+        Panda_J1.transform.localRotation = Quaternion.AngleAxis(jointAngles[0], Vector3.up);
+
+        Panda_J2.transform.localRotation =
+            Quaternion.AngleAxis(jointAngles[1], Vector3.left)
+            * Quaternion.AngleAxis(-90f, Vector3.back);
+        Panda_J3.transform.localRotation =
+            Quaternion.AngleAxis(jointAngles[2], Vector3.left)
+            * Quaternion.AngleAxis(90f, Vector3.back);
+        Panda_J4.transform.localRotation =
+            Quaternion.AngleAxis(jointAngles[3], Vector3.left)
+            * Quaternion.AngleAxis(90f, Vector3.back);
+        Panda_J5.transform.localRotation =
+            Quaternion.AngleAxis(jointAngles[4], Vector3.left)
+            * Quaternion.AngleAxis(-90f, Vector3.back);
+        Panda_J6.transform.localRotation =
+            Quaternion.AngleAxis(jointAngles[5], Vector3.left)
+            * Quaternion.AngleAxis(-90, Vector3.forward);
+        Panda_J7.transform.localRotation =
+            Quaternion.AngleAxis(jointAngles[6], Vector3.left)
+            * Quaternion.AngleAxis(90, Vector3.back);
+        // Panda_J2.transform.rotation =
+        // Panda_J2.transform.localEulerAngles = new Vector3(jointAngles[1], 0, 90);
+        // Panda_J4.transform.localEulerAngles = new Vector3(-jointAngles[3], 0, -90);
     }
 
     private void jointAngleConstraint(List<float> jointAngles)
@@ -82,14 +115,11 @@ public class CopyAvatarMovement : MonoBehaviour
         };
         for (int i = 0; i < jointAngles.Count; i++)
         {
-            if (jointAngles[i]>180f)
+            if (jointAngles[i] > 180f && i != 5)
             {
-                jointAngles[i] = jointAngles[i]-360f;
+                jointAngles[i] = jointAngles[i] - 360f;
             }
-            if (constraintVal[i, 0] > jointAngles[i] && constraintVal[i, 1] < jointAngles[i])
-            {
-                // valid angle, no need to alter angle -- do nothing
-            }
+            if (constraintVal[i, 0] > jointAngles[i] && constraintVal[i, 1] < jointAngles[i]) { }
             else if (constraintVal[i, 0] < jointAngles[i])
             {
                 // larger than max
@@ -100,6 +130,7 @@ public class CopyAvatarMovement : MonoBehaviour
             {
                 // lower than min
                 jointAngles[i] = constraintVal[i, 1];
+
                 // Debug.Log("joint " + (i + 1f) + "  out of Range");
             }
             else
