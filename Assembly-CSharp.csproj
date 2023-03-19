@@ -36,20 +36,20 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
+     <Compile Include="Assets\OptiTrack\Scripts\OptitrackRigidBody.cs" />
      <Compile Include="Assets\Scripts\ROSClockPublisher.cs" />
      <Compile Include="Assets\Scripts\CopyAvatarMovement.cs" />
+     <Compile Include="Assets\OptiTrack\Scripts\OptitrackSkeletonAnimator.cs" />
      <Compile Include="Assets\Scripts\TimeStamp.cs" />
      <Compile Include="Assets\Scripts\Clock.cs" />
      <Compile Include="Assets\Scripts\TransformTreeNode.cs" />
      <Compile Include="Assets\Scripts\ROSTransformTreePublisher.cs" />
-     <Compile Include="Assets\Scripts\TransformExtensions.cs" />
-     <Compile Include="Assets\OptiTrack\Scripts\OptitrackSkeletonAnimator.cs" />
-     <Compile Include="Assets\OptiTrack\Plugins\Managed\NatNetLib\Client.cs" />
-     <Compile Include="Assets\OptiTrack\Plugins\Managed\NatNetLib\Native.cs" />
-     <Compile Include="Assets\OptiTrack\Scripts\OptitrackStreamingClient.cs" />
-     <Compile Include="Assets\OptiTrack\Scripts\OptitrackRigidBody.cs" />
-     <Compile Include="Assets\Huge Mocap Library\demo\scripts\demo.cs" />
      <Compile Include="Assets\Huge Mocap Library\demo\scripts\smoothFollow.cs" />
+     <Compile Include="Assets\Huge Mocap Library\demo\scripts\demo.cs" />
+     <Compile Include="Assets\Scripts\TransformExtensions.cs" />
+     <Compile Include="Assets\OptiTrack\Plugins\Managed\NatNetLib\Native.cs" />
+     <Compile Include="Assets\OptiTrack\Plugins\Managed\NatNetLib\Client.cs" />
+     <Compile Include="Assets\OptiTrack\Scripts\OptitrackStreamingClient.cs" />
      <None Include="Assets\Huge Mocap Library\mocap animations\cmu-mocap-index-text.txt" />
      <None Include="Assets\Huge Mocap Library\READTHIS.txt" />
      <None Include="Assets\OptiTrack\README_OptiTrack_Unity.txt" />
@@ -688,6 +688,9 @@
     </Reference>
     <Reference Include="Unity.Robotics.UrdfImporter">
         <HintPath>D:\Desktop\Git Repos\HCIAdv\Library\ScriptAssemblies\Unity.Robotics.UrdfImporter.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Toolchain.Win-x86_64-Linux-x86_64">
+        <HintPath>D:\Desktop\Git Repos\HCIAdv\Library\ScriptAssemblies\Unity.Toolchain.Win-x86_64-Linux-x86_64.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Sysroot.Linux_x86_64">
         <HintPath>D:\Desktop\Git Repos\HCIAdv\Library\ScriptAssemblies\Unity.Sysroot.Linux_x86_64.dll</HintPath>
