@@ -13,14 +13,16 @@ using UnityEngine;
 public class ROSTransformTreePublisher : MonoBehaviour
 {
     const string k_TfTopic = "/tf";
-    
+
     [SerializeField]
     double m_PublishRateHz = 20f;
+
     [SerializeField]
-    List<string> m_GlobalFrameIds = new List<string> { "GameObject","fr3"};
+    List<string> m_GlobalFrameIds = new List<string> { "world", "fr3" };
+
     [SerializeField]
     GameObject m_RootGameObject;
-    
+
     double m_LastPublishTimeSeconds;
 
     TransformTreeNode m_TransformRoot;
@@ -28,14 +30,17 @@ public class ROSTransformTreePublisher : MonoBehaviour
 
     double PublishPeriodSeconds => 1.0f / m_PublishRateHz;
 
-    bool ShouldPublishMessage => Clock.NowTimeInSeconds > m_LastPublishTimeSeconds + PublishPeriodSeconds;
+    bool ShouldPublishMessage =>
+        Clock.NowTimeInSeconds > m_LastPublishTimeSeconds + PublishPeriodSeconds;
 
     // Start is called before the first frame update
     void Start()
     {
         if (m_RootGameObject == null)
         {
-            Debug.LogWarning($"No GameObject explicitly defined as {nameof(m_RootGameObject)}, so using {name} as root.");
+            Debug.LogWarning(
+                $"No GameObject explicitly defined as {nameof(m_RootGameObject)}, so using {name} as root."
+            );
             m_RootGameObject = gameObject;
         }
 
@@ -67,34 +72,35 @@ public class ROSTransformTreePublisher : MonoBehaviour
         if (m_GlobalFrameIds.Count > 0)
         {
             var tfRootToGlobal = new TransformStampedMsg(
-                new HeaderMsg(0,new TimeStamp(Clock.time), m_GlobalFrameIds.Last()),
+                new HeaderMsg(0, new TimeStamp(Clock.time), m_GlobalFrameIds.Last()),
                 m_TransformRoot.name,
-                m_TransformRoot.Transform.To<FLU>());
+                m_TransformRoot.Transform.To<FLU>()
+            );
             tfMessageList.Add(tfRootToGlobal);
         }
         else
         {
-            Debug.LogWarning($"No {m_GlobalFrameIds} specified, transform tree will be entirely local coordinates.");
+            Debug.LogWarning(
+                $"No {m_GlobalFrameIds} specified, transform tree will be entirely local coordinates."
+            );
         }
-        
-        // In case there are multiple "global" transforms that are effectively the same coordinate frame, 
+
+        // In case there are multiple "global" transforms that are effectively the same coordinate frame,
         // treat this as an ordered list, first entry is the "true" global
         for (var i = 1; i < m_GlobalFrameIds.Count; ++i)
         {
             var tfGlobalToGlobal = new TransformStampedMsg(
-                new HeaderMsg(0,new TimeStamp(Clock.time), m_GlobalFrameIds[i - 1]),
+                new HeaderMsg(0, new TimeStamp(Clock.time), m_GlobalFrameIds[i - 1]),
                 m_GlobalFrameIds[i],
                 // Initializes to identity transform
-                new TransformMsg());
+                new TransformMsg()
+            );
             tfMessageList.Add(tfGlobalToGlobal);
         }
         // get the transformation and rotation
         PopulateTFList(tfMessageList, m_TransformRoot);
-        tfMessageList.RemoveRange(0,9);
-        TFMessageMsg tfMessage = new TFMessageMsg
-        {
-            transforms=tfMessageList.ToArray()
-        };
+        tfMessageList.RemoveRange(0, 9);
+        TFMessageMsg tfMessage = new TFMessageMsg { transforms = tfMessageList.ToArray() };
 
         m_ROS.Publish(k_TfTopic, tfMessage);
         m_LastPublishTimeSeconds = Clock.FrameStartTimeInSeconds;
@@ -106,6 +112,5 @@ public class ROSTransformTreePublisher : MonoBehaviour
         {
             PublishMessage();
         }
-
     }
 }

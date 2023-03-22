@@ -18,6 +18,10 @@ public class CopyAvatarMovement : MonoBehaviour
     private GameObject Panda_J6;
     private GameObject Panda_J7;
 
+    private List<float> preFrameAngle;
+
+    private int initFlag;
+
     private float J1,
         J2,
         J3,
@@ -36,13 +40,15 @@ public class CopyAvatarMovement : MonoBehaviour
         right_forearm = GameObject.Find("Right Forearm");
         right_hand = GameObject.Find("Right Hand");
 
-        Panda_J1 = GameObject.Find("panda_link1");
-        Panda_J2 = GameObject.Find("panda_link2");
-        Panda_J3 = GameObject.Find("panda_link3");
-        Panda_J4 = GameObject.Find("panda_link4");
-        Panda_J5 = GameObject.Find("panda_link5");
-        Panda_J6 = GameObject.Find("panda_link6");
-        Panda_J7 = GameObject.Find("panda_link7");
+        Panda_J1 = GameObject.Find("fr3_link1");
+        Panda_J2 = GameObject.Find("fr3_link2");
+        Panda_J3 = GameObject.Find("fr3_link3");
+        Panda_J4 = GameObject.Find("fr3_link4");
+        Panda_J5 = GameObject.Find("fr3_link5");
+        Panda_J6 = GameObject.Find("fr3_link6");
+        Panda_J7 = GameObject.Find("fr3_link7");
+
+        initFlag = 0;
     }
 
     // Update is called once per frame
@@ -69,9 +75,12 @@ public class CopyAvatarMovement : MonoBehaviour
 
         //right_shoulder.transform.localEulerAngles = new Vector3(0, 0, 50);
         // joint angle constraint
-        Debug.Log(J6);
         List<float> jointAngles = new List<float> { J1, J2, J3, J4, J5, J6, J7 };
         jointAngleConstraint(jointAngles);
+        if (initFlag != 0)
+        {
+            jointVelocityConstraint(jointAngles);
+        }
 
         // Debug.Log(jointAngles[1]);
 
@@ -99,20 +108,65 @@ public class CopyAvatarMovement : MonoBehaviour
         // Panda_J2.transform.rotation =
         // Panda_J2.transform.localEulerAngles = new Vector3(jointAngles[1], 0, 90);
         // Panda_J4.transform.localEulerAngles = new Vector3(-jointAngles[3], 0, -90);
+        preFrameAngle = new List<float>();
+        for (int i = 0; i < jointAngles.Count; i++)
+        {
+            preFrameAngle.Add(jointAngles[i]);
+        }
+
+        initFlag = 1;
+    }
+
+    private void jointVelocityConstraint(List<float> jointAngles)
+    {
+        // list of max || min velocity
+        float[] velConstraintVal = new float[] { 2f, 1f, 1.5f, 1.25f, 3f, 1.5f, 3f };
+        for (int i = 0; i < velConstraintVal.Length; i++)
+        {
+            velConstraintVal[i] = velConstraintVal[i] * Mathf.Rad2Deg;
+        }
+
+        for (int i = 0; i < preFrameAngle.Count; i++)
+        {
+            var currentJointAngle = preFrameAngle[i];
+            var desiredJointAngle = jointAngles[i];
+           
+            float jointVel = (desiredJointAngle - currentJointAngle) / Time.deltaTime;
+
+            if (jointVel >= velConstraintVal[i])
+            {
+                // too fast
+                jointAngles[i] = desiredJointAngle - (jointVel * Time.deltaTime);
+            }
+            else
+            {
+                jointAngles[i] = jointAngles[i];
+            }
+        }
+    }
+
+    private void rad2Deg(float[,] radArray)
+    {
+        for (int i = 0; i < radArray.GetLength(0); i++)
+        {
+            radArray[i, 0] = radArray[i, 0] * Mathf.Rad2Deg;
+            radArray[i, 1] = radArray[i, 1] * Mathf.Rad2Deg;
+        }
     }
 
     private void jointAngleConstraint(List<float> jointAngles)
     {
         float[,] constraintVal = new float[,]
         {
-            { 157.20243f, -157.20243f },
-            { 102.198482f, -102.198482f },
-            { 166.197868f, -166.197868f },
-            { -8.69749933f, -174.299491f },
-            { 160.800605f, -160.800605f },
-            { 258.799306f, 31.1975519f },
-            { 172.798341f, -172.798341f }
+            { 2.3093f, -2.3093f },
+            { 1.5133f, -1.5133f },
+            { 2.4937f, -2.4937f },
+            { -0.4461f, -2.7478f },
+            { 2.4800f, -2.4800f },
+            { 4.2094f, 0.8521f },
+            { 2.6895f, -2.6895f }
         };
+        rad2Deg(constraintVal);
         for (int i = 0; i < jointAngles.Count; i++)
         {
             if (jointAngles[i] > 180f && i != 5)
