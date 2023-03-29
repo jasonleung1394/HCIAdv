@@ -81,7 +81,11 @@ public class CopyAvatarMovement : MonoBehaviour
         {
             jointVelocityConstraint(jointAngles);
         }
-
+        JointStatePublisher jointStatePublisher = GetComponent<JointStatePublisher>();
+        for (int i = 0; i < jointAngles.Count; i++)
+        {
+            jointStatePublisher.jointAngles_double[i] = jointAngles[i] * Mathf.Deg2Rad;
+        }
         // Debug.Log(jointAngles[1]);
 
         // Panda_J1.transform.localEulerAngles = new Vector3(0, jointAngles[0], 0);
@@ -130,7 +134,7 @@ public class CopyAvatarMovement : MonoBehaviour
         {
             var currentJointAngle = preFrameAngle[i];
             var desiredJointAngle = jointAngles[i];
-           
+
             float jointVel = (desiredJointAngle - currentJointAngle) / Time.deltaTime;
 
             if (jointVel >= velConstraintVal[i])

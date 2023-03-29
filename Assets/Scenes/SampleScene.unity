@@ -2035,6 +2035,7 @@ GameObject:
   - component: {fileID: 824616624}
   - component: {fileID: 824616625}
   - component: {fileID: 824616626}
+  - component: {fileID: 824616627}
   m_Layer: 0
   m_Name: MainScript
   m_TagString: Untagged
@@ -2049,7 +2050,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 824616621}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c44b8337ee20ac42b902d4c4096d8fd3, type: 3}
   m_Name: 
@@ -2120,6 +2121,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 691527a826f72ee129df3c255dc6fb83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &824616627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 824616621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b5c3e506df610313bd545b470c386f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  topic_name: franka_state_controller/joint_states
+  jointAngles_double:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  fr3: {fileID: 0}
 --- !u!1 &848751667
 GameObject:
   m_ObjectHideFlags: 0
