@@ -8,13 +8,14 @@ using RosMessageTypes.Sensor;
 using RosMessageTypes.Std;
 using RosMessageTypes.Rosgraph;
 using RosMessageTypes.Tf2;
+using RosMessageTypes.FrankaPositionServo;
 
 public class JointStatePublisher : MonoBehaviour
 {
     ROSConnection ros;
 
     // topic /joint_states is subscribed to /joint_state)publisher. /joint_state_publisher is subscribed to /franka_state_controller/joint_states
-    public string topic_name = "franka_state_controller/joint_states";
+    private string topic_name = "motion_controller/arm/joint_commands";
 
     public double[] jointAngles_double = new double[7];
 
@@ -38,7 +39,7 @@ public class JointStatePublisher : MonoBehaviour
     void Start()
     {
         ros = ROSConnection.GetOrCreateInstance();
-        ros.RegisterPublisher<JointStateMsg>(topic_name);
+        ros.RegisterPublisher<JointCommandMsg>(topic_name);
 
         m_LastPublishTimeSeconds = Clock.time + PublishPeriodSeconds;
     }
@@ -70,14 +71,16 @@ public class JointStatePublisher : MonoBehaviour
         jointPos = jointAngles_double;
         if (clockMsg_prop != null && ShouldPublishMessage)
         {
-            JointStateMsg JointStateMsg = new JointStateMsg(
+            JointCommandMsg jointCommandMsg = new JointCommandMsg(
                 new HeaderMsg(0, clockMsg.clock, ""),
+                1,
                 jointNames,
                 jointPos,
                 jointVel,
+                jointEff,
                 jointEff
             );
-            ros.Publish(topic_name, JointStateMsg);
+            ros.Publish(topic_name, jointCommandMsg);
             m_LastPublishTimeSeconds = Clock.FrameStartTimeInSeconds;
         }
     }
