@@ -22,6 +22,8 @@ public class CopyAvatarMovement : MonoBehaviour
 
     private int initFlag;
 
+    public bool[] jointInitFlag = new bool[7];
+
     private float J1,
         J2,
         J3,
@@ -119,6 +121,35 @@ public class CopyAvatarMovement : MonoBehaviour
         }
 
         initFlag = 1;
+    }
+
+    public double[] cur_jointAngles { get; set; }
+
+    public bool ifPosSynced(double[] jointPos)
+    {
+        bool flag = true;
+        JointStatePublisher jointStatePublisher = GetComponent<JointStatePublisher>();
+        cur_jointAngles = jointStatePublisher.jointAngles_double;
+
+        for (int i = 0; i < cur_jointAngles.Length; i++)
+        {
+            double diff;
+            diff = cur_jointAngles[i] - jointPos[i];
+            diff = Mathf.Abs((float)diff);
+
+            if (diff < 0.2f)
+            {
+                // close enough
+                jointInitFlag[i] = true;
+            }
+            else
+            {
+                jointInitFlag[i] = false;
+                flag = false;
+            }
+        }
+
+        return flag;
     }
 
     private void jointVelocityConstraint(List<float> jointAngles)

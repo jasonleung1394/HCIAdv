@@ -55,8 +55,7 @@ public class JointStatePublisher : MonoBehaviour
         // sequence = seq;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void PublishJointState()
     {
         ros.Subscribe<ClockMsg>("clock", syncClock);
 
@@ -69,6 +68,9 @@ public class JointStatePublisher : MonoBehaviour
         double[] jointVel = new double[7];
         double[] jointEff = new double[7];
         jointPos = jointAngles_double;
+
+        InitialProcedure initialProcedure = GetComponent<InitialProcedure>();
+
         if (clockMsg_prop != null && ShouldPublishMessage)
         {
             JointCommandMsg jointCommandMsg = new JointCommandMsg(
