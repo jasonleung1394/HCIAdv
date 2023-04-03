@@ -6,7 +6,6 @@ public class CopyAvatarMovement : MonoBehaviour
 {
     private GameObject avatar_human;
     private GameObject robotic_arm;
-    private GameObject right_shoulder;
     private GameObject right_arm;
     private GameObject right_forearm;
     private GameObject right_hand;
@@ -20,9 +19,27 @@ public class CopyAvatarMovement : MonoBehaviour
 
     private List<float> preFrameAngle;
 
+    private double[] avatarJointState { get; set; }
+    private double[] robotJointState_CheckPoint = new double[7];
     private int initFlag;
 
     public bool[] jointInitFlag = new bool[7];
+
+    private float reset_speed = 0.5f;
+
+    private float checkPointTime { get; set; }
+    private int waitTime_checkPoint = 3;
+
+    private float[] initialPose = new float[]
+    {
+        0,
+        -0.785398163f,
+        0f,
+        -2.35619449f,
+        0,
+        1.57079632679f,
+        0.785398163397f
+    };
 
     private float J1,
         J2,
@@ -37,7 +54,6 @@ public class CopyAvatarMovement : MonoBehaviour
     {
         avatar_human = GameObject.Find("Banana Man");
         robotic_arm = GameObject.Find("pandaAnimator");
-        right_shoulder = GameObject.Find("Right Shoulder");
         right_arm = GameObject.Find("Right Arm");
         right_forearm = GameObject.Find("Right Forearm");
         right_hand = GameObject.Find("Right Hand");
@@ -50,12 +66,54 @@ public class CopyAvatarMovement : MonoBehaviour
         Panda_J6 = GameObject.Find("fr3_link6");
         Panda_J7 = GameObject.Find("fr3_link7");
 
+        initialPoser();
+
         initFlag = 0;
+    }
+
+    void initialPoser()
+    {
+        Quaternion arm_rotation = right_arm.transform.localRotation;
+        Quaternion forearm_rotation = right_forearm.transform.localRotation;
+        Quaternion hand_rotation = right_hand.transform.localRotation;
+
+        // right_arm.transform.localEulerAngles = new Vector3(
+        //     initialPose[2],
+        //     initialPose[0],
+        //     initialPose[1] * Mathf.Rad2Deg
+        // );
+        right_arm.transform.localEulerAngles = Vector3.Lerp(
+            right_arm.transform.localEulerAngles,
+            new Vector3(initialPose[2], initialPose[0], initialPose[1] * Mathf.Rad2Deg),
+            reset_speed 
+        );
+        // right_forearm.transform.localEulerAngles = new Vector3(
+        //     0,
+        //     initialPose[4],
+        //     initialPose[3] * Mathf.Rad2Deg
+        // );
+        right_forearm.transform.localEulerAngles = Vector3.Lerp(
+            right_forearm.transform.localEulerAngles,
+            new Vector3(0, initialPose[4], initialPose[3] * Mathf.Rad2Deg),
+            reset_speed
+        );
+        // right_hand.transform.localEulerAngles = new Vector3(
+        //     0,
+        //     initialPose[6] * Mathf.Rad2Deg,
+        //     initialPose[5] * Mathf.Rad2Deg
+        // );
+        right_hand.transform.localEulerAngles = Vector3.Lerp(
+            right_hand.transform.localEulerAngles,
+            new Vector3(0, initialPose[6] * Mathf.Rad2Deg, initialPose[5] * Mathf.Rad2Deg),
+            reset_speed
+        );
     }
 
     // Update is called once per frame
     void Update()
     {
+        reset_speed += Time.deltaTime * reset_speed;
+        checkPointTime += Time.deltaTime;
         // assuming T pose is the origin pose
         Quaternion arm_rotation = right_arm.transform.localRotation;
         Quaternion forearm_rotation = right_forearm.transform.localRotation;
@@ -76,6 +134,7 @@ public class CopyAvatarMovement : MonoBehaviour
         //right_shoulder.transform.localEulerAngles = new Vector3(0, 0, 50);
         // joint angle constraint
         List<float> jointAngles = new List<float> { J1, J2, J3, J4, J5, J6, J7 };
+        avatarJointState = new double[] { J1, J2, J3, J4, J5, J6, J7 };
         jointAngleConstraint(jointAngles);
         if (initFlag != 0)
         {
@@ -117,10 +176,50 @@ public class CopyAvatarMovement : MonoBehaviour
         {
             preFrameAngle.Add(jointAngles[i]);
         }
-
-        // detectUndesiredJointAngle(preFrameAngle,robotJointAngle);
+        if (checkPointTime > waitTime_checkPoint)
+        {
+            // init a check point
+            detectUndesiredJointAngle(robotJointState_CheckPoint, jointAngles);
+            checkPointTime = 0f;
+        }
+        else if (checkPointTime == Time.deltaTime)
+        {
+            for (int i = 0; i < jointAngles.Count; i++)
+            {
+                robotJointState_CheckPoint[i] = jointAngles[i];
+            }
+        }
+        else
+        {
+            // do nothing
+        }
 
         initFlag = 1;
+    }
+
+    void detectUndesiredJointAngle(double[] robotJointState, List<float> cur_jointState)
+    {
+        InitialProcedure initialProcedure = GetComponent<InitialProcedure>();
+
+        bool detectFlag = false;
+        // check the status of robotJointAngles, check if it has not been moving for a while
+        for (int i = 0; i < robotJointState.Length; i++)
+        {
+            if ((int)(robotJointState[i]) != (int)(cur_jointState[i]))
+            {
+                // meaning it has changed
+                detectFlag = true;
+            }
+        }
+        if (detectFlag == false && initialProcedure.autoReset == true)
+        {
+            initFlag = 0;
+            initialPoser();
+            preFrameAngle = new List<float>();
+            Debug.Log("reset");
+        }
+        robotJointState_CheckPoint = new double[7];
+        // avatar joint sync to robot joint
     }
 
     public double[] cur_jointAngles { get; set; }

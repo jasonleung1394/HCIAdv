@@ -14,6 +14,8 @@ public class InitialProcedure : MonoBehaviour
 
     public bool overSpeedFlag { get; set; }
 
+    public bool autoReset = false;
+
     public bool jointStateSynced { get; set; }
 
     void Start()
