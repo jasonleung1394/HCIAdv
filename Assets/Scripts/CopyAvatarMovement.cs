@@ -64,8 +64,6 @@ public class CopyAvatarMovement : MonoBehaviour
         J1 = Quaternion.FromToRotation(Vector3.left, arm_rotation * Vector3.left).eulerAngles.y;
         J2 = Quaternion.FromToRotation(Vector3.right, arm_rotation * Vector3.right).eulerAngles.z;
         J3 = Quaternion.FromToRotation(Vector3.up, arm_rotation * Vector3.up).eulerAngles.x;
-        // J2 = right_arm.transform.localEulerAngles.z;
-        // J3 = right_arm.transform.localEulerAngles.x;
         J4 = Quaternion
             .FromToRotation(Vector3.right, forearm_rotation * Vector3.right)
             .eulerAngles.z;
@@ -94,7 +92,7 @@ public class CopyAvatarMovement : MonoBehaviour
         Panda_J1.transform.localRotation = Quaternion.AngleAxis(jointAngles[0], Vector3.up);
 
         Panda_J2.transform.localRotation =
-            Quaternion.AngleAxis(jointAngles[1], Vector3.left)
+            Quaternion.AngleAxis(-jointAngles[1], Vector3.left)
             * Quaternion.AngleAxis(-90f, Vector3.back);
         Panda_J3.transform.localRotation =
             Quaternion.AngleAxis(jointAngles[2], Vector3.left)
@@ -119,6 +117,8 @@ public class CopyAvatarMovement : MonoBehaviour
         {
             preFrameAngle.Add(jointAngles[i]);
         }
+
+        // detectUndesiredJointAngle(preFrameAngle,robotJointAngle);
 
         initFlag = 1;
     }
@@ -154,6 +154,9 @@ public class CopyAvatarMovement : MonoBehaviour
 
     private void jointVelocityConstraint(List<float> jointAngles)
     {
+        InitialProcedure initialProcedure = GetComponent<InitialProcedure>();
+        initialProcedure.overSpeedFlag = true;
+
         // list of max || min velocity
         float[] velConstraintVal = new float[] { 2f, 1f, 1.5f, 1.25f, 3f, 1.5f, 3f };
         for (int i = 0; i < velConstraintVal.Length; i++)
@@ -172,6 +175,7 @@ public class CopyAvatarMovement : MonoBehaviour
             {
                 // too fast
                 jointAngles[i] = desiredJointAngle - (jointVel * Time.deltaTime);
+                initialProcedure.overSpeedFlag = false;
             }
             else
             {

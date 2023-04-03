@@ -12,6 +12,8 @@ public class InitialProcedure : MonoBehaviour
     // Start is called before the first frame update
     private string JointState_TopicName = "joint_states";
 
+    public bool overSpeedFlag { get; set; }
+
     public bool jointStateSynced { get; set; }
 
     void Start()
@@ -77,5 +79,6 @@ public class InitialProcedure : MonoBehaviour
             }
         }
         GUI.Label(new Rect(700, 10, 500, 1000), jointInitText);
+        GUI.Label(new Rect(700, 150, 500, 1000), "Is the movement overspeed? -- " + !overSpeedFlag);
     }
 }
