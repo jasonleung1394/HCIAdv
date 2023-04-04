@@ -9,13 +9,13 @@ public class CopyAvatarMovement : MonoBehaviour
     private GameObject right_arm;
     private GameObject right_forearm;
     private GameObject right_hand;
-    private GameObject Panda_J1;
-    private GameObject Panda_J2;
-    private GameObject Panda_J3;
-    private GameObject Panda_J4;
-    private GameObject Panda_J5;
-    private GameObject Panda_J6;
-    private GameObject Panda_J7;
+    private GameObject fr3_J1;
+    private GameObject fr3_J2;
+    private GameObject fr3_J3;
+    private GameObject fr3_J4;
+    private GameObject fr3_J5;
+    private GameObject fr3_J6;
+    private GameObject fr3_J7;
 
     private List<float> preFrameAngle;
 
@@ -29,6 +29,9 @@ public class CopyAvatarMovement : MonoBehaviour
 
     private float checkPointTime { get; set; }
     private int waitTime_checkPoint = 3;
+    public Vector3 AvatarArm_Offset { get; set; }
+    public Vector3 AvatarForeArm_Offset { get; set; }
+    public Vector3 AvatarHand_Offset { get; set; }
 
     private float[] initialPose = new float[]
     {
@@ -58,13 +61,17 @@ public class CopyAvatarMovement : MonoBehaviour
         right_forearm = GameObject.Find("Right Forearm");
         right_hand = GameObject.Find("Right Hand");
 
-        Panda_J1 = GameObject.Find("fr3_link1");
-        Panda_J2 = GameObject.Find("fr3_link2");
-        Panda_J3 = GameObject.Find("fr3_link3");
-        Panda_J4 = GameObject.Find("fr3_link4");
-        Panda_J5 = GameObject.Find("fr3_link5");
-        Panda_J6 = GameObject.Find("fr3_link6");
-        Panda_J7 = GameObject.Find("fr3_link7");
+        fr3_J1 = GameObject.Find("fr3_link1");
+        fr3_J2 = GameObject.Find("fr3_link2");
+        fr3_J3 = GameObject.Find("fr3_link3");
+        fr3_J4 = GameObject.Find("fr3_link4");
+        fr3_J5 = GameObject.Find("fr3_link5");
+        fr3_J6 = GameObject.Find("fr3_link6");
+        fr3_J7 = GameObject.Find("fr3_link7");
+
+        AvatarArm_Offset = new Vector3(90, 0, 45);
+        AvatarForeArm_Offset = new Vector3(90, 0, 135);
+        AvatarHand_Offset = new Vector3(0, -45, -90);
 
         initialPoser();
 
@@ -77,36 +84,33 @@ public class CopyAvatarMovement : MonoBehaviour
         Quaternion forearm_rotation = right_forearm.transform.localRotation;
         Quaternion hand_rotation = right_hand.transform.localRotation;
 
-        // right_arm.transform.localEulerAngles = new Vector3(
-        //     initialPose[2],
-        //     initialPose[0],
-        //     initialPose[1] * Mathf.Rad2Deg
+        right_arm.transform.localEulerAngles =
+            new Vector3(
+                initialPose[2] * Mathf.Rad2Deg,
+                initialPose[0] * Mathf.Rad2Deg,
+                initialPose[1] * Mathf.Rad2Deg
+            ) + AvatarArm_Offset;
+        right_forearm.transform.localEulerAngles =
+            new Vector3(0, initialPose[4] * Mathf.Rad2Deg, initialPose[3] * Mathf.Rad2Deg)
+            + AvatarForeArm_Offset;
+        right_hand.transform.localEulerAngles =
+            new Vector3(0, initialPose[6] * Mathf.Rad2Deg, initialPose[5] * Mathf.Rad2Deg)
+            + AvatarHand_Offset;
+        // right_arm.transform.localEulerAngles = Vector3.Lerp(
+        //     right_arm.transform.localEulerAngles,
+        //     new Vector3(initialPose[2], initialPose[0], initialPose[1] * Mathf.Rad2Deg),
+        //     reset_speed
         // );
-        right_arm.transform.localEulerAngles = Vector3.Lerp(
-            right_arm.transform.localEulerAngles,
-            new Vector3(initialPose[2], initialPose[0], initialPose[1] * Mathf.Rad2Deg),
-            reset_speed 
-        );
-        // right_forearm.transform.localEulerAngles = new Vector3(
-        //     0,
-        //     initialPose[4],
-        //     initialPose[3] * Mathf.Rad2Deg
+        // right_forearm.transform.localEulerAngles = Vector3.Lerp(
+        //     right_forearm.transform.localEulerAngles,
+        //     new Vector3(0, initialPose[4], initialPose[3] * Mathf.Rad2Deg),
+        //     reset_speed
         // );
-        right_forearm.transform.localEulerAngles = Vector3.Lerp(
-            right_forearm.transform.localEulerAngles,
-            new Vector3(0, initialPose[4], initialPose[3] * Mathf.Rad2Deg),
-            reset_speed
-        );
-        // right_hand.transform.localEulerAngles = new Vector3(
-        //     0,
-        //     initialPose[6] * Mathf.Rad2Deg,
-        //     initialPose[5] * Mathf.Rad2Deg
+        // right_hand.transform.localEulerAngles = Vector3.Lerp(
+        //     right_hand.transform.localEulerAngles,
+        //     new Vector3(0, initialPose[6] * Mathf.Rad2Deg, initialPose[5] * Mathf.Rad2Deg),
+        //     reset_speed
         // );
-        right_hand.transform.localEulerAngles = Vector3.Lerp(
-            right_hand.transform.localEulerAngles,
-            new Vector3(0, initialPose[6] * Mathf.Rad2Deg, initialPose[5] * Mathf.Rad2Deg),
-            reset_speed
-        );
     }
 
     // Update is called once per frame
@@ -119,8 +123,11 @@ public class CopyAvatarMovement : MonoBehaviour
         Quaternion forearm_rotation = right_forearm.transform.localRotation;
         Quaternion hand_rotation = right_hand.transform.localRotation;
         // J1 = right_arm.transform.localEulerAngles.y;
-        J1 = Quaternion.FromToRotation(Vector3.left, arm_rotation * Vector3.left).eulerAngles.y;
-        J2 = Quaternion.FromToRotation(Vector3.right, arm_rotation * Vector3.right).eulerAngles.z;
+        // J1 = Quaternion.FromToRotation(Vector3.left, arm_rotation * Vector3.left).eulerAngles.y;
+        // J2 = Quaternion.FromToRotation(Vector3.right, arm_rotation * Vector3.right).eulerAngles.z;
+        // J3 = Quaternion.FromToRotation(Vector3.up, arm_rotation * Vector3.up).eulerAngles.x;
+        J1 = arm_rotation.y * Mathf.Rad2Deg;
+        J2 = arm_rotation.z * Mathf.Rad2Deg;
         J3 = Quaternion.FromToRotation(Vector3.up, arm_rotation * Vector3.up).eulerAngles.x;
         J4 = Quaternion
             .FromToRotation(Vector3.right, forearm_rotation * Vector3.right)
@@ -130,6 +137,7 @@ public class CopyAvatarMovement : MonoBehaviour
             .eulerAngles.y;
         J6 = Quaternion.FromToRotation(Vector3.right, hand_rotation * Vector3.right).eulerAngles.z;
         J7 = Quaternion.FromToRotation(Vector3.right, hand_rotation * Vector3.right).eulerAngles.y;
+        Debug.Log(J1);
 
         //right_shoulder.transform.localEulerAngles = new Vector3(0, 0, 50);
         // joint angle constraint
@@ -147,30 +155,30 @@ public class CopyAvatarMovement : MonoBehaviour
         }
         // Debug.Log(jointAngles[1]);
 
-        // Panda_J1.transform.localEulerAngles = new Vector3(0, jointAngles[0], 0);
-        Panda_J1.transform.localRotation = Quaternion.AngleAxis(jointAngles[0], Vector3.up);
+        // fr3_J1.transform.localEulerAngles = new Vector3(0, jointAngles[0], 0);
+        fr3_J1.transform.localRotation = Quaternion.AngleAxis(jointAngles[0], Vector3.up);
 
-        Panda_J2.transform.localRotation =
+        fr3_J2.transform.localRotation =
             Quaternion.AngleAxis(-jointAngles[1], Vector3.left)
             * Quaternion.AngleAxis(-90f, Vector3.back);
-        Panda_J3.transform.localRotation =
+        fr3_J3.transform.localRotation =
             Quaternion.AngleAxis(jointAngles[2], Vector3.left)
             * Quaternion.AngleAxis(90f, Vector3.back);
-        Panda_J4.transform.localRotation =
+        fr3_J4.transform.localRotation =
             Quaternion.AngleAxis(jointAngles[3], Vector3.left)
             * Quaternion.AngleAxis(90f, Vector3.back);
-        Panda_J5.transform.localRotation =
+        fr3_J5.transform.localRotation =
             Quaternion.AngleAxis(jointAngles[4], Vector3.left)
             * Quaternion.AngleAxis(-90f, Vector3.back);
-        Panda_J6.transform.localRotation =
+        fr3_J6.transform.localRotation =
             Quaternion.AngleAxis(jointAngles[5], Vector3.left)
             * Quaternion.AngleAxis(-90, Vector3.forward);
-        Panda_J7.transform.localRotation =
+        fr3_J7.transform.localRotation =
             Quaternion.AngleAxis(jointAngles[6], Vector3.left)
             * Quaternion.AngleAxis(90, Vector3.back);
-        // Panda_J2.transform.rotation =
-        // Panda_J2.transform.localEulerAngles = new Vector3(jointAngles[1], 0, 90);
-        // Panda_J4.transform.localEulerAngles = new Vector3(-jointAngles[3], 0, -90);
+        // fr3_J2.transform.rotation =
+        // fr3_J2.transform.localEulerAngles = new Vector3(jointAngles[1], 0, 90);
+        // fr3_J4.transform.localEulerAngles = new Vector3(-jointAngles[3], 0, -90);
         preFrameAngle = new List<float>();
         for (int i = 0; i < jointAngles.Count; i++)
         {
