@@ -33,16 +33,7 @@ public class CopyAvatarMovement : MonoBehaviour
     public Vector3 AvatarForeArm_Offset { get; set; }
     public Vector3 AvatarHand_Offset { get; set; }
 
-    private float[] initialPose = new float[]
-    {
-        0,
-        -0.785398163f,
-        0f,
-        -2.35619449f,
-        0,
-        1.57079632679f,
-        0.785398163397f
-    };
+    private float[] initialPose = new float[] { 0, 0, 0f, -1.59695f, 0, 2.53075f, 0 };
 
     private float J1,
         J2,
@@ -69,9 +60,9 @@ public class CopyAvatarMovement : MonoBehaviour
         fr3_J6 = GameObject.Find("fr3_link6");
         fr3_J7 = GameObject.Find("fr3_link7");
 
-        AvatarArm_Offset = new Vector3(90, 0, 45);
-        AvatarForeArm_Offset = new Vector3(90, 0, 135);
-        AvatarHand_Offset = new Vector3(0, -45, -90);
+        AvatarArm_Offset = new Vector3(0, 0, 0);
+        AvatarForeArm_Offset = new Vector3(0, 0, 0);
+        AvatarHand_Offset = new Vector3(0, 0, 0);
 
         initialPoser();
 
@@ -122,22 +113,26 @@ public class CopyAvatarMovement : MonoBehaviour
         Quaternion arm_rotation = right_arm.transform.localRotation;
         Quaternion forearm_rotation = right_forearm.transform.localRotation;
         Quaternion hand_rotation = right_hand.transform.localRotation;
-        // J1 = right_arm.transform.localEulerAngles.y;
-        // J1 = Quaternion.FromToRotation(Vector3.left, arm_rotation * Vector3.left).eulerAngles.y;
-        // J2 = Quaternion.FromToRotation(Vector3.right, arm_rotation * Vector3.right).eulerAngles.z;
-        // J3 = Quaternion.FromToRotation(Vector3.up, arm_rotation * Vector3.up).eulerAngles.x;
-        J1 = arm_rotation.y * Mathf.Rad2Deg;
-        J2 = arm_rotation.z * Mathf.Rad2Deg;
+        J1 = Quaternion.FromToRotation(Vector3.left, arm_rotation * Vector3.left).eulerAngles.y;
+        J2 = Quaternion.FromToRotation(Vector3.right, arm_rotation * Vector3.right).eulerAngles.z;
         J3 = Quaternion.FromToRotation(Vector3.up, arm_rotation * Vector3.up).eulerAngles.x;
         J4 = Quaternion
             .FromToRotation(Vector3.right, forearm_rotation * Vector3.right)
             .eulerAngles.z;
+        Debug.Log(J2);
         J5 = Quaternion
             .FromToRotation(Vector3.right, forearm_rotation * Vector3.right)
             .eulerAngles.y;
         J6 = Quaternion.FromToRotation(Vector3.right, hand_rotation * Vector3.right).eulerAngles.z;
         J7 = Quaternion.FromToRotation(Vector3.right, hand_rotation * Vector3.right).eulerAngles.y;
-        Debug.Log(J1);
+        // J1 = right_arm.transform.localEulerAngles.y;
+        // J2 = right_arm.transform.localEulerAngles.z;
+        // J3 = right_arm.transform.localEulerAngles.x;
+        // J4 = right_forearm.transform.localEulerAngles.z;
+        // J5 = right_forearm.transform.localEulerAngles.y;
+        // J6 = right_hand.transform.localEulerAngles.z;
+        // J7 = right_hand.transform.localEulerAngles.y;
+        // Debug.Log(J1);
 
         //right_shoulder.transform.localEulerAngles = new Vector3(0, 0, 50);
         // joint angle constraint
@@ -153,16 +148,16 @@ public class CopyAvatarMovement : MonoBehaviour
         {
             jointStatePublisher.jointAngles_double[i] = jointAngles[i] * Mathf.Deg2Rad;
         }
-        // Debug.Log(jointAngles[1]);
+        Debug.Log(jointAngles[0]);
 
         // fr3_J1.transform.localEulerAngles = new Vector3(0, jointAngles[0], 0);
         fr3_J1.transform.localRotation = Quaternion.AngleAxis(jointAngles[0], Vector3.up);
 
         fr3_J2.transform.localRotation =
-            Quaternion.AngleAxis(-jointAngles[1], Vector3.left)
+            Quaternion.AngleAxis(jointAngles[1], Vector3.left)
             * Quaternion.AngleAxis(-90f, Vector3.back);
         fr3_J3.transform.localRotation =
-            Quaternion.AngleAxis(jointAngles[2], Vector3.left)
+            Quaternion.AngleAxis(-jointAngles[2], Vector3.left)
             * Quaternion.AngleAxis(90f, Vector3.back);
         fr3_J4.transform.localRotation =
             Quaternion.AngleAxis(jointAngles[3], Vector3.left)
@@ -176,6 +171,26 @@ public class CopyAvatarMovement : MonoBehaviour
         fr3_J7.transform.localRotation =
             Quaternion.AngleAxis(jointAngles[6], Vector3.left)
             * Quaternion.AngleAxis(90, Vector3.back);
+        // fr3_J1.transform.localRotation = Quaternion.AngleAxis(jointAngles[0], Vector3.up);
+
+        // fr3_J2.transform.localRotation =
+        //     Quaternion.AngleAxis(jointAngles[1], Vector3.left)
+        //     * Quaternion.AngleAxis(-90f, Vector3.back);
+        // fr3_J3.transform.localRotation =
+        //     Quaternion.AngleAxis(-jointAngles[2], Vector3.left)
+        //     * Quaternion.AngleAxis(90f, Vector3.back);
+        // fr3_J4.transform.localRotation =
+        //     Quaternion.AngleAxis(jointAngles[3], Vector3.left)
+        //     * Quaternion.AngleAxis(90f, Vector3.back);
+        // fr3_J5.transform.localRotation =
+        //     Quaternion.AngleAxis(jointAngles[4], Vector3.left)
+        //     * Quaternion.AngleAxis(-90f, Vector3.back);
+        // fr3_J6.transform.localRotation =
+        //     Quaternion.AngleAxis(jointAngles[5], Vector3.left)
+        //     * Quaternion.AngleAxis(-90, Vector3.forward);
+        // fr3_J7.transform.localRotation =
+        //     Quaternion.AngleAxis(jointAngles[6], Vector3.left)
+        //     * Quaternion.AngleAxis(90, Vector3.back);
         // fr3_J2.transform.rotation =
         // fr3_J2.transform.localEulerAngles = new Vector3(jointAngles[1], 0, 90);
         // fr3_J4.transform.localEulerAngles = new Vector3(-jointAngles[3], 0, -90);
@@ -319,6 +334,10 @@ public class CopyAvatarMovement : MonoBehaviour
             {
                 jointAngles[i] = jointAngles[i] - 360f;
             }
+            // if (i == 0)
+            // {
+            //     Debug.Log(jointAngles[i]);
+            // }
             if (constraintVal[i, 0] > jointAngles[i] && constraintVal[i, 1] < jointAngles[i]) { }
             else if (constraintVal[i, 0] < jointAngles[i])
             {
