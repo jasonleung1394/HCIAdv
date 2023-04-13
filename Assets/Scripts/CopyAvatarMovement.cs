@@ -29,6 +29,8 @@ public class CopyAvatarMovement : MonoBehaviour
 
     private float checkPointTime { get; set; }
     private int waitTime_checkPoint = 3;
+
+    // make these into slider in the inspector, to ensure when player standing facing the robot, the dof of each joint will be 180 degree and front facing
     public Vector3 AvatarArm_Offset { get; set; }
     public Vector3 AvatarForeArm_Offset { get; set; }
     public Vector3 AvatarHand_Offset { get; set; }
@@ -60,14 +62,18 @@ public class CopyAvatarMovement : MonoBehaviour
         fr3_J6 = GameObject.Find("fr3_link6");
         fr3_J7 = GameObject.Find("fr3_link7");
 
-        AvatarArm_Offset = new Vector3(0, 0, 0);
-        AvatarForeArm_Offset = new Vector3(0, 0, 0);
-        AvatarHand_Offset = new Vector3(0, 0, 0);
-
         initialPoser();
 
         initFlag = 0;
     }
+
+    private Quaternion initial_Arm = Quaternion.Euler((1.59695f / 2) * Mathf.Rad2Deg, 0, 0);
+
+    private Quaternion initial_ForeArm = Quaternion.Euler(0, 0, (-1.59695f / 2) * Mathf.Rad2Deg);
+
+    private Quaternion initial_Hand = Quaternion.Euler(0, 0 * Mathf.Rad2Deg, 0);
+    private float lerpTime = 0.0f;
+    private float lerpSpeed = 0.1f;
 
     void initialPoser()
     {
@@ -75,20 +81,9 @@ public class CopyAvatarMovement : MonoBehaviour
         Quaternion forearm_rotation = right_forearm.transform.localRotation;
         Quaternion hand_rotation = right_hand.transform.localRotation;
 
-        right_arm.transform.localRotation =
-            Quaternion.Euler(
-                initialPose[2] * Mathf.Rad2Deg,
-                initialPose[0] * Mathf.Rad2Deg,
-                initialPose[1] * Mathf.Rad2Deg
-            ) * Quaternion.Euler(AvatarArm_Offset);
-
-        right_forearm.transform.localRotation =
-            Quaternion.Euler(0, initialPose[4] * Mathf.Rad2Deg, initialPose[3] * Mathf.Rad2Deg)
-            * Quaternion.Euler(AvatarForeArm_Offset);
-
-        right_hand.transform.localRotation =
-            Quaternion.Euler(0, initialPose[6] * Mathf.Rad2Deg, initialPose[5] * Mathf.Rad2Deg)
-            * Quaternion.Euler(AvatarHand_Offset);
+        right_arm.transform.localRotation = initial_Arm;
+        right_forearm.transform.localRotation = initial_ForeArm;
+        right_hand.transform.localRotation = initial_Hand;
     }
 
     // Update is called once per frame
@@ -100,29 +95,16 @@ public class CopyAvatarMovement : MonoBehaviour
         Quaternion arm_rotation = right_arm.transform.localRotation;
         Quaternion forearm_rotation = right_forearm.transform.localRotation;
         Quaternion hand_rotation = right_hand.transform.localRotation;
-        J1 = Quaternion.FromToRotation(Vector3.left, arm_rotation * Vector3.left).eulerAngles.y;
-        J2 = Quaternion.FromToRotation(Vector3.right, arm_rotation * Vector3.right).eulerAngles.z;
-        J3 = Quaternion.FromToRotation(Vector3.up, arm_rotation * Vector3.up).eulerAngles.x;
-        J4 = Quaternion
-            .FromToRotation(Vector3.right, forearm_rotation * Vector3.right)
-            .eulerAngles.z;
-        Debug.Log(J2);
-        J5 = Quaternion
-            .FromToRotation(Vector3.right, forearm_rotation * Vector3.right)
-            .eulerAngles.y;
-        J6 = Quaternion.FromToRotation(Vector3.right, hand_rotation * Vector3.right).eulerAngles.z;
-        J7 = Quaternion.FromToRotation(Vector3.right, hand_rotation * Vector3.right).eulerAngles.y;
-        // J1 = right_arm.transform.localEulerAngles.y;
-        // J2 = right_arm.transform.localEulerAngles.z;
-        // J3 = right_arm.transform.localEulerAngles.x;
-        // J4 = right_forearm.transform.localEulerAngles.z;
-        // J5 = right_forearm.transform.localEulerAngles.y;
-        // J6 = right_hand.transform.localEulerAngles.z;
-        // J7 = right_hand.transform.localEulerAngles.y;
-        // Debug.Log(J1);
 
-        //right_shoulder.transform.localEulerAngles = new Vector3(0, 0, 50);
-        // joint angle constraint
+        // because all Asin, its ranged from -90 to 90. in the angle constraint. the range is offsets so that the dof can be at least 180 deg.
+        J2 = Mathf.Asin(2 * (arm_rotation.z * arm_rotation.w)) * Mathf.Rad2Deg;
+        J1 = Mathf.Asin(2 * (arm_rotation.y * arm_rotation.w)) * Mathf.Rad2Deg;
+        J3 = Mathf.Asin(2 * (arm_rotation.x * arm_rotation.w)) * Mathf.Rad2Deg;
+        J4 = Mathf.Asin(2 * (forearm_rotation.z * forearm_rotation.w)) * Mathf.Rad2Deg - 40f;
+        J5 = Mathf.Asin(2 * (forearm_rotation.y * forearm_rotation.w)) * Mathf.Rad2Deg;
+        J6 = Mathf.Asin(2 * (hand_rotation.z * hand_rotation.w)) * Mathf.Rad2Deg + 138f;
+        J7 = Mathf.Asin(2 * (hand_rotation.y * hand_rotation.w)) * Mathf.Rad2Deg;
+
         List<float> jointAngles = new List<float> { J1, J2, J3, J4, J5, J6, J7 };
         avatarJointState = new double[] { J1, J2, J3, J4, J5, J6, J7 };
         jointAngleConstraint(jointAngles);
@@ -135,51 +117,34 @@ public class CopyAvatarMovement : MonoBehaviour
         {
             jointStatePublisher.jointAngles_double[i] = jointAngles[i] * Mathf.Deg2Rad;
         }
-        Debug.Log(jointAngles[0]);
 
         // fr3_J1.transform.localEulerAngles = new Vector3(0, jointAngles[0], 0);
         fr3_J1.transform.localRotation = Quaternion.AngleAxis(jointAngles[0], Vector3.up);
+
         fr3_J2.transform.localRotation =
             Quaternion.AngleAxis(jointAngles[1], Vector3.left)
             * Quaternion.AngleAxis(-90f, Vector3.back);
+
         fr3_J3.transform.localRotation =
-            Quaternion.AngleAxis(-jointAngles[2], Vector3.left)
+            Quaternion.AngleAxis(jointAngles[2], Vector3.left)
             * Quaternion.AngleAxis(90f, Vector3.back);
+
         fr3_J4.transform.localRotation =
             Quaternion.AngleAxis(jointAngles[3], Vector3.left)
             * Quaternion.AngleAxis(90f, Vector3.back);
+
         fr3_J5.transform.localRotation =
             Quaternion.AngleAxis(jointAngles[4], Vector3.left)
             * Quaternion.AngleAxis(-90f, Vector3.back);
+
         fr3_J6.transform.localRotation =
             Quaternion.AngleAxis(jointAngles[5], Vector3.left)
-            * Quaternion.AngleAxis(-90, Vector3.forward);
+            * Quaternion.AngleAxis(-90f, Vector3.forward);
+
         fr3_J7.transform.localRotation =
             Quaternion.AngleAxis(jointAngles[6], Vector3.left)
-            * Quaternion.AngleAxis(90, Vector3.back);
-        // fr3_J1.transform.localRotation = Quaternion.AngleAxis(jointAngles[0], Vector3.up);
+            * Quaternion.AngleAxis(90f, Vector3.back);
 
-        // fr3_J2.transform.localRotation =
-        //     Quaternion.AngleAxis(jointAngles[1], Vector3.left)
-        //     * Quaternion.AngleAxis(-90f, Vector3.back);
-        // fr3_J3.transform.localRotation =
-        //     Quaternion.AngleAxis(-jointAngles[2], Vector3.left)
-        //     * Quaternion.AngleAxis(90f, Vector3.back);
-        // fr3_J4.transform.localRotation =
-        //     Quaternion.AngleAxis(jointAngles[3], Vector3.left)
-        //     * Quaternion.AngleAxis(90f, Vector3.back);
-        // fr3_J5.transform.localRotation =
-        //     Quaternion.AngleAxis(jointAngles[4], Vector3.left)
-        //     * Quaternion.AngleAxis(-90f, Vector3.back);
-        // fr3_J6.transform.localRotation =
-        //     Quaternion.AngleAxis(jointAngles[5], Vector3.left)
-        //     * Quaternion.AngleAxis(-90, Vector3.forward);
-        // fr3_J7.transform.localRotation =
-        //     Quaternion.AngleAxis(jointAngles[6], Vector3.left)
-        //     * Quaternion.AngleAxis(90, Vector3.back);
-        // fr3_J2.transform.rotation =
-        // fr3_J2.transform.localEulerAngles = new Vector3(jointAngles[1], 0, 90);
-        // fr3_J4.transform.localEulerAngles = new Vector3(-jointAngles[3], 0, -90);
         preFrameAngle = new List<float>();
         for (int i = 0; i < jointAngles.Count; i++)
         {
@@ -225,7 +190,6 @@ public class CopyAvatarMovement : MonoBehaviour
             initFlag = 0;
             initialPoser();
             preFrameAngle = new List<float>();
-            Debug.Log("reset");
         }
         robotJointState_CheckPoint = new double[7];
         // avatar joint sync to robot joint
@@ -305,13 +269,13 @@ public class CopyAvatarMovement : MonoBehaviour
     {
         float[,] constraintVal = new float[,]
         {
-            { 2.3093f, -2.3093f },
-            { 1.5133f, -1.5133f },
-            { 2.4937f, -2.4937f },
-            { -0.4461f, -2.7478f },
-            { 2.4800f, -2.4800f },
-            { 4.2094f, 0.8521f },
-            { 2.6895f, -2.6895f }
+            { 2.3093f, -2.3093f }, // 132 ~ -132
+            { 1.5133f, -1.5133f }, // 86.7057031 ~ -86.7057031
+            { 2.4937f, -2.4937f }, // 142 ~ -142.878485
+            { -0.4461f, -2.7478f }, // -25 ~ -157 changed to -40 ~ 130
+            { 2.4800f, -2.4800f }, // 142.0935 ~ -142.0935
+            { 4.2094f, 0.8521f }, // 241 ~ 48 changed to
+            { 2.6895f, -2.6895f } // 154 ~ -154
         };
         rad2Deg(constraintVal);
         for (int i = 0; i < jointAngles.Count; i++)
@@ -320,10 +284,7 @@ public class CopyAvatarMovement : MonoBehaviour
             {
                 jointAngles[i] = jointAngles[i] - 360f;
             }
-            // if (i == 0)
-            // {
-            //     Debug.Log(jointAngles[i]);
-            // }
+
             if (constraintVal[i, 0] > jointAngles[i] && constraintVal[i, 1] < jointAngles[i]) { }
             else if (constraintVal[i, 0] < jointAngles[i])
             {
