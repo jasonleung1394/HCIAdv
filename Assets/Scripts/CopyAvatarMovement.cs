@@ -96,15 +96,37 @@ public class CopyAvatarMovement : MonoBehaviour
         Quaternion forearm_rotation = right_forearm.transform.localRotation;
         Quaternion hand_rotation = right_hand.transform.localRotation;
 
-        // because all Asin, its ranged from -90 to 90. in the angle constraint. the range is offsets so that the dof can be at least 180 deg.
-        J2 = Mathf.Asin(2 * (arm_rotation.z * arm_rotation.w)) * Mathf.Rad2Deg;
-        J1 = Mathf.Asin(2 * (arm_rotation.y * arm_rotation.w)) * Mathf.Rad2Deg;
-        J3 = Mathf.Asin(2 * (arm_rotation.x * arm_rotation.w)) * Mathf.Rad2Deg;
-        J4 = Mathf.Asin(2 * (forearm_rotation.z * forearm_rotation.w)) * Mathf.Rad2Deg - 40f;
-        J5 = Mathf.Asin(2 * (forearm_rotation.y * forearm_rotation.w)) * Mathf.Rad2Deg;
-        J6 = Mathf.Asin(2 * (hand_rotation.z * hand_rotation.w)) * Mathf.Rad2Deg + 138f;
-        J7 = Mathf.Asin(2 * (hand_rotation.y * hand_rotation.w)) * Mathf.Rad2Deg;
+        // Quaternion arm_rotation = right_arm.transform.localRotation;
+        // Quaternion forearm_rotation = right_forearm.transform.localRotation;
+        // Quaternion hand_rotation = right_hand.transform.localRotation;
 
+        J1 =
+            -Mathf.Atan2(
+                2 * (arm_rotation.x * arm_rotation.w),
+                1 - 2 * (arm_rotation.x * arm_rotation.x)
+            ) * Mathf.Rad2Deg;
+        J2 =
+            Mathf.Atan2(
+                2 * (arm_rotation.z * arm_rotation.w),
+                1 - 2 * (arm_rotation.z * arm_rotation.z)
+            ) * Mathf.Rad2Deg;
+        J3 =
+            -Mathf.Atan2(
+                2 * (arm_rotation.y * arm_rotation.w),
+                1 - 2 * (arm_rotation.y * arm_rotation.y)
+            ) * Mathf.Rad2Deg;
+
+        Vector3 forearm_axis;
+        float forearm_angle;
+        forearm_rotation.ToAngleAxis(out forearm_angle, out forearm_axis);
+        J4 = forearm_angle * forearm_axis.z;
+        J5 = forearm_angle * forearm_axis.y;
+
+        Vector3 hand_axis;
+        float hand_angle;
+        hand_rotation.ToAngleAxis(out hand_angle, out hand_axis);
+        J6 = hand_angle * hand_axis.z;
+        J7 = hand_angle * hand_axis.y;
         List<float> jointAngles = new List<float> { J1, J2, J3, J4, J5, J6, J7 };
         avatarJointState = new double[] { J1, J2, J3, J4, J5, J6, J7 };
         jointAngleConstraint(jointAngles);
