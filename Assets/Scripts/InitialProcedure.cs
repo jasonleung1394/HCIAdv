@@ -68,6 +68,9 @@ public class InitialProcedure : MonoBehaviour
     {
         CopyAvatarMovement copyAvatarMovement = GetComponent<CopyAvatarMovement>();
         bool[] jointInitFlag = copyAvatarMovement.jointInitFlag;
+
+        ButtonAction buttonAction = GetComponent<ButtonAction>();
+        int GripperState_Index = buttonAction.GripperState_Index;
         string jointInitText = "";
         for (int i = 0; i < jointInitFlag.Length; i++)
         {
@@ -82,5 +85,6 @@ public class InitialProcedure : MonoBehaviour
         }
         GUI.Label(new Rect(700, 10, 500, 1000), jointInitText);
         GUI.Label(new Rect(700, 150, 500, 1000), "Is the movement overspeed? -- " + !overSpeedFlag);
+        GUI.Label(new Rect(700, 600, 500, 1000), GripperState_Index == 0 ? "Gripper is Closed" : "Gripper is Open");
     }
 }

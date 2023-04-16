@@ -72,18 +72,12 @@ public class CopyAvatarMovement : MonoBehaviour
     private Quaternion initial_ForeArm = Quaternion.Euler(0, 0, (-1.59695f / 2) * Mathf.Rad2Deg);
 
     private Quaternion initial_Hand = Quaternion.Euler(0, 0 * Mathf.Rad2Deg, 0);
-    private float lerpTime = 0.0f;
-    private float lerpSpeed = 0.1f;
+
 
     void initialPoser()
     {
-        Quaternion arm_rotation = right_arm.transform.localRotation;
-        Quaternion forearm_rotation = right_forearm.transform.localRotation;
-        Quaternion hand_rotation = right_hand.transform.localRotation;
-
-        right_arm.transform.localRotation = initial_Arm;
-        right_forearm.transform.localRotation = initial_ForeArm;
-        right_hand.transform.localRotation = initial_Hand;
+        LerpToInitialPose lerpToInitialPose = GetComponent<LerpToInitialPose>();
+        lerpToInitialPose.Lerp_Index = 1;
     }
 
     // Update is called once per frame
@@ -95,10 +89,6 @@ public class CopyAvatarMovement : MonoBehaviour
         Quaternion arm_rotation = right_arm.transform.localRotation;
         Quaternion forearm_rotation = right_forearm.transform.localRotation;
         Quaternion hand_rotation = right_hand.transform.localRotation;
-
-        // Quaternion arm_rotation = right_arm.transform.localRotation;
-        // Quaternion forearm_rotation = right_forearm.transform.localRotation;
-        // Quaternion hand_rotation = right_hand.transform.localRotation;
 
         J1 =
             -Mathf.Atan2(
