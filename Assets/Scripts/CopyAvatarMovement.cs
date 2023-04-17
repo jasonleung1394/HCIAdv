@@ -83,6 +83,8 @@ public class CopyAvatarMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        OffsetValue offsetValue = GetComponent<OffsetValue>();
+
         reset_speed += Time.deltaTime * reset_speed;
         checkPointTime += Time.deltaTime;
         // assuming T pose is the origin pose
@@ -94,35 +96,34 @@ public class CopyAvatarMovement : MonoBehaviour
             Mathf.Atan2(
                 2 * (arm_rotation.x * arm_rotation.w),
                 1 - 2 * (arm_rotation.x * arm_rotation.x)
-            ) * Mathf.Rad2Deg;
+            ) * Mathf.Rad2Deg + offsetValue.arm_yaw * Mathf.Rad2Deg;
         J2 =
             -Mathf.Atan2(
                 2 * (arm_rotation.z * arm_rotation.w),
                 1 - 2 * (arm_rotation.z * arm_rotation.z)
-            ) * Mathf.Rad2Deg;
+            ) * Mathf.Rad2Deg + offsetValue.arm_pitch * Mathf.Rad2Deg;
         J3 =
             Mathf.Atan2(
                 2 * (arm_rotation.y * arm_rotation.w),
                 1 - 2 * (arm_rotation.y * arm_rotation.y)
-            ) * Mathf.Rad2Deg;
-
+            ) * Mathf.Rad2Deg + offsetValue.arm_roll * Mathf.Rad2Deg;
         Vector3 forearm_axis;
         float forearm_angle;
         forearm_rotation.ToAngleAxis(out forearm_angle, out forearm_axis);
-        J4 = forearm_angle * forearm_axis.z;
-        J5 = -forearm_angle * forearm_axis.y;
+        J4 = forearm_angle * forearm_axis.z + offsetValue.forearm_pitch * Mathf.Rad2Deg;
+        J5 = -forearm_angle * forearm_axis.y + offsetValue.forearm_roll * Mathf.Rad2Deg;
 
         Vector3 hand_axis;
         float hand_angle;
         hand_rotation.ToAngleAxis(out hand_angle, out hand_axis);
-        J6 = hand_angle * hand_axis.z;
-        J7 = hand_angle * hand_axis.y;
+        J6 = hand_angle * hand_axis.z + offsetValue.hand_pitch * Mathf.Rad2Deg;
+        J7 = hand_angle * hand_axis.y + offsetValue.hand_roll * Mathf.Rad2Deg;
         List<float> jointAngles = new List<float> { J1, J2, J3, J4, J5, J6, J7 };
         avatarJointState = new double[] { J1, J2, J3, J4, J5, J6, J7 };
         jointAngleConstraint(jointAngles);
         if (initFlag != 0)
         {
-            // jointVelocityConstraint(jointAngles);
+            jointVelocityConstraint(jointAngles);
         }
         JointStatePublisher jointStatePublisher = GetComponent<JointStatePublisher>();
         for (int i = 0; i < jointAngles.Count; i++)
@@ -241,6 +242,7 @@ public class CopyAvatarMovement : MonoBehaviour
         InitialProcedure initialProcedure = GetComponent<InitialProcedure>();
         initialProcedure.overSpeedFlag = true;
 
+
         // list of max || min velocity
         float[] velConstraintVal = new float[] { 2f, 1f, 1.5f, 1.25f, 3f, 1.5f, 3f };
         for (int i = 0; i < velConstraintVal.Length; i++)
@@ -253,7 +255,8 @@ public class CopyAvatarMovement : MonoBehaviour
             var currentJointAngle = preFrameAngle[i];
             var desiredJointAngle = jointAngles[i];
 
-            float jointVel = (desiredJointAngle - currentJointAngle) / Time.deltaTime;
+            float jointVel = Mathf.Abs(desiredJointAngle - currentJointAngle) / Time.deltaTime;
+
 
             if (jointVel >= velConstraintVal[i])
             {
@@ -284,7 +287,7 @@ public class CopyAvatarMovement : MonoBehaviour
             { 2.3093f, -2.3093f }, // 132 ~ -132
             { 1.5133f, -1.5133f }, // 86.7057031 ~ -86.7057031
             { 2.4937f, -2.4937f }, // 142 ~ -142.878485
-            { -0.4461f, -2.7478f }, // -25 ~ -157 changed to -40 ~ 130
+            { -0.4461f, -2.7478f }, // -25 ~ -157 
             { 2.4800f, -2.4800f }, // 142.0935 ~ -142.0935
             { 4.2094f, 0.8521f }, // 241 ~ 48 changed to
             { 2.6895f, -2.6895f } // 154 ~ -154

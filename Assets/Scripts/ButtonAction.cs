@@ -15,6 +15,7 @@ public class ButtonAction : MonoBehaviour
     private ROSConnection ros;
     public Button syncUnityToRosBtn;
     public Button GripperActionBtn;
+
     private int _gripperState_Index = 0; //Suppose close is 0, open is 1
     public int GripperState_Index
     {
@@ -30,16 +31,23 @@ public class ButtonAction : MonoBehaviour
 
         ros.RegisterPublisher<MoveActionGoalMsg>("/franka_gripper/move/goal");
         ros.RegisterPublisher<GraspActionGoalMsg>("/franka_gripper/grasp/goal");
+
     }
 
     // Update is called once per frame
-    void Update() { }
+    void Update()
+    {
+    }
+
 
     void SyncUnityToRos()
     {
         JointStatePublisher jointStatePublisher = GetComponent<JointStatePublisher>();
 
         jointStatePublisher.PublishJointState();
+
+        LerpToInitialPose lerpToInitialPose = GetComponent<LerpToInitialPose>();
+        lerpToInitialPose.Lerp_Index = 1;
     }
 
     void GripperAction()
