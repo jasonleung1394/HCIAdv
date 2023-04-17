@@ -1,4 +1,4 @@
 float64 width
-GraspEpsilon epsilon
+franka_gripper/GraspEpsilon epsilon
 float64 speed
 float64 force

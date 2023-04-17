@@ -1,3 +1,3 @@
 std_msgs/Header header
 actionlib_msgs/GoalID goal_id
-GraspGoal goal
+franka_gripper/GraspGoal goal

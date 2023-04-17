@@ -13,15 +13,21 @@ namespace RosMessageTypes.Assets
         public const string k_RosMessageName = "Assets/MoveActionGoal";
         public override string RosMessageName => k_RosMessageName;
 
-        public MoveGoalMsg goal;
+        public Std.HeaderMsg header;
+        public Actionlib.GoalIDMsg goal_id;
+        public FrankaGripper.MoveGoalMsg goal;
 
         public MoveActionGoalMsg()
         {
-            this.goal = new MoveGoalMsg();
+            this.header = new Std.HeaderMsg();
+            this.goal_id = new Actionlib.GoalIDMsg();
+            this.goal = new FrankaGripper.MoveGoalMsg();
         }
 
-        public MoveActionGoalMsg(MoveGoalMsg goal)
+        public MoveActionGoalMsg(Std.HeaderMsg header, Actionlib.GoalIDMsg goal_id, FrankaGripper.MoveGoalMsg goal)
         {
+            this.header = header;
+            this.goal_id = goal_id;
             this.goal = goal;
         }
 
@@ -29,17 +35,23 @@ namespace RosMessageTypes.Assets
 
         private MoveActionGoalMsg(MessageDeserializer deserializer)
         {
-            this.goal = MoveGoalMsg.Deserialize(deserializer);
+            this.header = Std.HeaderMsg.Deserialize(deserializer);
+            this.goal_id = Actionlib.GoalIDMsg.Deserialize(deserializer);
+            this.goal = FrankaGripper.MoveGoalMsg.Deserialize(deserializer);
         }
 
         public override void SerializeTo(MessageSerializer serializer)
         {
+            serializer.Write(this.header);
+            serializer.Write(this.goal_id);
             serializer.Write(this.goal);
         }
 
         public override string ToString()
         {
             return "MoveActionGoalMsg: " +
+            "\nheader: " + header.ToString() +
+            "\ngoal_id: " + goal_id.ToString() +
             "\ngoal: " + goal.ToString();
         }
 

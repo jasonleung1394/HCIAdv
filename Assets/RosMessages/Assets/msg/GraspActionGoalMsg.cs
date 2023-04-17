@@ -15,16 +15,16 @@ namespace RosMessageTypes.Assets
 
         public Std.HeaderMsg header;
         public Actionlib.GoalIDMsg goal_id;
-        public GraspGoalMsg goal;
+        public FrankaGripper.GraspGoalMsg goal;
 
         public GraspActionGoalMsg()
         {
             this.header = new Std.HeaderMsg();
             this.goal_id = new Actionlib.GoalIDMsg();
-            this.goal = new GraspGoalMsg();
+            this.goal = new FrankaGripper.GraspGoalMsg();
         }
 
-        public GraspActionGoalMsg(Std.HeaderMsg header, Actionlib.GoalIDMsg goal_id, GraspGoalMsg goal)
+        public GraspActionGoalMsg(Std.HeaderMsg header, Actionlib.GoalIDMsg goal_id, FrankaGripper.GraspGoalMsg goal)
         {
             this.header = header;
             this.goal_id = goal_id;
@@ -37,7 +37,7 @@ namespace RosMessageTypes.Assets
         {
             this.header = Std.HeaderMsg.Deserialize(deserializer);
             this.goal_id = Actionlib.GoalIDMsg.Deserialize(deserializer);
-            this.goal = GraspGoalMsg.Deserialize(deserializer);
+            this.goal = FrankaGripper.GraspGoalMsg.Deserialize(deserializer);
         }
 
         public override void SerializeTo(MessageSerializer serializer)

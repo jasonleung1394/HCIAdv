@@ -14,19 +14,19 @@ namespace RosMessageTypes.Assets
         public override string RosMessageName => k_RosMessageName;
 
         public double width;
-        public GraspEpsilonMsg epsilon;
+        public FrankaGripper.GraspEpsilonMsg epsilon;
         public double speed;
         public double force;
 
         public GraspGoalMsg()
         {
             this.width = 0.0;
-            this.epsilon = new GraspEpsilonMsg();
+            this.epsilon = new FrankaGripper.GraspEpsilonMsg();
             this.speed = 0.0;
             this.force = 0.0;
         }
 
-        public GraspGoalMsg(double width, GraspEpsilonMsg epsilon, double speed, double force)
+        public GraspGoalMsg(double width, FrankaGripper.GraspEpsilonMsg epsilon, double speed, double force)
         {
             this.width = width;
             this.epsilon = epsilon;
@@ -39,7 +39,7 @@ namespace RosMessageTypes.Assets
         private GraspGoalMsg(MessageDeserializer deserializer)
         {
             deserializer.Read(out this.width);
-            this.epsilon = GraspEpsilonMsg.Deserialize(deserializer);
+            this.epsilon = FrankaGripper.GraspEpsilonMsg.Deserialize(deserializer);
             deserializer.Read(out this.speed);
             deserializer.Read(out this.force);
         }
