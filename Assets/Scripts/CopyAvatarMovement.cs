@@ -91,17 +91,17 @@ public class CopyAvatarMovement : MonoBehaviour
         Quaternion hand_rotation = right_hand.transform.localRotation;
 
         J1 =
-            -Mathf.Atan2(
+            Mathf.Atan2(
                 2 * (arm_rotation.x * arm_rotation.w),
                 1 - 2 * (arm_rotation.x * arm_rotation.x)
             ) * Mathf.Rad2Deg;
         J2 =
-            Mathf.Atan2(
+            -Mathf.Atan2(
                 2 * (arm_rotation.z * arm_rotation.w),
                 1 - 2 * (arm_rotation.z * arm_rotation.z)
             ) * Mathf.Rad2Deg;
         J3 =
-            -Mathf.Atan2(
+            Mathf.Atan2(
                 2 * (arm_rotation.y * arm_rotation.w),
                 1 - 2 * (arm_rotation.y * arm_rotation.y)
             ) * Mathf.Rad2Deg;
@@ -110,7 +110,7 @@ public class CopyAvatarMovement : MonoBehaviour
         float forearm_angle;
         forearm_rotation.ToAngleAxis(out forearm_angle, out forearm_axis);
         J4 = forearm_angle * forearm_axis.z;
-        J5 = forearm_angle * forearm_axis.y;
+        J5 = -forearm_angle * forearm_axis.y;
 
         Vector3 hand_axis;
         float hand_angle;
@@ -131,14 +131,14 @@ public class CopyAvatarMovement : MonoBehaviour
         }
 
         // fr3_J1.transform.localEulerAngles = new Vector3(0, jointAngles[0], 0);
-        fr3_J1.transform.localRotation = Quaternion.AngleAxis(jointAngles[0], Vector3.up);
+        fr3_J1.transform.localRotation = Quaternion.AngleAxis(-jointAngles[0], Vector3.up);
 
         fr3_J2.transform.localRotation =
-            Quaternion.AngleAxis(jointAngles[1], Vector3.left)
+            Quaternion.AngleAxis(-jointAngles[1], Vector3.left)
             * Quaternion.AngleAxis(-90f, Vector3.back);
 
         fr3_J3.transform.localRotation =
-            Quaternion.AngleAxis(jointAngles[2], Vector3.left)
+            Quaternion.AngleAxis(-jointAngles[2], Vector3.left)
             * Quaternion.AngleAxis(90f, Vector3.back);
 
         fr3_J4.transform.localRotation =
@@ -146,7 +146,7 @@ public class CopyAvatarMovement : MonoBehaviour
             * Quaternion.AngleAxis(90f, Vector3.back);
 
         fr3_J5.transform.localRotation =
-            Quaternion.AngleAxis(jointAngles[4], Vector3.left)
+            Quaternion.AngleAxis(-jointAngles[4], Vector3.left)
             * Quaternion.AngleAxis(-90f, Vector3.back);
 
         fr3_J6.transform.localRotation =
