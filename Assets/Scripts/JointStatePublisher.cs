@@ -9,6 +9,7 @@ using RosMessageTypes.Std;
 using RosMessageTypes.Rosgraph;
 using RosMessageTypes.Tf2;
 using RosMessageTypes.FrankaPositionServo;
+using System;
 
 public class JointStatePublisher : MonoBehaviour
 {
@@ -22,8 +23,8 @@ public class JointStatePublisher : MonoBehaviour
     public Transform fr3;
     private float timeElapsed;
 
-    private ClockMsg clockMsg;
-    public ClockMsg clockMsg_prop
+    private TimeStamp clockMsg;
+    public TimeStamp clockMsg_prop
     {
         get { return clockMsg; }
         set { clockMsg = value; }
@@ -44,9 +45,10 @@ public class JointStatePublisher : MonoBehaviour
         m_LastPublishTimeSeconds = Clock.time + PublishPeriodSeconds;
     }
 
-    void syncClock(ClockMsg clock)
+    void syncClock(JointStateMsg JointStateMsg)
     {
-        clockMsg_prop = clock;
+        clockMsg_prop = JointStateMsg.header.stamp;
+        Debug.Log(clockMsg_prop);
     }
 
     void getSeq(TFMessageMsg tF)
@@ -57,13 +59,14 @@ public class JointStatePublisher : MonoBehaviour
 
     public void PublishJointState()
     {
-        ros.Subscribe<ClockMsg>("clock", syncClock);
+        ros.Subscribe<JointStateMsg>("joint_states", syncClock);
 
         string[] jointNames = new string[7];
         for (int i = 0; i < 7; i++)
         {
-            jointNames[i] = "fr3_joint" + (i + 1);
+            jointNames[i] = "panda_joint" + (i + 1);
         }
+        // i guess vel and eff needs to be set
         double[] jointPos = new double[7];
         double[] jointVel = new double[7];
         double[] jointEff = new double[7];
@@ -71,10 +74,10 @@ public class JointStatePublisher : MonoBehaviour
 
         InitialProcedure initialProcedure = GetComponent<InitialProcedure>();
 
-        if (clockMsg_prop != null && ShouldPublishMessage)
+        if (ShouldPublishMessage)
         {
             JointCommandMsg jointCommandMsg = new JointCommandMsg(
-                new HeaderMsg(0, clockMsg.clock, ""),
+                new HeaderMsg(0, clockMsg, ""),
                 1,
                 jointNames,
                 jointPos,

@@ -42,6 +42,7 @@ public class ButtonAction : MonoBehaviour
 
     void SyncUnityToRos()
     {
+        // sync action needs to be a lerp
         JointStatePublisher jointStatePublisher = GetComponent<JointStatePublisher>();
 
         jointStatePublisher.PublishJointState();
@@ -70,7 +71,6 @@ public class ButtonAction : MonoBehaviour
         HeaderMsg header = new HeaderMsg(1, timeMsg, "");
         GoalIDMsg goalIDMsg = new GoalIDMsg(timeMsg, "");
         MoveActionGoalMsg msg_to_publish = new MoveActionGoalMsg(header, goalIDMsg, new MoveGoalMsg(0.08, 0.1));
-        Debug.Log(msg_to_publish);
         ros.Publish("/franka_gripper/move/goal", msg_to_publish);
     }
 
