@@ -1,0 +1,221 @@
+json2004@json2004-16Z90P-G-AA75A:~/catkin_ws$ roslaunch franka_position_servo joint_position_controller.launch robot_ip:=172.16.0.2 
+... logging to /home/json2004/.ros/log/6e28ef6c-e3fd-11ed-b766-671344ae4b40/roslaunch-json2004-16Z90P-G-AA75A-29771.log
+Checking log directory for disk usage. This may take a while.
+Press Ctrl-C to interrupt
+Done checking log file disk usage. Usage is <1GB.
+
+started roslaunch server http://json2004-16Z90P-G-AA75A:42521/
+
+SUMMARY
+========
+
+PARAMETERS
+ * /controllers_config/position_controller: franka_position_s...
+ * /controllers_config/trajectory_controller: position_joint_tr...
+ * /effort_joint_trajectory_controller/constraints/goal_time: 0.5
+ * /effort_joint_trajectory_controller/constraints/panda_joint1/goal: 0.05
+ * /effort_joint_trajectory_controller/constraints/panda_joint2/goal: 0.05
+ * /effort_joint_trajectory_controller/constraints/panda_joint3/goal: 0.05
+ * /effort_joint_trajectory_controller/constraints/panda_joint4/goal: 0.05
+ * /effort_joint_trajectory_controller/constraints/panda_joint5/goal: 0.05
+ * /effort_joint_trajectory_controller/constraints/panda_joint6/goal: 0.05
+ * /effort_joint_trajectory_controller/constraints/panda_joint7/goal: 0.05
+ * /effort_joint_trajectory_controller/gains/panda_joint1/d: 30
+ * /effort_joint_trajectory_controller/gains/panda_joint1/i: 0
+ * /effort_joint_trajectory_controller/gains/panda_joint1/p: 600
+ * /effort_joint_trajectory_controller/gains/panda_joint2/d: 30
+ * /effort_joint_trajectory_controller/gains/panda_joint2/i: 0
+ * /effort_joint_trajectory_controller/gains/panda_joint2/p: 600
+ * /effort_joint_trajectory_controller/gains/panda_joint3/d: 30
+ * /effort_joint_trajectory_controller/gains/panda_joint3/i: 0
+ * /effort_joint_trajectory_controller/gains/panda_joint3/p: 600
+ * /effort_joint_trajectory_controller/gains/panda_joint4/d: 30
+ * /effort_joint_trajectory_controller/gains/panda_joint4/i: 0
+ * /effort_joint_trajectory_controller/gains/panda_joint4/p: 600
+ * /effort_joint_trajectory_controller/gains/panda_joint5/d: 10
+ * /effort_joint_trajectory_controller/gains/panda_joint5/i: 0
+ * /effort_joint_trajectory_controller/gains/panda_joint5/p: 250
+ * /effort_joint_trajectory_controller/gains/panda_joint6/d: 10
+ * /effort_joint_trajectory_controller/gains/panda_joint6/i: 0
+ * /effort_joint_trajectory_controller/gains/panda_joint6/p: 150
+ * /effort_joint_trajectory_controller/gains/panda_joint7/d: 5
+ * /effort_joint_trajectory_controller/gains/panda_joint7/i: 0
+ * /effort_joint_trajectory_controller/gains/panda_joint7/p: 50
+ * /effort_joint_trajectory_controller/joints: ['panda_joint1', ...
+ * /effort_joint_trajectory_controller/type: effort_controller...
+ * /franka_control/arm_id: panda
+ * /franka_control/collision_config/lower_force_thresholds_acceleration: [20.0, 20.0, 20.0...
+ * /franka_control/collision_config/lower_force_thresholds_nominal: [20.0, 20.0, 20.0...
+ * /franka_control/collision_config/lower_torque_thresholds_acceleration: [20.0, 20.0, 18.0...
+ * /franka_control/collision_config/lower_torque_thresholds_nominal: [20.0, 20.0, 18.0...
+ * /franka_control/collision_config/upper_force_thresholds_acceleration: [20.0, 20.0, 20.0...
+ * /franka_control/collision_config/upper_force_thresholds_nominal: [20.0, 20.0, 20.0...
+ * /franka_control/collision_config/upper_torque_thresholds_acceleration: [20.0, 20.0, 18.0...
+ * /franka_control/collision_config/upper_torque_thresholds_nominal: [20.0, 20.0, 18.0...
+ * /franka_control/cutoff_frequency: 100
+ * /franka_control/internal_controller: joint_impedance
+ * /franka_control/joint_limit_warning_threshold: 0.1
+ * /franka_control/joint_names: ['panda_joint1', ...
+ * /franka_control/rate_limiting: True
+ * /franka_control/realtime_config: enforce
+ * /franka_control/robot_ip: 172.16.0.2
+ * /franka_gripper/default_grasp_epsilon/inner: 0.005
+ * /franka_gripper/default_grasp_epsilon/outer: 0.005
+ * /franka_gripper/default_speed: 0.1
+ * /franka_gripper/joint_names: ['panda_finger_jo...
+ * /franka_gripper/publish_rate: 30
+ * /franka_gripper/robot_ip: 172.16.0.2
+ * /franka_gripper/stop_at_shutdown: False
+ * /franka_state_controller/arm_id: panda
+ * /franka_state_controller/joint_names: ['panda_joint1', ...
+ * /franka_state_controller/publish_rate: 30
+ * /franka_state_controller/type: franka_control/Fr...
+ * /gripper_config/default_grasp_epsilon/inner: 0.005
+ * /gripper_config/default_grasp_epsilon/outer: 0.005
+ * /gripper_config/default_speed: 0.1
+ * /gripper_config/joint_names: ['panda_finger_jo...
+ * /joint_position_controller/joint_names: ['panda_joint1', ...
+ * /joint_position_controller/type: franka_position_s...
+ * /joint_state_publisher/rate: 30
+ * /joint_state_publisher/source_list: ['franka_state_co...
+ * /position_joint_trajectory_controller/constraints/goal_time: 0.5
+ * /position_joint_trajectory_controller/constraints/panda_joint1/goal: 0.05
+ * /position_joint_trajectory_controller/constraints/panda_joint2/goal: 0.05
+ * /position_joint_trajectory_controller/constraints/panda_joint3/goal: 0.05
+ * /position_joint_trajectory_controller/constraints/panda_joint4/goal: 0.05
+ * /position_joint_trajectory_controller/constraints/panda_joint5/goal: 0.05
+ * /position_joint_trajectory_controller/constraints/panda_joint6/goal: 0.05
+ * /position_joint_trajectory_controller/constraints/panda_joint7/goal: 0.05
+ * /position_joint_trajectory_controller/joints: ['panda_joint1', ...
+ * /position_joint_trajectory_controller/type: position_controll...
+ * /robot_config/arm_id: panda
+ * /robot_config/cutoff_frequency: 100
+ * /robot_config/internal_controller: joint_impedance
+ * /robot_config/joint_config/joint_acceleration_limit/panda_joint1: 15.0
+ * /robot_config/joint_config/joint_acceleration_limit/panda_joint2: 7.5
+ * /robot_config/joint_config/joint_acceleration_limit/panda_joint3: 10.0
+ * /robot_config/joint_config/joint_acceleration_limit/panda_joint4: 12.5
+ * /robot_config/joint_config/joint_acceleration_limit/panda_joint5: 15.0
+ * /robot_config/joint_config/joint_acceleration_limit/panda_joint6: 20.0
+ * /robot_config/joint_config/joint_acceleration_limit/panda_joint7: 20.0
+ * /robot_config/joint_config/joint_effort_limit/panda_joint1: 87
+ * /robot_config/joint_config/joint_effort_limit/panda_joint2: 87
+ * /robot_config/joint_config/joint_effort_limit/panda_joint3: 87
+ * /robot_config/joint_config/joint_effort_limit/panda_joint4: 87
+ * /robot_config/joint_config/joint_effort_limit/panda_joint5: 12
+ * /robot_config/joint_config/joint_effort_limit/panda_joint6: 12
+ * /robot_config/joint_config/joint_effort_limit/panda_joint7: 12
+ * /robot_config/joint_config/joint_position_limit/lower/panda_joint1: -2.8973
+ * /robot_config/joint_config/joint_position_limit/lower/panda_joint2: -1.7628
+ * /robot_config/joint_config/joint_position_limit/lower/panda_joint3: -2.8973
+ * /robot_config/joint_config/joint_position_limit/lower/panda_joint4: -3.0718
+ * /robot_config/joint_config/joint_position_limit/lower/panda_joint5: -2.8973
+ * /robot_config/joint_config/joint_position_limit/lower/panda_joint6: -0.0175
+ * /robot_config/joint_config/joint_position_limit/lower/panda_joint7: -2.8973
+ * /robot_config/joint_config/joint_position_limit/upper/panda_joint1: 2.8973
+ * /robot_config/joint_config/joint_position_limit/upper/panda_joint2: 1.7628
+ * /robot_config/joint_config/joint_position_limit/upper/panda_joint3: 2.8973
+ * /robot_config/joint_config/joint_position_limit/upper/panda_joint4: -0.0698
+ * /robot_config/joint_config/joint_position_limit/upper/panda_joint5: 2.8973
+ * /robot_config/joint_config/joint_position_limit/upper/panda_joint6: 3.7525
+ * /robot_config/joint_config/joint_position_limit/upper/panda_joint7: 2.8973
+ * /robot_config/joint_config/joint_velocity_limit/panda_joint1: 2.175
+ * /robot_config/joint_config/joint_velocity_limit/panda_joint2: 2.175
+ * /robot_config/joint_config/joint_velocity_limit/panda_joint3: 2.175
+ * /robot_config/joint_config/joint_velocity_limit/panda_joint4: 2.175
+ * /robot_config/joint_config/joint_velocity_limit/panda_joint5: 2.61
+ * /robot_config/joint_config/joint_velocity_limit/panda_joint6: 2.61
+ * /robot_config/joint_config/joint_velocity_limit/panda_joint7: 2.61
+ * /robot_config/joint_names: ['panda_joint1', ...
+ * /robot_config/neutral_pose/panda_joint1: -0.01779206022777...
+ * /robot_config/neutral_pose/panda_joint2: -0.7601235411041661
+ * /robot_config/neutral_pose/panda_joint3: 0.019782607023391807
+ * /robot_config/neutral_pose/panda_joint4: -2.342050140544315
+ * /robot_config/neutral_pose/panda_joint5: 0.029840531355804868
+ * /robot_config/neutral_pose/panda_joint6: 1.5411935298621688
+ * /robot_config/neutral_pose/panda_joint7: 0.7534486589746342
+ * /robot_config/rate_limiting: True
+ * /robot_description: <?xml version="1....
+ * /rosdistro: noetic
+ * /rosversion: 1.16.0
+
+NODES
+  /
+    controller_spawner_1 (controller_manager/spawner)
+    controller_spawner_2 (controller_manager/spawner)
+    franka_control (franka_control/franka_control_node)
+    franka_gripper (franka_gripper/franka_gripper_node)
+    hand_camera_tf (tf/static_transform_publisher)
+    hand_optoforce_tf (tf/static_transform_publisher)
+    joint_state_publisher (joint_state_publisher/joint_state_publisher)
+    robot_state_publisher (robot_state_publisher/robot_state_publisher)
+    state_controller_spawner (controller_manager/spawner)
+
+ROS_MASTER_URI=http://localhost:11311
+
+process[franka_gripper-1]: started with pid [29788]
+process[franka_control-2]: started with pid [29789]
+process[state_controller_spawner-3]: started with pid [29790]
+process[robot_state_publisher-4]: started with pid [29791]
+[ INFO] [1682491368.400681157]: franka_gripper_node: Found default_speed 0.1
+[ INFO] [1682491368.401721015]: franka_gripper_node: Found default_grasp_epsilon inner: 0.005, outer: 0.005
+process[joint_state_publisher-5]: started with pid [29802]
+process[controller_spawner_1-6]: started with pid [29808]
+process[controller_spawner_2-7]: started with pid [29810]
+process[hand_camera_tf-8]: started with pid [29811]
+process[hand_optoforce_tf-9]: started with pid [29813]
+[INFO] [1682491368.808011]: Controller Spawner: Waiting for service controller_manager/load_controller
+[INFO] [1682491368.809862]: Controller Spawner: Waiting for service controller_manager/load_controller
+[INFO] [1682491368.811934]: Controller Spawner: Waiting for service controller_manager/switch_controller
+[INFO] [1682491368.814392]: Controller Spawner: Waiting for service controller_manager/switch_controller
+[INFO] [1682491368.815524]: Controller Spawner: Waiting for service controller_manager/unload_controller
+[INFO] [1682491368.818211]: Controller Spawner: Waiting for service controller_manager/unload_controller
+[INFO] [1682491368.819820]: Loading controller: franka_state_controller
+[INFO] [1682491368.827374]: Loading controller: joint_position_controller
+[INFO] [1682491368.832775]: Controller Spawner: Waiting for service controller_manager/load_controller
+[INFO] [1682491368.835950]: Controller Spawner: Waiting for service controller_manager/switch_controller
+[INFO] [1682491368.838907]: Controller Spawner: Waiting for service controller_manager/unload_controller
+[INFO] [1682491368.839090]: Controller Spawner: Loaded controllers: franka_state_controller
+[INFO] [1682491368.842303]: Loading controller: position_joint_trajectory_controller
+[ INFO] [1682491368.845751047]: PositionJointPositionController: Did not find controller_state_publish_rate. Using default 30 [Hz].
+[INFO] [1682491368.851925]: Controller Spawner: Loaded controllers: joint_position_controller
+[INFO] [1682491368.853912]: Started controllers: franka_state_controller
+[INFO] [1682491368.876142]: Controller Spawner: Loaded controllers: position_joint_trajectory_controller
+[ INFO] [1682491368.876203541]: FrankaHW: Prepared switching controllers to joint_position with parameters limit_rate=1, cutoff_frequency=100, internal_controller=joint_impedance
+[ INFO] [1682491368.876683730]: franka_control: controller activated
+[INFO] [1682491368.876986]: Started controllers: joint_position_controller
+[ERROR] [1682491486.579710062]: libfranka: Move command aborted: User Stop pressed!
+[ INFO] [1682491486.579771498]: franka_control: main loop
+[ INFO] [1682491530.163282135]: franka_control: controller activated
+[ERROR] [1682491538.814108442]: libfranka: Move command aborted: motion aborted by reflex! ["cartesian_reflex"]
+control_command_success_rate: 1
+[ INFO] [1682491538.814238002]: franka_control: main loop
+[ INFO] [1682491585.620232008]: franka_control: controller activated
+terminate called after throwing an instance of 'franka::CommandException'
+  what():  libfranka: Move command rejected due to activated safety function! Please disable all safety functions.
+================================================================================REQUIRED process [franka_control-2] has died!
+process has died [pid 29789, exit code -6, cmd /home/json2004/catkin_ws/devel/lib/franka_control/franka_control_node __name:=franka_control __log:=/home/json2004/.ros/log/6e28ef6c-e3fd-11ed-b766-671344ae4b40/franka_control-2.log].
+log file: /home/json2004/.ros/log/6e28ef6c-e3fd-11ed-b766-671344ae4b40/franka_control-2*.log
+Initiating shutdown!
+================================================================================
+[hand_optoforce_tf-9] killing on exit
+[hand_camera_tf-8] killing on exit
+[controller_spawner_2-7] killing on exit
+[controller_spawner_1-6] killing on exit
+[joint_state_publisher-5] killing on exit
+[robot_state_publisher-4] killing on exit
+[state_controller_spawner-3] killing on exit
+[franka_control-2] killing on exit
+[franka_gripper-1] killing on exit
+[INFO] [1682491586.199888]: Shutting down spawner. Stopping and unloading controllers...
+[INFO] [1682491586.200057]: Shutting down spawner. Stopping and unloading controllers...
+[INFO] [1682491586.201056]: Shutting down spawner. Stopping and unloading controllers...
+[INFO] [1682491586.203691]: Stopping all controllers...
+[INFO] [1682491586.204245]: Stopping all controllers...
+[INFO] [1682491586.204858]: Stopping all controllers...
+[WARN] [1682491586.211893]: Controller Spawner error while taking down controllers: unable to connect to service: [Errno 111] Connection refused
+[WARN] [1682491586.216773]: Controller Spawner error while taking down controllers: unable to connect to service: [Errno 111] Connection refused
+[WARN] [1682491586.220930]: Controller Spawner error while taking down controllers: unable to connect to service: [Errno 111] Connection refused
+shutting down processing monitor...
+... shutting down processing monitor complete
+done
