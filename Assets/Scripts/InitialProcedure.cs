@@ -35,6 +35,7 @@ public class InitialProcedure : MonoBehaviour
         ros.Subscribe<JointStateMsg>(JointState_TopicName, getJointState);
     }
 
+
     void getJointState(JointStateMsg jointStateMsg)
     {
         double[] JointPosition = jointStateMsg.position;

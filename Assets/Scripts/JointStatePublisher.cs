@@ -48,7 +48,6 @@ public class JointStatePublisher : MonoBehaviour
     void syncClock(JointStateMsg JointStateMsg)
     {
         clockMsg_prop = JointStateMsg.header.stamp;
-        Debug.Log(clockMsg_prop);
     }
 
     void getSeq(TFMessageMsg tF)
@@ -72,7 +71,6 @@ public class JointStatePublisher : MonoBehaviour
         double[] jointEff = new double[7];
         jointPos = jointAngles_double;
 
-        InitialProcedure initialProcedure = GetComponent<InitialProcedure>();
 
         if (ShouldPublishMessage)
         {

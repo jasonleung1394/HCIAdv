@@ -8,12 +8,14 @@ using RosMessageTypes.FrankaGripper;
 using RosMessageTypes.Actionlib;
 using RosMessageTypes.Std;
 using RosMessageTypes.BuiltinInterfaces;
+using RosMessageTypes.Sensor;
 
 public class ButtonAction : MonoBehaviour
 {
     // Start is called before the first frame update
     private ROSConnection ros;
     public Button syncUnityToRosBtn;
+    public Button syncRosToUnityBtn;
     public Button GripperActionBtn;
 
     private int _gripperState_Index = 0; //Suppose close is 0, open is 1
@@ -28,6 +30,7 @@ public class ButtonAction : MonoBehaviour
         ros = ROSConnection.GetOrCreateInstance();
         syncUnityToRosBtn.onClick.AddListener(SyncUnityToRos);
         GripperActionBtn.onClick.AddListener(GripperAction);
+        syncRosToUnityBtn.onClick.AddListener(SyncRosToUnity);
 
         ros.RegisterPublisher<MoveActionGoalMsg>("/franka_gripper/move/goal");
         ros.RegisterPublisher<GraspActionGoalMsg>("/franka_gripper/grasp/goal");
@@ -49,6 +52,30 @@ public class ButtonAction : MonoBehaviour
 
         LerpToInitialPose lerpToInitialPose = GetComponent<LerpToInitialPose>();
         lerpToInitialPose.Lerp_Index = 1;
+    }
+    void SyncRosToUnity()
+    {
+        ros.Subscribe<JointStateMsg>("joint_states", SyncRosToUnityAction);
+        syncRosToUnityAction_assignmentIndex = 0;
+    }
+
+    private int syncRosToUnityAction_assignmentIndex = 0;
+    void SyncRosToUnityAction(JointStateMsg jointStateMsg)
+    {
+        if (syncRosToUnityAction_assignmentIndex == 0)
+        {
+            LerpToInitialPose lerpToInitialPose = GetComponent<LerpToInitialPose>();
+            lerpToInitialPose.Lerp_Index = 2;
+            double[] rosPos = jointStateMsg.position;
+            
+            
+            lerpToInitialPose.RosArm = Quaternion.Euler((float)rosPos[0] * Mathf.Rad2Deg, (float)rosPos[2] * Mathf.Rad2Deg, (float)rosPos[1] * Mathf.Rad2Deg);
+            lerpToInitialPose.RosForeArm = Quaternion.Euler(0f, (float)rosPos[4] * Mathf.Rad2Deg, (float)rosPos[3] * Mathf.Rad2Deg);
+            lerpToInitialPose.RosHand = Quaternion.Euler(0f, (float)rosPos[6] * Mathf.Rad2Deg, (float)rosPos[5] * Mathf.Rad2Deg);
+
+
+            syncRosToUnityAction_assignmentIndex = 1;
+        }
     }
 
     void GripperAction()

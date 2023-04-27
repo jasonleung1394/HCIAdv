@@ -112,23 +112,29 @@ public class CopyAvatarMovement : MonoBehaviour
         forearm_rotation.ToAngleAxis(out forearm_angle, out forearm_axis);
         J4 = forearm_angle * forearm_axis.z + offsetValue.forearm_pitch * Mathf.Rad2Deg;
         J5 = -forearm_angle * forearm_axis.y + offsetValue.forearm_roll * Mathf.Rad2Deg;
-
         Vector3 hand_axis;
         float hand_angle;
         hand_rotation.ToAngleAxis(out hand_angle, out hand_axis);
         J6 = hand_angle * hand_axis.z + offsetValue.hand_pitch * Mathf.Rad2Deg;
         J7 = hand_angle * hand_axis.y + offsetValue.hand_roll * Mathf.Rad2Deg;
+
+
         List<float> jointAngles = new List<float> { J1, J2, J3, J4, J5, J6, J7 };
         avatarJointState = new double[] { J1, J2, J3, J4, J5, J6, J7 };
         jointAngleConstraint(jointAngles);
         if (initFlag != 0)
         {
-            jointVelocityConstraint(jointAngles);
+            // jointVelocityConstraint(jointAngles);
         }
         JointStatePublisher jointStatePublisher = GetComponent<JointStatePublisher>();
         for (int i = 0; i < jointAngles.Count; i++)
         {
             jointStatePublisher.jointAngles_double[i] = jointAngles[i] * Mathf.Deg2Rad;
+        }
+        preFrameAngle = new List<float>();
+        for (int i = 0; i < jointAngles.Count; i++)
+        {
+            preFrameAngle.Add(jointAngles[i]);
         }
 
         // fr3_J1.transform.localEulerAngles = new Vector3(0, jointAngles[0], 0);
@@ -158,11 +164,6 @@ public class CopyAvatarMovement : MonoBehaviour
             Quaternion.AngleAxis(jointAngles[6], Vector3.left)
             * Quaternion.AngleAxis(90f, Vector3.back);
 
-        preFrameAngle = new List<float>();
-        for (int i = 0; i < jointAngles.Count; i++)
-        {
-            preFrameAngle.Add(jointAngles[i]);
-        }
         if (checkPointTime > waitTime_checkPoint)
         {
             // init a check point
