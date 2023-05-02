@@ -73,6 +73,6 @@ public class LerpToInitialPose : MonoBehaviour
             hand_transform = GameObject.Find("Right Hand").transform;
         }
 
-        Debug.Log(lerp_Index);
+        // Debug.Log(lerp_Index);
     }
 }

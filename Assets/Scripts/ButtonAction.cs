@@ -47,11 +47,10 @@ public class ButtonAction : MonoBehaviour
     {
         // sync action needs to be a lerp
         JointStatePublisher jointStatePublisher = GetComponent<JointStatePublisher>();
-
-        jointStatePublisher.PublishJointState();
-
         LerpToInitialPose lerpToInitialPose = GetComponent<LerpToInitialPose>();
         lerpToInitialPose.Lerp_Index = 1;
+
+        jointStatePublisher.PublishJointState();
     }
     void SyncRosToUnity()
     {
@@ -67,8 +66,9 @@ public class ButtonAction : MonoBehaviour
             LerpToInitialPose lerpToInitialPose = GetComponent<LerpToInitialPose>();
             lerpToInitialPose.Lerp_Index = 2;
             double[] rosPos = jointStateMsg.position;
-            
-            
+
+
+
             lerpToInitialPose.RosArm = Quaternion.Euler((float)rosPos[0] * Mathf.Rad2Deg, (float)rosPos[2] * Mathf.Rad2Deg, (float)rosPos[1] * Mathf.Rad2Deg);
             lerpToInitialPose.RosForeArm = Quaternion.Euler(0f, (float)rosPos[4] * Mathf.Rad2Deg, (float)rosPos[3] * Mathf.Rad2Deg);
             lerpToInitialPose.RosHand = Quaternion.Euler(0f, (float)rosPos[6] * Mathf.Rad2Deg, (float)rosPos[5] * Mathf.Rad2Deg);

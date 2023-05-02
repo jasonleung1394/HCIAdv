@@ -71,7 +71,6 @@ public class JointStatePublisher : MonoBehaviour
         double[] jointEff = new double[7];
         jointPos = jointAngles_double;
 
-
         if (ShouldPublishMessage)
         {
             JointCommandMsg jointCommandMsg = new JointCommandMsg(
