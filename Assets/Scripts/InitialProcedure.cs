@@ -39,11 +39,9 @@ public class InitialProcedure : MonoBehaviour
     void getJointState(JointStateMsg jointStateMsg)
     {
         double[] JointPosition = jointStateMsg.position;
-        JointStatePublisher jointStatePublisher = GetComponent<JointStatePublisher>();
-
-        double[] cur_JointPosition = jointStatePublisher.jointAngles_double;
-
         CopyAvatarMovement copyAvatarMovement = GetComponent<CopyAvatarMovement>();
+
+        // Debug.Log(JointPosition[5]);
         if (copyAvatarMovement.ifPosSynced(JointPosition))
         {
             jointStateSynced = true;

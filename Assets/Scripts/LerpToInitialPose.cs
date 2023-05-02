@@ -52,6 +52,7 @@ public class LerpToInitialPose : MonoBehaviour
             arm_transform.localRotation = Quaternion.Lerp(arm_transform.localRotation, RosArm, lerpSpeed * Time.deltaTime);
             foreArm_transform.localRotation = Quaternion.Lerp(foreArm_transform.localRotation, RosForeArm, lerpSpeed * Time.deltaTime);
             hand_transform.localRotation = Quaternion.Lerp(hand_transform.localRotation, RosHand, lerpSpeed * Time.deltaTime);
+
             reset_text.text = "Robot Pose Syncing !! ";
         }
 

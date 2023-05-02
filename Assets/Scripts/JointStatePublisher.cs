@@ -58,6 +58,8 @@ public class JointStatePublisher : MonoBehaviour
 
     public void PublishJointState()
     {
+
+        LerpToInitialPose lerpToInitialPose = GetComponent<LerpToInitialPose>();
         ros.Subscribe<JointStateMsg>("joint_states", syncClock);
 
         string[] jointNames = new string[7];
@@ -71,7 +73,7 @@ public class JointStatePublisher : MonoBehaviour
         double[] jointEff = new double[7];
         jointPos = jointAngles_double;
 
-        if (ShouldPublishMessage)
+        if (ShouldPublishMessage && lerpToInitialPose.Lerp_Index != 2 && lerpToInitialPose.Lerp_Index != 1)
         {
             JointCommandMsg jointCommandMsg = new JointCommandMsg(
                 new HeaderMsg(0, clockMsg, ""),
