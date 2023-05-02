@@ -20,7 +20,9 @@ public class OffsetValue : MonoBehaviour
     public float forearm_roll = 0;
 
     [Range(0.8521f, 4.2094f)]
-    public float hand_pitch = 2.53075f;
+    // public float hand_pitch = 2.53075f;
+        public float hand_pitch = 0f;
+
 
     [Range(-2.6895f, 2.6895f)]
     public float hand_roll = 0;

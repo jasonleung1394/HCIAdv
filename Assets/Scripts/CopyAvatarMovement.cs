@@ -126,6 +126,7 @@ public class CopyAvatarMovement : MonoBehaviour
         {
             // jointVelocityConstraint(jointAngles);
         }
+        // let publisher know what to publish
         JointStatePublisher jointStatePublisher = GetComponent<JointStatePublisher>();
         for (int i = 0; i < jointAngles.Count; i++)
         {
@@ -219,6 +220,13 @@ public class CopyAvatarMovement : MonoBehaviour
 
         for (int i = 0; i < cur_jointAngles.Length; i++)
         {
+            if (i == 5)
+            {
+                Debug.Log(cur_jointAngles[5]);
+                Debug.Log(jointPos[5]);
+            }
+            // Debug.Log(cur_jointAngles[i] + "published joint nbr " + i);
+            // Debug.Log(jointPos[i] + "scene joint nbr " + i);
             double diff;
             diff = cur_jointAngles[i] - jointPos[i];
             diff = Mathf.Abs((float)diff);
