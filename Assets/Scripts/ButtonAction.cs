@@ -50,7 +50,7 @@ public class ButtonAction : MonoBehaviour
         LerpToInitialPose lerpToInitialPose = GetComponent<LerpToInitialPose>();
         lerpToInitialPose.Lerp_Index = 1;
 
-// should call a move to start launch file here
+        // should call a move to start launch file here
         // jointStatePublisher.PublishJointState();
     }
     void SyncRosToUnity()
@@ -62,6 +62,8 @@ public class ButtonAction : MonoBehaviour
     private int syncRosToUnityAction_assignmentIndex = 0;
     void SyncRosToUnityAction(JointStateMsg jointStateMsg)
     {
+        OffsetValue offsetValue = GetComponent<OffsetValue>();
+
         if (syncRosToUnityAction_assignmentIndex == 0)
         {
             LerpToInitialPose lerpToInitialPose = GetComponent<LerpToInitialPose>();
@@ -70,9 +72,9 @@ public class ButtonAction : MonoBehaviour
 
 
 
-            lerpToInitialPose.RosArm = Quaternion.Euler((float)rosPos[0] * Mathf.Rad2Deg, -(float)rosPos[2] * Mathf.Rad2Deg, -(float)rosPos[1] * Mathf.Rad2Deg);
-            lerpToInitialPose.RosForeArm = Quaternion.Euler(0f, (float)rosPos[4] * Mathf.Rad2Deg, (float)rosPos[3] * Mathf.Rad2Deg);
-            lerpToInitialPose.RosHand = Quaternion.Euler(0f, (float)rosPos[6] * Mathf.Rad2Deg, (float)rosPos[5] * Mathf.Rad2Deg - 0.8521f *Mathf.Rad2Deg);
+            lerpToInitialPose.RosArm = Quaternion.Euler((float)rosPos[0] * Mathf.Rad2Deg - offsetValue.arm_yaw * Mathf.Rad2Deg, -(float)rosPos[2] * Mathf.Rad2Deg - offsetValue.arm_roll * Mathf.Rad2Deg, -(float)rosPos[1] * Mathf.Rad2Deg - offsetValue.arm_pitch * Mathf.Rad2Deg);
+            lerpToInitialPose.RosForeArm = Quaternion.Euler(0f, (float)rosPos[4] * Mathf.Rad2Deg - offsetValue.forearm_roll * Mathf.Rad2Deg, (float)rosPos[3] * Mathf.Rad2Deg - offsetValue.forearm_pitch * Mathf.Rad2Deg);
+            lerpToInitialPose.RosHand = Quaternion.Euler(0f, (float)rosPos[6] * Mathf.Rad2Deg - offsetValue.hand_roll * Mathf.Rad2Deg, (float)rosPos[5] * Mathf.Rad2Deg - offsetValue.hand_pitch * Mathf.Rad2Deg);
 
 
             syncRosToUnityAction_assignmentIndex = 1;
