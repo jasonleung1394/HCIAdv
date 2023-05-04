@@ -72,6 +72,8 @@ public class JointStatePublisher : MonoBehaviour
         double[] jointVel = new double[7];
         double[] jointEff = new double[7];
         jointPos = jointAngles_double;
+        jointPos[1] = -jointPos[1];
+        jointPos[2] = -jointPos[2];
 
         if (ShouldPublishMessage && lerpToInitialPose.Lerp_Index != 2 && lerpToInitialPose.Lerp_Index != 1)
         {
