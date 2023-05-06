@@ -53,7 +53,7 @@ public class InitialProcedure : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         syncJointState();
         if (jointStateSynced == true)

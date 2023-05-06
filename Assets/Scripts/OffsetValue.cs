@@ -6,19 +6,19 @@ public class OffsetValue : MonoBehaviour
 {
     [Header("Human Arm DOF Offset Value")]
     [Range(60,180)]
-    public float human_arm_yaw = 60;
+    public float human_arm_yaw;
     [Range(60,180)]
-    public float human_arm_roll = 60;
+    public float human_arm_roll;
     [Range(60,180)]
-    public float human_arm_pitch = 60;
+    public float human_arm_pitch;
     [Range(60,180)]
-    public float human_forearm_roll = 60;
+    public float human_forearm_roll;
     [Range(60,180)]
-    public float human_forearm_pitch = 60;
+    public float human_forearm_pitch;
     [Range(60,180)]
-    public float human_hand_roll = 60;
+    public float human_hand_roll;
     [Range(60,180)]
-    public float human_hand_pitch = 60;
+    public float human_hand_pitch;
 
 
     [Header("Robot Posing Offset Value")]

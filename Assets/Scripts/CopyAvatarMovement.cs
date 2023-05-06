@@ -81,7 +81,7 @@ public class CopyAvatarMovement : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         OffsetValue offsetValue = GetComponent<OffsetValue>();
 
@@ -125,11 +125,13 @@ public class CopyAvatarMovement : MonoBehaviour
         jointAngleConstraint(jointAngles);
         if (initFlag != 0)
         {
-            // jointVelocityConstraint(jointAngles);
+            jointVelocityConstraint(jointAngles);
         }
-
-
-
+        preFrameAngle = new List<float>();
+        for (int i = 0; i < jointAngles.Count; i++)
+        {
+            preFrameAngle.Add(jointAngles[i]);
+        }
         // let publisher know what to publish
         JointStatePublisher jointStatePublisher = GetComponent<JointStatePublisher>();
         for (int i = 0; i < jointAngles.Count; i++)
@@ -139,11 +141,7 @@ public class CopyAvatarMovement : MonoBehaviour
         avatarJointState = jointAngles.ToArray();
         avatarJointState[1] = -avatarJointState[1];
         avatarJointState[2] = -avatarJointState[2];
-        preFrameAngle = new List<float>();
-        for (int i = 0; i < jointAngles.Count; i++)
-        {
-            preFrameAngle.Add(jointAngles[i]);
-        }
+
 
         // fr3_J1.transform.localEulerAngles = new Vector3(0, jointAngles[0], 0);
         fr3_J1.transform.localRotation = Quaternion.AngleAxis(-jointAngles[0], Vector3.up);
@@ -255,22 +253,25 @@ public class CopyAvatarMovement : MonoBehaviour
         float[] velConstraintVal = new float[] { 2f, 1f, 1.5f, 1.25f, 3f, 1.5f, 3f };
         for (int i = 0; i < velConstraintVal.Length; i++)
         {
-            velConstraintVal[i] = velConstraintVal[i] * Mathf.Rad2Deg;
+            velConstraintVal[i] = velConstraintVal[i];
         }
-
         for (int i = 0; i < preFrameAngle.Count; i++)
         {
             var currentJointAngle = preFrameAngle[i];
             var desiredJointAngle = jointAngles[i];
+        
 
-            float jointVel = Mathf.Abs(desiredJointAngle - currentJointAngle) / Time.deltaTime;
+            float jointVel = (Mathf.Abs(desiredJointAngle - currentJointAngle) / Time.deltaTime) * Mathf.Deg2Rad;
 
-
+            // Debug.Log(jointVel + " joint" + (i + 1));
+            // Debug.Log(Mathf.Abs(desiredJointAngle - currentJointAngle));
             if (jointVel >= velConstraintVal[i])
             {
                 // too fast
-                jointAngles[i] = desiredJointAngle - (jointVel * Time.deltaTime);
+                jointAngles[i] = jointAngles[i];
+                // jointAngles[i] = desiredJointAngle - (jointVel * Time.deltaTime);
                 initialProcedure.overSpeedFlag = false;
+                Debug.Log(jointVel);
             }
             else
             {
@@ -314,7 +315,7 @@ public class CopyAvatarMovement : MonoBehaviour
             var robotDOF = Mathf.Abs(constraintVal[i, 0] - constraintVal[i, 1]);
             var DOF_Delta = robotDOF / Human_dof_offset[i];
 
-            jointAngles[i] = jointAngles[i] * DOF_Delta;
+            // jointAngles[i] = jointAngles[i] * 0.5f;
             if (constraintVal[i, 0] > jointAngles[i] && constraintVal[i, 1] < jointAngles[i]) { }
             else if (constraintVal[i, 0] < jointAngles[i])
             {
