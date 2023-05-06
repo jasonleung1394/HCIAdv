@@ -463,7 +463,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 81bb9eea30387e442899949a80011e55, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 1.352
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 81bb9eea30387e442899949a80011e55, type: 3}
       propertyPath: m_LocalPosition.y
@@ -471,7 +471,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 81bb9eea30387e442899949a80011e55, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.23
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 81bb9eea30387e442899949a80011e55, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2299,12 +2299,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 824616623}
+  - component: {fileID: 824616630}
   - component: {fileID: 824616626}
   - component: {fileID: 824616625}
   - component: {fileID: 824616627}
   - component: {fileID: 824616628}
   - component: {fileID: 824616629}
-  - component: {fileID: 824616630}
   m_Layer: 0
   m_Name: MainScript
   m_TagString: Untagged
@@ -2418,6 +2418,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93e89c5c43fc9bd4fadb856b746e40b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  human_arm_yaw: 180
+  human_arm_roll: 180
+  human_arm_pitch: 180
+  human_forearm_roll: 180
+  human_forearm_pitch: 180
+  human_hand_roll: 180
+  human_hand_pitch: 180
   arm_yaw: 0
   arm_pitch: 0
   arm_roll: 0
