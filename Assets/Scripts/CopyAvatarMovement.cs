@@ -243,11 +243,13 @@ public class CopyAvatarMovement : MonoBehaviour
         return flag;
     }
 
+    public float vel_timeIndex;
+
     private void jointVelocityConstraint(List<float> jointAngles)
     {
         InitialProcedure initialProcedure = GetComponent<InitialProcedure>();
         initialProcedure.overSpeedFlag = true;
-
+        LerpToInitialPose lerpToInitialPose = GetComponent<LerpToInitialPose>();
 
         // list of max || min velocity
         float[] velConstraintVal = new float[] { 2f, 1f, 1.5f, 1.25f, 3f, 1.5f, 3f };
@@ -255,27 +257,38 @@ public class CopyAvatarMovement : MonoBehaviour
         {
             velConstraintVal[i] = velConstraintVal[i];
         }
-        for (int i = 0; i < preFrameAngle.Count; i++)
+        if (lerpToInitialPose.Lerp_Index == 0)
         {
-            var currentJointAngle = preFrameAngle[i];
-            var desiredJointAngle = jointAngles[i];
-        
 
-            float jointVel = (Mathf.Abs(desiredJointAngle - currentJointAngle) / Time.deltaTime) * Mathf.Deg2Rad;
+            for (int i = 0; i < preFrameAngle.Count; i++)
+            {
+                var currentJointAngle = preFrameAngle[i];
+                var desiredJointAngle = jointAngles[i];
 
-            // Debug.Log(jointVel + " joint" + (i + 1));
-            // Debug.Log(Mathf.Abs(desiredJointAngle - currentJointAngle));
-            if (jointVel >= velConstraintVal[i])
-            {
-                // too fast
-                jointAngles[i] = jointAngles[i];
-                // jointAngles[i] = desiredJointAngle - (jointVel * Time.deltaTime);
-                initialProcedure.overSpeedFlag = false;
-                Debug.Log(jointVel);
-            }
-            else
-            {
-                jointAngles[i] = jointAngles[i];
+                var jointDIff = (Mathf.Abs(desiredJointAngle - currentJointAngle));
+
+                float jointVel = (Mathf.Abs(desiredJointAngle - currentJointAngle) / Time.deltaTime) * Mathf.Deg2Rad;
+
+                // Debug.Log(jointVel + " joint" + (i + 1));
+                // Debug.Log(Mathf.Abs(desiredJointAngle - currentJointAngle));
+                if (jointVel >= velConstraintVal[i])
+                {
+                    vel_timeIndex += Time.deltaTime;
+
+                    // too fast
+                    // jointAngles[i] = jointAngles[i];
+                    jointAngles[i] = currentJointAngle + (velConstraintVal[i] * Time.deltaTime);
+                    initialProcedure.overSpeedFlag = false;
+                    if (vel_timeIndex >= 3f)
+                    {
+                        lerpToInitialPose.Lerp_Index = 1;
+                        vel_timeIndex = 0;
+                    }
+                }
+                else
+                {
+                    jointAngles[i] = jointAngles[i];
+                }
             }
         }
     }
