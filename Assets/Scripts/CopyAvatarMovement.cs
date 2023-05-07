@@ -281,7 +281,8 @@ public class CopyAvatarMovement : MonoBehaviour
                     initialProcedure.overSpeedFlag = false;
                     if (vel_timeIndex >= 3f)
                     {
-                        lerpToInitialPose.Lerp_Index = 1;
+                        // too out of range cant follow up
+                        lerpToInitialPose.Lerp_Index = 3;
                         vel_timeIndex = 0;
                     }
                 }
@@ -327,8 +328,9 @@ public class CopyAvatarMovement : MonoBehaviour
             // total DOF of Robot
             var robotDOF = Mathf.Abs(constraintVal[i, 0] - constraintVal[i, 1]);
             var DOF_Delta = robotDOF / Human_dof_offset[i];
+            Debug.Log(Human_dof_offset[i]);
 
-            // jointAngles[i] = jointAngles[i] * 0.5f;
+            jointAngles[i] = jointAngles[i] * DOF_Delta;
             if (constraintVal[i, 0] > jointAngles[i] && constraintVal[i, 1] < jointAngles[i]) { }
             else if (constraintVal[i, 0] < jointAngles[i])
             {

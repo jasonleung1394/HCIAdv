@@ -5,20 +5,20 @@ using UnityEngine;
 public class OffsetValue : MonoBehaviour
 {
     [Header("Human Arm DOF Offset Value")]
-    [Range(60,180)]
-    public float human_arm_yaw;
-    [Range(60,180)]
-    public float human_arm_roll;
-    [Range(60,180)]
-    public float human_arm_pitch;
-    [Range(60,180)]
-    public float human_forearm_roll;
-    [Range(60,180)]
-    public float human_forearm_pitch;
-    [Range(60,180)]
-    public float human_hand_roll;
-    [Range(60,180)]
-    public float human_hand_pitch;
+    [Range(60,250)]
+    public float human_arm_yaw = 120f;
+    [Range(60,250)]
+    public float human_arm_roll = 120f;
+    [Range(60,250)]
+    public float human_arm_pitch = 120f;
+    [Range(60,250)]
+    public float human_forearm_roll = 120f;
+    [Range(60,250)]
+    public float human_forearm_pitch = 120f;
+    [Range(60,250)]
+    public float human_hand_roll = 120f;
+    [Range(60,250)]
+    public float human_hand_pitch = 120f;
 
 
     [Header("Robot Posing Offset Value")]

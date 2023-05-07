@@ -34,7 +34,7 @@ public class LerpToInitialPose : MonoBehaviour
     public Quaternion RosHand;
 
 
-    void Update()
+    void FixedUpdate()
     {
         Text reset_text = reset_warning.GetComponentInChildren<Text>();
 
@@ -54,7 +54,7 @@ public class LerpToInitialPose : MonoBehaviour
             hand_transform.localRotation = Quaternion.Lerp(hand_transform.localRotation, RosHand, lerpSpeed * Time.deltaTime);
 
             reset_text.text = "Robot Pose Syncing !! ";
-        }
+        } 
 
         if (arm_transform.localRotation == initial_Arm && foreArm_transform.localRotation == initial_ForeArm && hand_transform.localRotation == initial_Hand && lerp_Index == 1)
         {
