@@ -328,7 +328,6 @@ public class CopyAvatarMovement : MonoBehaviour
             // total DOF of Robot
             var robotDOF = Mathf.Abs(constraintVal[i, 0] - constraintVal[i, 1]);
             var DOF_Delta = robotDOF / Human_dof_offset[i];
-            Debug.Log(Human_dof_offset[i]);
 
             jointAngles[i] = jointAngles[i] * DOF_Delta;
             if (constraintVal[i, 0] > jointAngles[i] && constraintVal[i, 1] < jointAngles[i]) { }
