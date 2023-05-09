@@ -23,11 +23,9 @@ public class InitialProcedure : MonoBehaviour
         // establish Ros Connection
         // ROSConnection.GetOrCreateInstance().Subscribe<TFMessageMsg>("tf",ShowTF);
         ros = ROSConnection.GetOrCreateInstance();
-        // establish remote play
 
-        // connect with optitrack
-
-        // start the following sequence
+        indicator_man = GameObject.Find("indicator_man");
+        banana_man = GameObject.Find("Banana Man");
     }
 
     void syncJointState()
@@ -55,12 +53,42 @@ public class InitialProcedure : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        syncTrackingToUnity();
         syncJointState();
-        if (jointStateSynced == true)
+        if (jointStateSynced == true && syncTrackingToUnity())
         {
             JointStatePublisher jointStatePublisher = GetComponent<JointStatePublisher>();
             jointStatePublisher.PublishJointState();
         }
+    }
+    private GameObject indicator_man;
+    private GameObject banana_man;
+    private bool syncTrackingToUnity()
+    {
+        bool sync_result = true;
+
+        Transform[] Banana_man_Transforms = { GameObject.Find("Right Arm").transform, GameObject.Find("Right Forearm").transform, GameObject.Find("Right Hand").transform };
+        Transform[] indicator_man_Transforms = { GameObject.Find("Right Arm OT").transform, GameObject.Find("Right Forearm OT").transform, GameObject.Find("Right Hand OT").transform };
+
+        for (int i = 0; i < Banana_man_Transforms.Length; i++)
+        {
+            var Banana_localR = Banana_man_Transforms[i].localRotation;
+            var Indicator_localR = indicator_man_Transforms[i].localRotation;
+            var diffX = Mathf.Abs(Banana_localR.eulerAngles.x - Indicator_localR.eulerAngles.x);
+            var diffY = Mathf.Abs(Banana_localR.eulerAngles.y - Indicator_localR.eulerAngles.y);
+            var diffZ = Mathf.Abs(Banana_localR.eulerAngles.z - Indicator_localR.eulerAngles.z);
+            if (diffX >= 10f || diffY >= 10f || diffZ >= 10f)
+            {
+                Debug.DrawRay(indicator_man_Transforms[i].position, Banana_man_Transforms[i].up, Color.red);
+                sync_result = false;
+            }
+            else
+            {
+                Debug.DrawRay(indicator_man_Transforms[i].position, Banana_man_Transforms[i].up, Color.green);
+            }
+        }
+
+        return sync_result;
     }
 
     private void OnGUI()
@@ -82,6 +110,7 @@ public class InitialProcedure : MonoBehaviour
                 jointInitText += "Joint " + (i + 1) + " Is Good To Go\n";
             }
         }
+        GUI.Label(new Rect(700, 5, 500, 1000), "Checking sync between Unity To ROS");
         GUI.Label(new Rect(700, 10, 500, 1000), jointInitText);
         GUI.Label(new Rect(700, 150, 500, 1000), "Is the movement overspeed? -- " + !overSpeedFlag);
         GUI.Label(new Rect(700, 600, 500, 1000), GripperState_Index == 0 ? "Gripper is Closed" : "Gripper is Open");
