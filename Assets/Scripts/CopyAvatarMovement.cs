@@ -138,10 +138,10 @@ public class CopyAvatarMovement : MonoBehaviour
         {
             jointStatePublisher.jointAngles_double[i] = jointAngles[i] * Mathf.Deg2Rad;
         }
+
         avatarJointState = jointAngles.ToArray();
         avatarJointState[1] = -avatarJointState[1];
         avatarJointState[2] = -avatarJointState[2];
-
 
         // fr3_J1.transform.localEulerAngles = new Vector3(0, jointAngles[0], 0);
         fr3_J1.transform.localRotation = Quaternion.AngleAxis(-jointAngles[0], Vector3.up);
@@ -315,6 +315,7 @@ public class CopyAvatarMovement : MonoBehaviour
             { 4.2094f, 0.8521f }, // 241 ~ 48 changed to
             { 2.6895f, -2.6895f } // 154 ~ -154
         };
+        LerpToInitialPose lerpToInitialPose = GetComponent<LerpToInitialPose>();
         OffsetValue offsetValue = GetComponent<OffsetValue>();
         float[] Human_dof_offset = { offsetValue.human_arm_yaw, offsetValue.human_arm_pitch, offsetValue.human_arm_roll, offsetValue.human_forearm_pitch, offsetValue.human_forearm_roll, offsetValue.human_hand_pitch, offsetValue.human_hand_roll };
         rad2Deg(constraintVal);
@@ -329,7 +330,10 @@ public class CopyAvatarMovement : MonoBehaviour
             var robotDOF = Mathf.Abs(constraintVal[i, 0] - constraintVal[i, 1]);
             var DOF_Delta = robotDOF / Human_dof_offset[i];
 
-            jointAngles[i] = jointAngles[i] * DOF_Delta;
+            if (lerpToInitialPose.Lerp_Index == 0)
+            {
+                jointAngles[i] = jointAngles[i] * DOF_Delta;
+            }
             if (constraintVal[i, 0] > jointAngles[i] && constraintVal[i, 1] < jointAngles[i]) { }
             else if (constraintVal[i, 0] < jointAngles[i])
             {
