@@ -316,6 +316,7 @@ public class CopyAvatarMovement : MonoBehaviour
             { 2.6895f, -2.6895f } // 154 ~ -154
         };
         OffsetValue offsetValue = GetComponent<OffsetValue>();
+        LerpToInitialPose lerpToInitialPose = GetComponent<LerpToInitialPose>();
         float[] Human_dof_offset = { offsetValue.human_arm_yaw, offsetValue.human_arm_pitch, offsetValue.human_arm_roll, offsetValue.human_forearm_pitch, offsetValue.human_forearm_roll, offsetValue.human_hand_pitch, offsetValue.human_hand_roll };
         rad2Deg(constraintVal);
         for (int i = 0; i < jointAngles.Count; i++)
@@ -328,8 +329,11 @@ public class CopyAvatarMovement : MonoBehaviour
             // total DOF of Robot
             var robotDOF = Mathf.Abs(constraintVal[i, 0] - constraintVal[i, 1]);
             var DOF_Delta = robotDOF / Human_dof_offset[i];
-
+            if (lerpToInitialPose.Lerp_Index == 0)
+            {
             jointAngles[i] = jointAngles[i] * DOF_Delta;
+                
+            }
             if (constraintVal[i, 0] > jointAngles[i] && constraintVal[i, 1] < jointAngles[i]) { }
             else if (constraintVal[i, 0] < jointAngles[i])
             {
