@@ -39,7 +39,6 @@ public class InitialProcedure : MonoBehaviour
         double[] JointPosition = jointStateMsg.position;
         CopyAvatarMovement copyAvatarMovement = GetComponent<CopyAvatarMovement>();
 
-        // Debug.Log(JointPosition[5]);
         if (copyAvatarMovement.ifPosSynced(JointPosition))
         {
             jointStateSynced = true;
@@ -55,7 +54,7 @@ public class InitialProcedure : MonoBehaviour
     {
         syncTrackingToUnity();
         syncJointState();
-        if (jointStateSynced == true && syncTrackingToUnity())
+        if (jointStateSynced == true)
         {
             JointStatePublisher jointStatePublisher = GetComponent<JointStatePublisher>();
             jointStatePublisher.PublishJointState();

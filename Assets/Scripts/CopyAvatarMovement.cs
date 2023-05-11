@@ -119,9 +119,7 @@ public class CopyAvatarMovement : MonoBehaviour
         J6 = hand_angle * hand_axis.z + offsetValue.hand_pitch * Mathf.Rad2Deg;
         J7 = hand_angle * hand_axis.y + offsetValue.hand_roll * Mathf.Rad2Deg;
 
-
         List<float> jointAngles = new List<float> { J1, J2, J3, J4, -J5, J6, J7 };
-
         jointAngleConstraint(jointAngles);
         if (initFlag != 0)
         {
@@ -317,7 +315,6 @@ public class CopyAvatarMovement : MonoBehaviour
         };
         LerpToInitialPose lerpToInitialPose = GetComponent<LerpToInitialPose>();
         OffsetValue offsetValue = GetComponent<OffsetValue>();
-        LerpToInitialPose lerpToInitialPose = GetComponent<LerpToInitialPose>();
         float[] Human_dpi_offset = { offsetValue.human_arm_yaw, offsetValue.human_arm_pitch, offsetValue.human_arm_roll, offsetValue.human_forearm_pitch, offsetValue.human_forearm_roll, offsetValue.human_hand_pitch, offsetValue.human_hand_roll };
         rad2Deg(constraintVal);
         for (int i = 0; i < jointAngles.Count; i++)
