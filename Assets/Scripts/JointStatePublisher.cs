@@ -55,7 +55,8 @@ public class JointStatePublisher : MonoBehaviour
         // Debug.Log(tF.transforms[0]);
         // sequence = seq;
     }
-
+    
+    // private List<double[]> publisher_buffer;
     public void PublishJointState()
     {
 
@@ -74,6 +75,7 @@ public class JointStatePublisher : MonoBehaviour
         jointPos = jointAngles_double;
         jointPos[1] = -jointPos[1];
         jointPos[2] = -jointPos[2];
+        // publisher_buffer.Add(jointPos);
 
         if (ShouldPublishMessage && lerpToInitialPose.Lerp_Index != 2 && lerpToInitialPose.Lerp_Index != 1)
         {

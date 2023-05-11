@@ -4,21 +4,30 @@ using UnityEngine;
 
 public class OffsetValue : MonoBehaviour
 {
-    [Header("Human Arm DOF Offset Value")]
-    [Range(60,250)]
-    public float human_arm_yaw = 120f;
-    [Range(60,250)]
-    public float human_arm_roll = 120f;
-    [Range(60,250)]
-    public float human_arm_pitch = 120f;
-    [Range(60,250)]
-    public float human_forearm_roll = 120f;
-    [Range(60,250)]
-    public float human_forearm_pitch = 120f;
-    [Range(60,250)]
-    public float human_hand_roll = 120f;
-    [Range(60,250)]
-    public float human_hand_pitch = 120f;
+    // When DPI is set to 1, the movement is one to one
+    // Human DOF is ROBOT_DOF / DPI
+    [Header("Human Arm DPI Offset Value")]
+    [Range(0,2)]
+    public float human_arm_yaw = 1f;
+    // 4.6186f
+    [Range(0,2)]
+    public float human_arm_roll = 1f;
+    // 3.0266
+    [Range(0,2)]
+    public float human_arm_pitch = 1f;
+    // 4.9874
+    [Range(0,2)]
+    public float human_forearm_roll = 1f;
+    // 2.3017
+    [Range(0,2)]
+    public float human_forearm_pitch = 1f;
+    // 4.96
+    [Range(0,2)]
+    public float human_hand_roll = 1f;
+    // 3.3573
+    [Range(0,2)]
+    public float human_hand_pitch = 1f;
+    // 5.379
 
 
     [Header("Robot Posing Offset Value")]
