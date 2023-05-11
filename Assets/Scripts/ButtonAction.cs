@@ -71,7 +71,7 @@ public class ButtonAction : MonoBehaviour
             double[] rosPos = jointStateMsg.position;
 
 
-
+            // Debug.Log(rosPos[4] * Mathf.Rad2Deg );
             lerpToInitialPose.RosArm = Quaternion.Euler((float)rosPos[0] * Mathf.Rad2Deg - offsetValue.arm_yaw * Mathf.Rad2Deg, -(float)rosPos[2] * Mathf.Rad2Deg - offsetValue.arm_roll * Mathf.Rad2Deg, -(float)rosPos[1] * Mathf.Rad2Deg - offsetValue.arm_pitch * Mathf.Rad2Deg);
             lerpToInitialPose.RosForeArm = Quaternion.Euler(0f, (float)rosPos[4] * Mathf.Rad2Deg - offsetValue.forearm_roll * Mathf.Rad2Deg, (float)rosPos[3] * Mathf.Rad2Deg - offsetValue.forearm_pitch * Mathf.Rad2Deg);
             lerpToInitialPose.RosHand = Quaternion.Euler(0f, (float)rosPos[6] * Mathf.Rad2Deg - offsetValue.hand_roll * Mathf.Rad2Deg, (float)rosPos[5] * Mathf.Rad2Deg - offsetValue.hand_pitch * Mathf.Rad2Deg);
