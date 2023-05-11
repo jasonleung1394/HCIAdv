@@ -10,7 +10,7 @@ using RosMessageTypes.Rosgraph;
 using RosMessageTypes.Tf2;
 using RosMessageTypes.FrankaPositionServo;
 using System;
-
+using System.Linq;
 public class JointStatePublisher : MonoBehaviour
 {
     ROSConnection ros;
@@ -33,6 +33,10 @@ public class JointStatePublisher : MonoBehaviour
     double PublishPeriodSeconds => 1.0f / 30f;
     double m_LastPublishTimeSeconds;
 
+    public Vector3 prev_handLocation;
+    List<double[]> jointStateBuffer = new List<double[]>();
+    public OffsetValue offsetValue;
+
     bool ShouldPublishMessage =>
         Clock.NowTimeInSeconds > m_LastPublishTimeSeconds + PublishPeriodSeconds;
 
@@ -43,8 +47,13 @@ public class JointStatePublisher : MonoBehaviour
         ros.RegisterPublisher<JointCommandMsg>(topic_name);
 
         m_LastPublishTimeSeconds = Clock.time + PublishPeriodSeconds;
+        prev_handLocation = GameObject.Find("Right Hand").transform.position;
+        offsetValue = GetComponent<OffsetValue>();
     }
+    private void FixedUpdate()
+    {
 
+    }
     void syncClock(JointStateMsg JointStateMsg)
     {
         clockMsg_prop = JointStateMsg.header.stamp;
@@ -55,7 +64,7 @@ public class JointStatePublisher : MonoBehaviour
         // Debug.Log(tF.transforms[0]);
         // sequence = seq;
     }
-    
+
     // private List<double[]> publisher_buffer;
     public void PublishJointState()
     {
@@ -73,6 +82,11 @@ public class JointStatePublisher : MonoBehaviour
         double[] jointVel = new double[7];
         double[] jointEff = new double[7];
         jointPos = jointAngles_double;
+        if (Vector3.Distance(prev_handLocation, GameObject.Find("Right Hand").transform.position) > offsetValue.sampleDistanceVal)
+        {
+            addNewToBuffer(jointPos);
+        }
+
         jointPos[1] = -jointPos[1];
         jointPos[2] = -jointPos[2];
         // publisher_buffer.Add(jointPos);
@@ -90,6 +104,39 @@ public class JointStatePublisher : MonoBehaviour
             );
             ros.Publish(topic_name, jointCommandMsg);
             m_LastPublishTimeSeconds = Clock.FrameStartTimeInSeconds;
+        }
+    }
+    void addNewToBuffer(double[] jointPos)
+    {
+        if (!jointPos.Equals(jointStateBuffer.Last()))
+        {
+            SmoothSeq(jointPos);
+            jointStateBuffer.Add(jointPos);
+        }
+    }
+    public void PublishJointStateSeq()
+    {
+        //smooth the joint state seq
+    }
+    void SmoothSeq(double[] new_Pos)
+    {
+        float[] velConstraintVal = new float[] { 2f, 1f, 1.5f, 1.25f, 3f, 1.5f, 3f };
+        double[] next_Pos = new double[7];
+        //the time gap is 0.02 constance
+        double[] pre_Pos = jointStateBuffer.Last();
+        for (int i = 0; i < new_Pos.Length; i++)
+        {
+            // speed
+            var disTravel = PublishPeriodSeconds * velConstraintVal[i];
+            // too fast
+            if (pre_Pos[i] > new_Pos[i])
+            {
+                // decreasing, minus
+                while (pre_Pos[i] - disTravel > new_Pos[i])
+                {
+                    
+                }
+            }
         }
     }
 }

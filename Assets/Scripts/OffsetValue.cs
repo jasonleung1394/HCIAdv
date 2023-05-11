@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class OffsetValue : MonoBehaviour
 {
+    public float sampleDistanceVal;
     // When DPI is set to 1, the movement is one to one
     // Human DOF is ROBOT_DOF / DPI
     [Header("Human Arm DPI Offset Value")]
