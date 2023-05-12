@@ -54,7 +54,7 @@ public class InitialProcedure : MonoBehaviour
     {
         syncTrackingToUnity();
         syncJointState();
-        if (jointStateSynced == true)
+        // if (jointStateSynced == true)
         {
             JointStatePublisher jointStatePublisher = GetComponent<JointStatePublisher>();
             jointStatePublisher.PublishJointState();

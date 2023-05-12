@@ -46,6 +46,8 @@ public class CopyAvatarMovement : MonoBehaviour
         J7;
 
     // Start is called before the first frame update
+    private LerpToInitialPose lerpToInitialPose;
+
     void Start()
     {
         avatar_human = GameObject.Find("Banana Man");
@@ -65,6 +67,8 @@ public class CopyAvatarMovement : MonoBehaviour
         initialPoser();
 
         initFlag = 0;
+
+        lerpToInitialPose = GetComponent<LerpToInitialPose>();
     }
 
     private Quaternion initial_Arm = Quaternion.Euler((1.59695f / 2) * Mathf.Rad2Deg, 0, 0);
@@ -132,10 +136,21 @@ public class CopyAvatarMovement : MonoBehaviour
         }
         // let publisher know what to publish
         JointStatePublisher jointStatePublisher = GetComponent<JointStatePublisher>();
+        double[] tmp = new double[7];
         for (int i = 0; i < jointAngles.Count; i++)
         {
             jointStatePublisher.jointAngles_double[i] = jointAngles[i] * Mathf.Deg2Rad;
+            tmp[i] = (double)(tmp[i] * Mathf.Deg2Rad);
         }
+        if (lerpToInitialPose.Lerp_Index == 0 && jointStatePublisher.jointStateBuffer.Count == 0)
+        {
+            jointStatePublisher.jointStateBuffer.Add(tmp);
+            var record = jointStatePublisher.jointStateBuffer[0];
+            Debug.Log(record[1]);
+            jointStatePublisher.prev_handLocation = right_hand.transform.position;
+        }
+
+
 
         avatarJointState = jointAngles.ToArray();
         avatarJointState[1] = -avatarJointState[1];
@@ -329,8 +344,8 @@ public class CopyAvatarMovement : MonoBehaviour
             var DPI_Delta = robotDOF / Human_dpi_offset[i];
             if (lerpToInitialPose.Lerp_Index == 0)
             {
-            jointAngles[i] = jointAngles[i] * DPI_Delta;
-                
+                jointAngles[i] = jointAngles[i] * DPI_Delta;
+
             }
             if (constraintVal[i, 0] > jointAngles[i] && constraintVal[i, 1] < jointAngles[i]) { }
             else if (constraintVal[i, 0] < jointAngles[i])

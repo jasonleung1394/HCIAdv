@@ -34,9 +34,9 @@ public class JointStatePublisher : MonoBehaviour
     double m_LastPublishTimeSeconds;
 
     public Vector3 prev_handLocation;
-    List<double[]> jointStateBuffer = new List<double[]>();
-    public OffsetValue offsetValue;
-
+    public List<double[]> jointStateBuffer = new List<double[]>();
+    private OffsetValue offsetValue;
+    private LerpToInitialPose lerpToInitialPose;
     bool ShouldPublishMessage =>
         Clock.NowTimeInSeconds > m_LastPublishTimeSeconds + PublishPeriodSeconds;
 
@@ -47,8 +47,8 @@ public class JointStatePublisher : MonoBehaviour
         ros.RegisterPublisher<JointCommandMsg>(topic_name);
 
         m_LastPublishTimeSeconds = Clock.time + PublishPeriodSeconds;
-        prev_handLocation = GameObject.Find("Right Hand").transform.position;
         offsetValue = GetComponent<OffsetValue>();
+        lerpToInitialPose = GetComponent<LerpToInitialPose>();
     }
     private void FixedUpdate()
     {
@@ -82,8 +82,10 @@ public class JointStatePublisher : MonoBehaviour
         double[] jointVel = new double[7];
         double[] jointEff = new double[7];
         jointPos = jointAngles_double;
-        if (Vector3.Distance(prev_handLocation, GameObject.Find("Right Hand").transform.position) > offsetValue.sampleDistanceVal)
+        var movedDis = Vector3.Distance(prev_handLocation, GameObject.Find("Right Hand").transform.position);
+        if (movedDis > offsetValue.sampleDistanceVal && lerpToInitialPose.Lerp_Index != 2 && lerpToInitialPose.Lerp_Index != 1)
         {
+            var record = jointStateBuffer[0];
             addNewToBuffer(jointPos);
         }
 
@@ -102,17 +104,17 @@ public class JointStatePublisher : MonoBehaviour
                 jointEff,
                 jointEff
             );
-            ros.Publish(topic_name, jointCommandMsg);
+            // ros.Publish(topic_name, jointCommandMsg);
             m_LastPublishTimeSeconds = Clock.FrameStartTimeInSeconds;
         }
     }
     void addNewToBuffer(double[] jointPos)
     {
-        if (!jointPos.Equals(jointStateBuffer.Last()))
+        if (jointStateBuffer.Count == 1)
         {
             SmoothSeq(jointPos);
-            jointStateBuffer.Add(jointPos);
         }
+
     }
     public void PublishJointStateSeq()
     {
@@ -121,22 +123,44 @@ public class JointStatePublisher : MonoBehaviour
     void SmoothSeq(double[] new_Pos)
     {
         float[] velConstraintVal = new float[] { 2f, 1f, 1.5f, 1.25f, 3f, 1.5f, 3f };
+
+        for (int i = 0; i < velConstraintVal.Length; i++)
+        {
+            velConstraintVal[i] = offsetValue.velocityOffsetVal * velConstraintVal[i];
+        }
         double[] next_Pos = new double[7];
         //the time gap is 0.02 constance
-        double[] pre_Pos = jointStateBuffer.Last();
-        for (int i = 0; i < new_Pos.Length; i++)
+        double[] pre_Pos = jointStateBuffer[0];
+        Debug.Log(new_Pos[1] - pre_Pos[1]);
+
+
+        for (int i = 0; i < pre_Pos.Length; i++)
         {
-            // speed
-            var disTravel = PublishPeriodSeconds * velConstraintVal[i];
-            // too fast
-            if (pre_Pos[i] > new_Pos[i])
+            var Distance = Math.Abs(pre_Pos[i] - new_Pos[i]);
+            var timeToTravel = Distance / velConstraintVal[i];
+            var steps = Mathf.CeilToInt((float)timeToTravel / Time.deltaTime);
+            var distPerstep = Distance / steps;
+
+            for (int j = 0; j < steps; j++)
             {
-                // decreasing, minus
-                while (pre_Pos[i] - disTravel > new_Pos[i])
+                jointStateBuffer.Add(next_Pos);
+
+                if (pre_Pos[i] - new_Pos[i] > 0)
                 {
-                    
+                    jointStateBuffer[j][i] = -distPerstep + pre_Pos[i];
+
+                    // increase
+                }
+                else
+                {
+                    jointStateBuffer[j][i] = distPerstep + pre_Pos[i];
                 }
             }
         }
+        foreach (var item in jointStateBuffer)
+        {
+            Debug.Log(item[1]);
+        }
+        jointStateBuffer.Clear();
     }
 }
