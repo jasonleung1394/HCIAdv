@@ -102,26 +102,26 @@ public class JointStatePublisher : MonoBehaviour
         jointPos[2] = -jointPos[2];
         // publisher_buffer.Add(jointPos);
 
-        if (ShouldPublishMessage && lerpToInitialPose.Lerp_Index != 2 && lerpToInitialPose.Lerp_Index != 1)
-        {
-            // JointCommandMsg jointCommandMsg = new JointCommandMsg(
-            //     new HeaderMsg(0, clockMsg, ""),
-            //     1,
-            //     jointNames,
-            //     jointPos,
-            //     jointVel,
-            //     jointEff,
-            //     jointEff
-            // );
-            // ros.Publish(topic_name, jointCommandMsg);
-            // m_LastPublishTimeSeconds = Clock.FrameStartTimeInSeconds;
-            PositionsMsg positionsMsg = new PositionsMsg(
-                jointNames,
-                jointPos
-            ); 
-            ros.Publish("joint_trajectory", positionsMsg);
-            m_LastPublishTimeSeconds = Clock.FrameStartTimeInSeconds;
-        }
+        // if (ShouldPublishMessage && lerpToInitialPose.Lerp_Index != 2 && lerpToInitialPose.Lerp_Index != 1)
+        // {
+        //     // JointCommandMsg jointCommandMsg = new JointCommandMsg(
+        //     //     new HeaderMsg(0, clockMsg, ""),
+        //     //     1,
+        //     //     jointNames,
+        //     //     jointPos,
+        //     //     jointVel,
+        //     //     jointEff,
+        //     //     jointEff
+        //     // );
+        //     // ros.Publish(topic_name, jointCommandMsg);
+        //     // m_LastPublishTimeSeconds = Clock.FrameStartTimeInSeconds;
+        //     PositionsMsg positionsMsg = new PositionsMsg(
+        //         jointNames,
+        //         jointPos
+        //     ); 
+        //     ros.Publish("joint_trajectory", positionsMsg);
+        //     m_LastPublishTimeSeconds = Clock.FrameStartTimeInSeconds;
+        // }
     }
     void addNewToBuffer(double[] jointPos)
     {
