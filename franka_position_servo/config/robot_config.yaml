@@ -51,21 +51,21 @@ robot_config:
 
         joint_position_limit:
             lower: 
-                panda_joint1: -2.8973 # rad
-                panda_joint2: -1.7628 # rad
-                panda_joint3: -2.8973 # rad
-                panda_joint4: -3.0718 # rad
-                panda_joint5: -2.8973 # rad
-                panda_joint6: -0.0175 # rad
-                panda_joint7: -2.8973 # rad
+                panda_joint1: -2.3093 # rad
+                panda_joint2: -1.5133 # rad
+                panda_joint3: -2.4937 # rad
+                panda_joint4: -2.7478 # rad
+                panda_joint5: -2.4800 # rad
+                panda_joint6: 0.8521 # rad
+                panda_joint7: -2.6895 # rad
             upper:
-                panda_joint1: 2.8973 # rad
-                panda_joint2: 1.7628 # rad
-                panda_joint3: 2.8973 # rad
-                panda_joint4: -0.0698 # rad
-                panda_joint5: 2.8973 # rad
-                panda_joint6: 3.7525 # rad
-                panda_joint7: 2.8973 # rad
+                panda_joint1: 2.3093 # rad
+                panda_joint2: 1.5133 # rad
+                panda_joint3: 2.4937 # rad
+                panda_joint4: -0.4461 # rad
+                panda_joint5: 2.4800 # rad
+                panda_joint6: 4.2094 # rad
+                panda_joint7: 2.6895 # rad
 
         joint_effort_limit:
             panda_joint1: 87 # Nm

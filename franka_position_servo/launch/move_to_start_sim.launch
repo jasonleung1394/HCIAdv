@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+<launch>
+  <arg name="robot" default="panda" doc="choose your robot. Possible values: [panda, fr3]"/>
+  <arg name="arm_id" default="$(arg robot)" />
+
+  <include file="$(find franka_control)/launch/franka_control.launch" pass_all_args="true"/>
+ <rosparam command="load" file="$(find franka_example_controllers)/config/franka_example_controllers.yaml" subst_value="true" />
+  <include file="$(find panda_moveit_config)/launch/panda_moveit.launch">
+    <arg name="load_gripper" value="false" />
+  </include>
+  <node name="move_to_start" pkg="franka_position_servo" type="move_to_start.py" output="screen" required="true" />
+</launch>

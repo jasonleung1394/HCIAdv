@@ -9,6 +9,7 @@
 #include <franka/robot_state.h>
 #include <pluginlib/class_list_macros.h>
 #include <ros/ros.h>
+#include <ros/console.h>
 
 #include <franka_example_controllers/pseudo_inversion.h>
 
@@ -133,6 +134,8 @@ void CartesianImpedanceExampleController::update(const ros::Time& /*time*/,
   std::array<double, 7> coriolis_array = model_handle_->getCoriolis();
   std::array<double, 42> jacobian_array =
       model_handle_->getZeroJacobian(franka::Frame::kEndEffector);
+  ROS_DEBUG("HIHI");
+
 
   // convert to Eigen
   Eigen::Map<Eigen::Matrix<double, 7, 1>> coriolis(coriolis_array.data());
