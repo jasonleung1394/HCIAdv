@@ -9,6 +9,7 @@ using RosMessageTypes.Std;
 using RosMessageTypes.Rosgraph;
 using RosMessageTypes.Tf2;
 using RosMessageTypes.FrankaPositionServo;
+using RosMessageTypes.FrankaExampleControllers;
 using System;
 using System.Linq;
 public class JointStatePublisher : MonoBehaviour
@@ -45,6 +46,7 @@ public class JointStatePublisher : MonoBehaviour
     {
         ros = ROSConnection.GetOrCreateInstance();
         ros.RegisterPublisher<JointCommandMsg>(topic_name);
+        ros.RegisterPublisher<PositionsMsg>("joint_trajectory");
 
         m_LastPublishTimeSeconds = Clock.time + PublishPeriodSeconds;
         offsetValue = GetComponent<OffsetValue>();
@@ -85,8 +87,15 @@ public class JointStatePublisher : MonoBehaviour
         var movedDis = Vector3.Distance(prev_handLocation, GameObject.Find("Right Hand").transform.position);
         if (movedDis > offsetValue.sampleDistanceVal && lerpToInitialPose.Lerp_Index != 2 && lerpToInitialPose.Lerp_Index != 1)
         {
-            var record = jointStateBuffer[0];
-            addNewToBuffer(jointPos);
+            Debug.Log("1");
+            PositionsMsg positionsMsg = new PositionsMsg(
+                jointNames,
+                jointPos
+            ); 
+            // Debug.Log(positionsMsg);
+            ros.Publish("joint_trajectory", positionsMsg);
+            prev_handLocation = GameObject.Find("Right Hand").transform.position;
+            // addNewToBuffer(jointPos);
         }
 
         jointPos[1] = -jointPos[1];
@@ -95,16 +104,22 @@ public class JointStatePublisher : MonoBehaviour
 
         if (ShouldPublishMessage && lerpToInitialPose.Lerp_Index != 2 && lerpToInitialPose.Lerp_Index != 1)
         {
-            JointCommandMsg jointCommandMsg = new JointCommandMsg(
-                new HeaderMsg(0, clockMsg, ""),
-                1,
-                jointNames,
-                jointPos,
-                jointVel,
-                jointEff,
-                jointEff
-            );
+            // JointCommandMsg jointCommandMsg = new JointCommandMsg(
+            //     new HeaderMsg(0, clockMsg, ""),
+            //     1,
+            //     jointNames,
+            //     jointPos,
+            //     jointVel,
+            //     jointEff,
+            //     jointEff
+            // );
             // ros.Publish(topic_name, jointCommandMsg);
+            // m_LastPublishTimeSeconds = Clock.FrameStartTimeInSeconds;
+            PositionsMsg positionsMsg = new PositionsMsg(
+                jointNames,
+                jointPos
+            ); 
+            ros.Publish("joint_trajectory", positionsMsg);
             m_LastPublishTimeSeconds = Clock.FrameStartTimeInSeconds;
         }
     }
