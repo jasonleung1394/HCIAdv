@@ -48,13 +48,19 @@ public class InitialProcedure : MonoBehaviour
     }
 
     // Update is called once per frame
-    public int publishType_Index =0;
+    void Update()
+    {
+        GameObject.Find("Right Arm OT").transform.localRotation = GameObject.Find("Right Arm").transform.localRotation;
+        GameObject.Find("Right Forearm OT").transform.localRotation = GameObject.Find("Forearm Arm").transform.localRotation;
+        GameObject.Find("Right Hand OT").transform.localRotation = GameObject.Find("Right Hand").transform.localRotation;
+    }
+
+    public int publishType_Index = 0;
+
     void FixedUpdate()
     {
-        // syncTrackingToUnity();
-        // syncJointState();
+
         JointStatePublisher jointStatePublisher = GetComponent<JointStatePublisher>();
-        
         jointStatePublisher.PublishJointState(publishType_Index);
     }
     private GameObject indicator_man;

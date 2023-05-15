@@ -51,12 +51,7 @@ public class LerpToInitialPose : MonoBehaviour
         {
             lerp_Index = 0;
             reset_text.text = "";
-
-        }
-        else if (arm_transform.localRotation == RosArm && foreArm_transform.localRotation == RosForeArm && hand_transform.localRotation == RosHand && lerp_Index == 2)
-        {
-            lerp_Index = 0;
-            reset_text.text = "";
+            GetComponent<JointStatePublisher>().publish_once =true;
         }
         else
         {

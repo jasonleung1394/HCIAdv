@@ -30,16 +30,10 @@ public class ButtonAction : MonoBehaviour
         ros = ROSConnection.GetOrCreateInstance();
         syncUnityToRosBtn.onClick.AddListener(SyncUnityToRos);
         GripperActionBtn.onClick.AddListener(GripperAction);
-        syncRosToUnityBtn.onClick.AddListener(SyncRosToUnity);
 
         ros.RegisterPublisher<MoveActionGoalMsg>("/franka_gripper/move/goal");
         ros.RegisterPublisher<GraspActionGoalMsg>("/franka_gripper/grasp/goal");
 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
     }
 
 
@@ -50,12 +44,6 @@ public class ButtonAction : MonoBehaviour
         LerpToInitialPose lerpToInitialPose = GetComponent<LerpToInitialPose>();
         lerpToInitialPose.Lerp_Index = 1;
 
-        // should call a move to start launch file here
-        // jointStatePublisher.PublishJointState();
-    }
-    void SyncRosToUnity()
-    {
-        
     }
 
     void GripperAction()
