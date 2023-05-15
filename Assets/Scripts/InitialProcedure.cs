@@ -14,8 +14,6 @@ public class InitialProcedure : MonoBehaviour
 
     public bool overSpeedFlag { get; set; }
 
-    public bool autoReset = false;
-
     public bool jointStateSynced { get; set; }
 
     void Start()
@@ -50,12 +48,14 @@ public class InitialProcedure : MonoBehaviour
     }
 
     // Update is called once per frame
+    public int publishType_Index =0;
     void FixedUpdate()
     {
         // syncTrackingToUnity();
         // syncJointState();
         JointStatePublisher jointStatePublisher = GetComponent<JointStatePublisher>();
-        jointStatePublisher.PublishJointState();
+        
+        jointStatePublisher.PublishJointState(publishType_Index);
     }
     private GameObject indicator_man;
     private GameObject banana_man;
