@@ -123,7 +123,7 @@ public class CopyAvatarMovement : MonoBehaviour
         J6 = hand_angle * hand_axis.z + offsetValue.hand_pitch * Mathf.Rad2Deg;
         J7 = hand_angle * hand_axis.y + offsetValue.hand_roll * Mathf.Rad2Deg;
 
-        List<float> jointAngles = new List<float> { J1, J2, J3, J4, -J5, J6, J7 };
+        List<float> jointAngles = new List<float> { J1, -J2, J3, J4, -J5, J6, J7 };
         jointAngleConstraint(jointAngles);
         if (initFlag != 0)
         {
@@ -146,21 +146,17 @@ public class CopyAvatarMovement : MonoBehaviour
         {
             jointStatePublisher.jointStateBuffer.Add(tmp);
             var record = jointStatePublisher.jointStateBuffer[0];
-            Debug.Log(record[1]);
             jointStatePublisher.prev_handLocation = right_hand.transform.position;
         }
 
 
 
-        avatarJointState = jointAngles.ToArray();
-        avatarJointState[1] = -avatarJointState[1];
-        avatarJointState[2] = -avatarJointState[2];
 
         // fr3_J1.transform.localEulerAngles = new Vector3(0, jointAngles[0], 0);
         fr3_J1.transform.localRotation = Quaternion.AngleAxis(-jointAngles[0], Vector3.up);
 
         fr3_J2.transform.localRotation =
-            Quaternion.AngleAxis(jointAngles[1], Vector3.left)
+            Quaternion.AngleAxis(-jointAngles[1], Vector3.left)
             * Quaternion.AngleAxis(-90f, Vector3.back);
 
         fr3_J3.transform.localRotation =
