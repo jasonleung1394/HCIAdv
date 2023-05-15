@@ -27,9 +27,6 @@ public class CopyAvatarMovement : MonoBehaviour
 
     private float reset_speed = 0.5f;
 
-    private float checkPointTime { get; set; }
-    private int waitTime_checkPoint = 3;
-
     // make these into slider in the inspector, to ensure when player standing facing the robot, the dof of each joint will be 180 degree and front facing
     public Vector3 AvatarArm_Offset { get; set; }
     public Vector3 AvatarForeArm_Offset { get; set; }
@@ -90,7 +87,6 @@ public class CopyAvatarMovement : MonoBehaviour
         OffsetValue offsetValue = GetComponent<OffsetValue>();
 
         reset_speed += Time.deltaTime * reset_speed;
-        checkPointTime += Time.deltaTime;
         // assuming T pose is the origin pose
         Quaternion arm_rotation = right_arm.transform.localRotation;
         Quaternion forearm_rotation = right_forearm.transform.localRotation;
