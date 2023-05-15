@@ -21,7 +21,6 @@ public class CopyAvatarMovement : MonoBehaviour
 
     private float[] avatarJointState { get; set; }
     private double[] robotJointState_CheckPoint = new double[7];
-    private int initFlag;
 
     public bool[] jointInitFlag = new bool[7];
 
@@ -62,8 +61,6 @@ public class CopyAvatarMovement : MonoBehaviour
         fr3_J7 = GameObject.Find("fr3_link7");
 
         initialPoser();
-
-        initFlag = 0;
 
         lerpToInitialPose = GetComponent<LerpToInitialPose>();
     }
@@ -121,10 +118,7 @@ public class CopyAvatarMovement : MonoBehaviour
 
         List<float> jointAngles = new List<float> { J1, -J2, J3, J4, -J5, J6, J7 };
         jointAngleConstraint(jointAngles);
-        if (initFlag != 0)
-        {
-            jointVelocityConstraint(jointAngles);
-        }
+
         preFrameAngle = new List<float>();
         for (int i = 0; i < jointAngles.Count; i++)
         {
@@ -176,94 +170,93 @@ public class CopyAvatarMovement : MonoBehaviour
             * Quaternion.AngleAxis(90f, Vector3.back);
 
 
-        initFlag = 1;
     }
 
 
 
-    public double[] cur_jointAngles { get; set; }
+    // public double[] cur_jointAngles { get; set; }
 
-    /// <summary>
-    /// no longer required
-    /// </summary>
-    /// <param name="jointPos"></param>
-    /// <returns></returns>
-    public bool ifPosSynced(double[] jointPos)
-    {
-        bool flag = true;
+    // /// <summary>
+    // /// no longer required
+    // /// </summary>
+    // /// <param name="jointPos"></param>
+    // /// <returns></returns>
+    // public bool ifPosSynced(double[] jointPos)
+    // {
+    //     bool flag = true;
 
 
-        for (int i = 0; i < avatarJointState.Length; i++)
-        {
-            double diff;
-            diff = avatarJointState[i] * Mathf.Deg2Rad - jointPos[i];
-            diff = Mathf.Abs((float)diff);
+    //     for (int i = 0; i < avatarJointState.Length; i++)
+    //     {
+    //         double diff;
+    //         diff = avatarJointState[i] * Mathf.Deg2Rad - jointPos[i];
+    //         diff = Mathf.Abs((float)diff);
 
-            if (diff < 0.2f)
-            {
-                // close enough
-                jointInitFlag[i] = true;
-            }
-            else
-            {
-                jointInitFlag[i] = false;
-                flag = false;
-            }
-        }
+    //         if (diff < 0.2f)
+    //         {
+    //             // close enough
+    //             jointInitFlag[i] = true;
+    //         }
+    //         else
+    //         {
+    //             jointInitFlag[i] = false;
+    //             flag = false;
+    //         }
+    //     }
 
-        return flag;
-    }
+    //     return flag;
+    // }
 
-    public float vel_timeIndex;
+    // public float vel_timeIndex;
 
-    private void jointVelocityConstraint(List<float> jointAngles)
-    {
-        InitialProcedure initialProcedure = GetComponent<InitialProcedure>();
-        initialProcedure.overSpeedFlag = true;
-        LerpToInitialPose lerpToInitialPose = GetComponent<LerpToInitialPose>();
+    // private void jointVelocityConstraint(List<float> jointAngles)
+    // {
+    //     InitialProcedure initialProcedure = GetComponent<InitialProcedure>();
+    //     initialProcedure.overSpeedFlag = true;
+    //     LerpToInitialPose lerpToInitialPose = GetComponent<LerpToInitialPose>();
 
-        // list of max || min velocity
-        float[] velConstraintVal = new float[] { 2f, 1f, 1.5f, 1.25f, 3f, 1.5f, 3f };
-        for (int i = 0; i < velConstraintVal.Length; i++)
-        {
-            velConstraintVal[i] = velConstraintVal[i];
-        }
-        if (lerpToInitialPose.Lerp_Index == 0)
-        {
+    //     // list of max || min velocity
+    //     float[] velConstraintVal = new float[] { 2f, 1f, 1.5f, 1.25f, 3f, 1.5f, 3f };
+    //     for (int i = 0; i < velConstraintVal.Length; i++)
+    //     {
+    //         velConstraintVal[i] = velConstraintVal[i];
+    //     }
+    //     if (lerpToInitialPose.Lerp_Index == 0)
+    //     {
 
-            for (int i = 0; i < preFrameAngle.Count; i++)
-            {
-                var currentJointAngle = preFrameAngle[i];
-                var desiredJointAngle = jointAngles[i];
+    //         for (int i = 0; i < preFrameAngle.Count; i++)
+    //         {
+    //             var currentJointAngle = preFrameAngle[i];
+    //             var desiredJointAngle = jointAngles[i];
 
-                var jointDIff = (Mathf.Abs(desiredJointAngle - currentJointAngle));
+    //             var jointDIff = (Mathf.Abs(desiredJointAngle - currentJointAngle));
 
-                float jointVel = (Mathf.Abs(desiredJointAngle - currentJointAngle) / Time.deltaTime) * Mathf.Deg2Rad;
+    //             float jointVel = (Mathf.Abs(desiredJointAngle - currentJointAngle) / Time.deltaTime) * Mathf.Deg2Rad;
 
-                // Debug.Log(jointVel + " joint" + (i + 1));
-                // Debug.Log(Mathf.Abs(desiredJointAngle - currentJointAngle));
-                if (jointVel >= velConstraintVal[i])
-                {
-                    vel_timeIndex += Time.deltaTime;
+    //             // Debug.Log(jointVel + " joint" + (i + 1));
+    //             // Debug.Log(Mathf.Abs(desiredJointAngle - currentJointAngle));
+    //             if (jointVel >= velConstraintVal[i])
+    //             {
+    //                 vel_timeIndex += Time.deltaTime;
 
-                    // too fast
-                    // jointAngles[i] = jointAngles[i];
-                    jointAngles[i] = currentJointAngle + (velConstraintVal[i] * Time.deltaTime);
-                    initialProcedure.overSpeedFlag = false;
-                    if (vel_timeIndex >= 3f)
-                    {
-                        // too out of range cant follow up
-                        lerpToInitialPose.Lerp_Index = 3;
-                        vel_timeIndex = 0;
-                    }
-                }
-                else
-                {
-                    jointAngles[i] = jointAngles[i];
-                }
-            }
-        }
-    }
+    //                 // too fast
+    //                 // jointAngles[i] = jointAngles[i];
+    //                 jointAngles[i] = currentJointAngle + (velConstraintVal[i] * Time.deltaTime);
+    //                 initialProcedure.overSpeedFlag = false;
+    //                 if (vel_timeIndex >= 3f)
+    //                 {
+    //                     // too out of range cant follow up
+    //                     lerpToInitialPose.Lerp_Index = 3;
+    //                     vel_timeIndex = 0;
+    //                 }
+    //             }
+    //             else
+    //             {
+    //                 jointAngles[i] = jointAngles[i];
+    //             }
+    //         }
+    //     }
+    // }s
 
     private void rad2Deg(float[,] radArray)
     {
@@ -299,11 +292,9 @@ public class CopyAvatarMovement : MonoBehaviour
 
             // total DOF of Robot
             var robotDOF = Mathf.Abs(constraintVal[i, 0] - constraintVal[i, 1]);
-            var DPI_Delta = robotDOF / Human_dpi_offset[i];
             if (lerpToInitialPose.Lerp_Index == 0)
             {
-                jointAngles[i] = jointAngles[i] * DPI_Delta;
-
+                jointAngles[i] = jointAngles[i] *  Human_dpi_offset[i];
             }
             if (constraintVal[i, 0] > jointAngles[i] && constraintVal[i, 1] < jointAngles[i]) { }
             else if (constraintVal[i, 0] < jointAngles[i])
@@ -316,8 +307,6 @@ public class CopyAvatarMovement : MonoBehaviour
             {
                 // lower than min
                 jointAngles[i] = constraintVal[i, 1];
-
-                // Debug.Log("joint " + (i + 1f) + "  out of Range");
             }
             else
             {

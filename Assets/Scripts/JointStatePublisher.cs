@@ -84,11 +84,12 @@ public class JointStatePublisher : MonoBehaviour
         double[] jointPos = new double[7];
         jointPos = jointAngles_double;
         var movedDis = Vector3.Distance(prev_handLocation, GameObject.Find("Right Hand").transform.position);
-        if (publishType_Index == 0)
+        if (publishType_Index == 0 && !publish_once)
         {
-
             if (movedDis > offsetValue.sampleDistanceVal && lerpToInitialPose.Lerp_Index == 0)
             {
+                Debug.Log("publish distance");
+
                 PositionsMsg positionsMsg = new PositionsMsg(
                     jointNames,
                     jointPos
@@ -99,8 +100,10 @@ public class JointStatePublisher : MonoBehaviour
                 // addNewToBuffer(jointPos);
             }
         }
-        else if (publishType_Index == 1 && lerpToInitialPose.Lerp_Index == 0)
+        else if (publishType_Index == 1 && lerpToInitialPose.Lerp_Index == 0 && publish_once!)
         {
+            Debug.Log("publish freq");
+
             PositionsMsg positionsMsg = new PositionsMsg(
                jointNames,
                jointPos
@@ -108,8 +111,9 @@ public class JointStatePublisher : MonoBehaviour
             // Debug.Log(positionsMsg);
             ros.Publish("joint_trajectory", positionsMsg);
         }
-        else if (publish_once == true)
+        else if (publish_once)
         {
+            Debug.Log("publish once");
             PositionsMsg positionsMsg = new PositionsMsg(jointNames, jointPos);
             // Debug.Log(positionsMsg);
             ros.Publish("joint_trajectory", positionsMsg);

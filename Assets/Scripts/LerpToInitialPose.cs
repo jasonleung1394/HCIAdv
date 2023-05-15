@@ -33,7 +33,7 @@ public class LerpToInitialPose : MonoBehaviour
     public Quaternion RosForeArm;
     public Quaternion RosHand;
 
-
+    private int once = 0;
     void FixedUpdate()
     {
         Text reset_text = reset_warning.GetComponentInChildren<Text>();
@@ -41,6 +41,7 @@ public class LerpToInitialPose : MonoBehaviour
 
         if (Lerp_Index == 1)
         {
+            once =1;
             arm_transform.localRotation = Quaternion.Lerp(arm_transform.localRotation, initial_Arm, lerpSpeed * Time.deltaTime);
             foreArm_transform.localRotation = Quaternion.Lerp(foreArm_transform.localRotation, initial_ForeArm, lerpSpeed * Time.deltaTime);
             hand_transform.localRotation = Quaternion.Lerp(hand_transform.localRotation, initial_Hand, lerpSpeed * Time.deltaTime);
@@ -51,7 +52,11 @@ public class LerpToInitialPose : MonoBehaviour
         {
             lerp_Index = 0;
             reset_text.text = "";
-            GetComponent<JointStatePublisher>().publish_once =true;
+            if (once == 1)
+            {
+                GetComponent<JointStatePublisher>().publish_once =true;
+                once = 0;
+            }
         }
         else
         {

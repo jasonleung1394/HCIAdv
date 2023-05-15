@@ -9,12 +9,10 @@ public class InitialProcedure : MonoBehaviour
 {
     ROSConnection ros;
 
-    // Start is called before the first frame update
-    private string JointState_TopicName = "joint_states";
+    // // Start is called before the first frame update
+    // private string JointState_TopicName = "joint_states";
 
     public bool overSpeedFlag { get; set; }
-
-    public bool jointStateSynced { get; set; }
 
     void Start()
     {
@@ -26,33 +24,33 @@ public class InitialProcedure : MonoBehaviour
         banana_man = GameObject.Find("Banana Man");
     }
 
-    void syncJointState()
-    {
-        ros.Subscribe<JointStateMsg>(JointState_TopicName, getJointState);
-    }
+    // void syncJointState()
+    // {
+    //     ros.Subscribe<JointStateMsg>(JointState_TopicName, getJointState);
+    // }
 
 
-    void getJointState(JointStateMsg jointStateMsg)
-    {
-        double[] JointPosition = jointStateMsg.position;
-        CopyAvatarMovement copyAvatarMovement = GetComponent<CopyAvatarMovement>();
+    // void getJointState(JointStateMsg jointStateMsg)
+    // {
+    //     double[] JointPosition = jointStateMsg.position;
+    //     CopyAvatarMovement copyAvatarMovement = GetComponent<CopyAvatarMovement>();
 
-        if (copyAvatarMovement.ifPosSynced(JointPosition))
-        {
-            jointStateSynced = true;
-        }
-        else
-        {
-            jointStateSynced = false;
-        }
-    }
+    //     if (copyAvatarMovement.ifPosSynced(JointPosition))
+    //     {
+    //         jointStateSynced = true;
+    //     }
+    //     else
+    //     {
+    //         jointStateSynced = false;
+    //     }
+    // }
 
     // Update is called once per frame
     void Update()
     {
-        GameObject.Find("Right Arm OT").transform.localRotation = GameObject.Find("Right Arm").transform.localRotation;
-        GameObject.Find("Right Forearm OT").transform.localRotation = GameObject.Find("Forearm Arm").transform.localRotation;
-        GameObject.Find("Right Hand OT").transform.localRotation = GameObject.Find("Right Hand").transform.localRotation;
+    //     GameObject.Find("Right Arm").transform.localRotation =  GameObject.Find("Right Arm OT").transform.localRotation;
+    //   GameObject.Find("Right Forearm").transform.localRotation =   GameObject.Find("Right Forearm OT").transform.localRotation;
+    //     GameObject.Find("Right Hand").transform.localRotation =GameObject.Find("Right Hand OT").transform.localRotation ;
     }
 
     public int publishType_Index = 0;
