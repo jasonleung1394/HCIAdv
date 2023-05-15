@@ -183,27 +183,15 @@ public class CopyAvatarMovement : MonoBehaviour
             Quaternion.AngleAxis(jointAngles[6], Vector3.left)
             * Quaternion.AngleAxis(90f, Vector3.back);
 
-        if (checkPointTime > waitTime_checkPoint)
-        {
-            // init a check point
-            detectUndesiredJointAngle(robotJointState_CheckPoint, jointAngles);
-            checkPointTime = 0f;
-        }
-        else if (checkPointTime == Time.deltaTime)
-        {
-            for (int i = 0; i < jointAngles.Count; i++)
-            {
-                robotJointState_CheckPoint[i] = jointAngles[i];
-            }
-        }
-        else
-        {
-            // do nothing
-        }
 
         initFlag = 1;
     }
 
+    /// <summary>
+    /// No longer required
+    /// </summary>
+    /// <param name="robotJointState"></param>
+    /// <param name="cur_jointState"></param>
     void detectUndesiredJointAngle(double[] robotJointState, List<float> cur_jointState)
     {
         InitialProcedure initialProcedure = GetComponent<InitialProcedure>();
@@ -230,6 +218,11 @@ public class CopyAvatarMovement : MonoBehaviour
 
     public double[] cur_jointAngles { get; set; }
 
+    /// <summary>
+    /// no longer required
+    /// </summary>
+    /// <param name="jointPos"></param>
+    /// <returns></returns>
     public bool ifPosSynced(double[] jointPos)
     {
         bool flag = true;

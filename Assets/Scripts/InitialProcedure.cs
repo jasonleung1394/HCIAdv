@@ -52,16 +52,17 @@ public class InitialProcedure : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        syncTrackingToUnity();
-        syncJointState();
-        // if (jointStateSynced == true)
-        {
-            JointStatePublisher jointStatePublisher = GetComponent<JointStatePublisher>();
-            jointStatePublisher.PublishJointState();
-        }
+        // syncTrackingToUnity();
+        // syncJointState();
+        JointStatePublisher jointStatePublisher = GetComponent<JointStatePublisher>();
+        jointStatePublisher.PublishJointState();
     }
     private GameObject indicator_man;
     private GameObject banana_man;
+    /// <summary>
+    /// No longer required
+    /// </summary>
+    /// <returns></returns>
     private bool syncTrackingToUnity()
     {
         bool sync_result = true;
@@ -97,20 +98,20 @@ public class InitialProcedure : MonoBehaviour
 
         ButtonAction buttonAction = GetComponent<ButtonAction>();
         int GripperState_Index = buttonAction.GripperState_Index;
-        string jointInitText = "";
-        for (int i = 0; i < jointInitFlag.Length; i++)
-        {
-            if (jointInitFlag[i] != true)
-            {
-                jointInitText += "Joint " + (i + 1) + " Is Not In Starting Position \n";
-            }
-            else
-            {
-                jointInitText += "Joint " + (i + 1) + " Is Good To Go\n";
-            }
-        }
-        GUI.Label(new Rect(700, 5, 500, 1000), "Checking sync between Unity To ROS");
-        GUI.Label(new Rect(700, 10, 500, 1000), jointInitText);
+        // string jointInitText = "";
+        // for (int i = 0; i < jointInitFlag.Length; i++)
+        // {
+        //     if (jointInitFlag[i] != true)
+        //     {
+        //         jointInitText += "Joint " + (i + 1) + " Is Not In Starting Position \n";
+        //     }
+        //     else
+        //     {
+        //         jointInitText += "Joint " + (i + 1) + " Is Good To Go\n";
+        //     }
+        // }
+        // GUI.Label(new Rect(700, 5, 500, 1000), "Checking sync between Unity To ROS");
+        // GUI.Label(new Rect(700, 10, 500, 1000), jointInitText);
         GUI.Label(new Rect(700, 150, 500, 1000), "Is the movement overspeed? -- " + !overSpeedFlag);
         GUI.Label(new Rect(700, 600, 500, 1000), GripperState_Index == 0 ? "Gripper is Closed" : "Gripper is Open");
     }
