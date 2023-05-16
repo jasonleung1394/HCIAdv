@@ -48,9 +48,19 @@ public class InitialProcedure : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-    //     GameObject.Find("Right Arm").transform.localRotation =  GameObject.Find("Right Arm OT").transform.localRotation;
-    //   GameObject.Find("Right Forearm").transform.localRotation =   GameObject.Find("Right Forearm OT").transform.localRotation;
-    //     GameObject.Find("Right Hand").transform.localRotation =GameObject.Find("Right Hand OT").transform.localRotation ;
+        LerpToInitialPose lerpToInitialPose = GetComponent<LerpToInitialPose>();
+        if (lerpToInitialPose.Lerp_Index == 0)
+        {
+            GameObject.Find("Right Arm").transform.localRotation = GameObject.Find("Right Arm OT").transform.localRotation;
+            GameObject.Find("Right Forearm").transform.localRotation = GameObject.Find("Right Forearm OT").transform.localRotation;
+            GameObject.Find("Right Hand").transform.localRotation = GameObject.Find("Right Hand OT").transform.localRotation;
+        }
+        else
+        {
+            GameObject.Find("Right Arm OT").transform.localRotation = GameObject.Find("Right Arm").transform.localRotation;
+            GameObject.Find("Right Forearm OT").transform.localRotation = GameObject.Find("Right Forearm").transform.localRotation;
+            GameObject.Find("Right Hand OT").transform.localRotation = GameObject.Find("Right Hand").transform.localRotation;
+        }
     }
 
     public int publishType_Index = 0;
