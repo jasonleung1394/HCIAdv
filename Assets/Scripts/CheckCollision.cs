@@ -9,7 +9,6 @@ public class CheckCollision : MonoBehaviour
     void Start()
     {
         mainScript = GameObject.Find("MainScript");
-
     }
 
     // Update is called once per frame

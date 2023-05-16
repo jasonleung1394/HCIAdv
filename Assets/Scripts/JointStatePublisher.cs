@@ -100,7 +100,7 @@ public class JointStatePublisher : MonoBehaviour
                 // addNewToBuffer(jointPos);
             }
         }
-        else if (publishType_Index == 1 && lerpToInitialPose.Lerp_Index == 0 && publish_once!)
+        else if (publishType_Index == 1 && lerpToInitialPose.Lerp_Index == 0 && !publish_once)
         {
             Debug.Log("publish freq");
 

@@ -23,6 +23,14 @@ public class LerpToInitialPose : MonoBehaviour
         hand_transform = GameObject.Find("Right Hand").transform;
 
     }
+
+    void Update(){
+        if (lerp_Index ==1)
+        {
+            GameObject.Find("Banana Man").GetComponent<Animator>().enabled = false;
+        }
+
+    }
     private Quaternion initial_Arm = Quaternion.Euler((1.59695f / 2) * Mathf.Rad2Deg, 0, 0);
 
     private Quaternion initial_ForeArm = Quaternion.Euler(0, 0, (-1.59695f / 2) * Mathf.Rad2Deg);

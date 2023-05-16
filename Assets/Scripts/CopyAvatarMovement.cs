@@ -108,7 +108,7 @@ public class CopyAvatarMovement : MonoBehaviour
         Vector3 forearm_axis;
         float forearm_angle;
         forearm_rotation.ToAngleAxis(out forearm_angle, out forearm_axis);
-        J4 = forearm_angle * forearm_axis.z + offsetValue.forearm_pitch * Mathf.Rad2Deg;
+        J4 = right_forearm.transform.localEulerAngles.z + offsetValue.forearm_pitch * Mathf.Rad2Deg;
         J5 = forearm_angle * forearm_axis.y + offsetValue.forearm_roll * Mathf.Rad2Deg;
         Vector3 hand_axis;
         float hand_angle;
