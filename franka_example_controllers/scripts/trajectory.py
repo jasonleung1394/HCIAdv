@@ -8,6 +8,7 @@ from sensor_msgs.msg import JointState
 from trajectory_msgs.msg import JointTrajectory, JointTrajectoryPoint
 from control_msgs.msg import FollowJointTrajectoryAction, \
                              FollowJointTrajectoryGoal, FollowJointTrajectoryResult
+from franka_msgs.srv import SetFullCollisionBehavior, SetFullCollisionBehaviorRequest 
 def moveAction(data):
 
     ros.loginfo("trajectory: Waiting for '" + action + "' action to come up")
@@ -80,6 +81,27 @@ ros.init_node('trajectory')
 ros.logdebug("node initialized as trajectory")
 action = ros.resolve_name('~follow_joint_trajectory')
 client = SimpleActionClient(action, FollowJointTrajectoryAction)
+# 
 ros.Subscriber("joint_trajectory", positions,moveAction,queue_size=3)
 # ros.loginfo(queueSize)
 ros.spin()
+
+
+# collision behavior
+# ros.init_node('collision_behavior_node')
+# ros.wait_for_service('/franka_control/set_full_collision_behavior')
+# set_collision_behavior_client = ros.ServiceProxy('/franka_control/set_full_collision_behavior', SetFullCollisionBehavior)
+# request = SetFullCollisionBehaviorRequest()
+# request.lower_torque_thresholds_acceleration = [0.1] * 7  # Example torque threshold values
+# request.upper_torque_thresholds_acceleration = [1.0] * 7  # Example torque threshold values
+# request.lower_torque_thresholds_nominal = [0.05] * 7     # Example torque threshold values
+# request.upper_torque_thresholds_nominal = [0.5] * 7      # Example torque threshold values
+# request.lower_force_thresholds_acceleration = [5.0] * 3   # Example force threshold values
+# request.upper_force_thresholds_acceleration = [20.0] * 3  # Example force threshold values
+# request.lower_force_thresholds_nominal = [2.0] * 3       # Example force threshold values
+# request.upper_force_thresholds_nominal = [10.0] * 3      # Example force threshold values
+# response = set_collision_behavior_client(request)
+# if response.success:
+#     rospy.loginfo('Collision behavior set successfully.')
+# else:
+#     rospy.logerr('Failed to set collision behavior.')
