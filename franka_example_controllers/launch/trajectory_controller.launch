@@ -10,17 +10,9 @@
 
   <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" args="$(arg transmission)_joint_trajectory_controller">
   </node>
-  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher">
-    <!-- <param name="use_sim_time" value="true"/> -->
-  </node>
-  <node name="joint_state_publisher" type="joint_state_publisher" pkg="joint_state_publisher">
-    <rosparam param="source_list">[franka_state_controller/joint_states, franka_gripper/joint_states] </rosparam>
-    <param name="rate" value="30"/>
-    <!-- <param name="use_sim_time" value="true"/> -->
-  </node>
+  
 
   <node name="trajectory" pkg="franka_example_controllers" type="trajectory.py" output="screen" required="true">
-    <!-- <rosparam file="$(find franka_control)/config/start_pose.yaml" subst_value="true" /> -->
     <remap from="~follow_joint_trajectory" to="$(arg transmission)_joint_trajectory_controller/follow_joint_trajectory" />
     <remap from="~joint_states" to="franka_state_controller/joint_states" />
     <param name="max_dq" value="0.2" />

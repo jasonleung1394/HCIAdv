@@ -9,11 +9,9 @@ from trajectory_msgs.msg import JointTrajectory, JointTrajectoryPoint
 from control_msgs.msg import FollowJointTrajectoryAction, \
                              FollowJointTrajectoryGoal, FollowJointTrajectoryResult
 def moveAction(data):
-    action = ros.resolve_name('~follow_joint_trajectory')
-    client = SimpleActionClient(action, FollowJointTrajectoryAction)
+
     ros.loginfo("trajectory: Waiting for '" + action + "' action to come up")
     client.wait_for_server()
-
     param = ros.resolve_name('~joint_pose')
     pose = data
     if pose is None:
@@ -35,6 +33,7 @@ def moveAction(data):
     goal = FollowJointTrajectoryGoal()
 
     goal.trajectory.joint_names, point.positions = [list(x) for x in zip(*pose.items())]
+    ros.loginfo(joint_state.velocity)
     point.velocities = [0] * len(pose)
 
     goal.trajectory.points.append(point)
@@ -42,6 +41,7 @@ def moveAction(data):
 
     ros.loginfo('Sending trajectory Goal to move into initial config')
     client.send_goal_and_wait(goal)
+
 
     result = client.get_result()
     if result.error_code != FollowJointTrajectoryResult.SUCCESSFUL:
@@ -72,9 +72,14 @@ def moveAction(data):
         }[result.error_code])
 
     else:
-        ros.loginfo('trajectory: Successfully moved into start pose')
+        ros.loginfo('trajectory: Successfully moved into next pose')
+
 
 ros.init_node('trajectory')
+# queueSize = ros.get_param('queueSize')
 ros.logdebug("node initialized as trajectory")
-ros.Subscriber("joint_trajectory", positions,moveAction,queue_size=1)
+action = ros.resolve_name('~follow_joint_trajectory')
+client = SimpleActionClient(action, FollowJointTrajectoryAction)
+ros.Subscriber("joint_trajectory", positions,moveAction,queue_size=3)
+# ros.loginfo(queueSize)
 ros.spin()
