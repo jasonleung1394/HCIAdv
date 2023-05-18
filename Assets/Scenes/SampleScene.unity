@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571343, b: 0.30692208, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028331, g: 0.2257133, b: 0.3069217, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -203,7 +203,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 1
+  m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: cf55a37c2d0141b8ca6ca83fa3aa2c96, type: 2}
 --- !u!1 &26079832
@@ -264,7 +264,7 @@ GameObject:
   - component: {fileID: 26991889}
   m_Layer: 0
   m_Name: fr3_link0_mimic
-  m_TagString: Untagged
+  m_TagString: robot_mimic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -683,7 +683,7 @@ GameObject:
   - component: {fileID: 81408008}
   m_Layer: 0
   m_Name: unnamed
-  m_TagString: Untagged
+  m_TagString: robot_mimic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -850,6 +850,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: link1
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: bd51acdfb15b1b8248b49b49f341b291, type: 3}
+      propertyPath: m_TagString
+      value: robot_mimic
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd51acdfb15b1b8248b49b49f341b291, type: 3}
 --- !u!4 &100468680 stripped
@@ -908,10 +912,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8423681092522153320, guid: d71bc70d861552ff68f7e4fcef2a808c, type: 3}
+      propertyPath: m_TagString
+      value: robot_mimic
+      objectReference: {fileID: 0}
+    - target: {fileID: -8358889951477119832, guid: d71bc70d861552ff68f7e4fcef2a808c, type: 3}
+      propertyPath: m_TagString
+      value: robot_mimic
+      objectReference: {fileID: 0}
+    - target: {fileID: -7958452814550908976, guid: d71bc70d861552ff68f7e4fcef2a808c, type: 3}
+      propertyPath: m_TagString
+      value: robot_mimic
+      objectReference: {fileID: 0}
     - target: {fileID: -7264643304161535556, guid: d71bc70d861552ff68f7e4fcef2a808c, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: ba76722452c9e3298a07ff12dee8fd1f, type: 2}
+    - target: {fileID: -6076794226375105264, guid: d71bc70d861552ff68f7e4fcef2a808c, type: 3}
+      propertyPath: m_TagString
+      value: robot_mimic
+      objectReference: {fileID: 0}
     - target: {fileID: -4286396916692950121, guid: d71bc70d861552ff68f7e4fcef2a808c, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -920,10 +940,22 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: ba76722452c9e3298a07ff12dee8fd1f, type: 2}
+    - target: {fileID: -2058131768795360264, guid: d71bc70d861552ff68f7e4fcef2a808c, type: 3}
+      propertyPath: m_TagString
+      value: robot_mimic
+      objectReference: {fileID: 0}
     - target: {fileID: -1663525628340895374, guid: d71bc70d861552ff68f7e4fcef2a808c, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: ba76722452c9e3298a07ff12dee8fd1f, type: 2}
+    - target: {fileID: -1571034399289706438, guid: d71bc70d861552ff68f7e4fcef2a808c, type: 3}
+      propertyPath: m_TagString
+      value: robot_mimic
+      objectReference: {fileID: 0}
+    - target: {fileID: -930827064293124949, guid: d71bc70d861552ff68f7e4fcef2a808c, type: 3}
+      propertyPath: m_TagString
+      value: robot_mimic
+      objectReference: {fileID: 0}
     - target: {fileID: 55291342286754144, guid: d71bc70d861552ff68f7e4fcef2a808c, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -940,9 +972,29 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: ba76722452c9e3298a07ff12dee8fd1f, type: 2}
+    - target: {fileID: 901342971875042107, guid: d71bc70d861552ff68f7e4fcef2a808c, type: 3}
+      propertyPath: m_TagString
+      value: robot_mimic
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: d71bc70d861552ff68f7e4fcef2a808c, type: 3}
       propertyPath: m_Name
       value: link0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d71bc70d861552ff68f7e4fcef2a808c, type: 3}
+      propertyPath: m_TagString
+      value: robot_mimic
+      objectReference: {fileID: 0}
+    - target: {fileID: 1576419377407191253, guid: d71bc70d861552ff68f7e4fcef2a808c, type: 3}
+      propertyPath: m_TagString
+      value: robot_mimic
+      objectReference: {fileID: 0}
+    - target: {fileID: 2468772454801797645, guid: d71bc70d861552ff68f7e4fcef2a808c, type: 3}
+      propertyPath: m_TagString
+      value: robot_mimic
+      objectReference: {fileID: 0}
+    - target: {fileID: 4458578931032839201, guid: d71bc70d861552ff68f7e4fcef2a808c, type: 3}
+      propertyPath: m_TagString
+      value: robot_mimic
       objectReference: {fileID: 0}
     - target: {fileID: 5259097174956160687, guid: d71bc70d861552ff68f7e4fcef2a808c, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -956,6 +1008,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: ba76722452c9e3298a07ff12dee8fd1f, type: 2}
+    - target: {fileID: 7618929641657476143, guid: d71bc70d861552ff68f7e4fcef2a808c, type: 3}
+      propertyPath: m_TagString
+      value: robot_mimic
+      objectReference: {fileID: 0}
     - target: {fileID: 7850734403127241072, guid: d71bc70d861552ff68f7e4fcef2a808c, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -1068,7 +1124,7 @@ GameObject:
   - component: {fileID: 145210078}
   m_Layer: 0
   m_Name: unnamed
-  m_TagString: Untagged
+  m_TagString: robot_mimic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1182,7 +1238,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 1
+  m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 17056ef70fb671c2c932e862e541e602, type: 2}
 --- !u!1001 &181485703
@@ -1346,6 +1402,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: link4
       objectReference: {fileID: 0}
+    - target: {fileID: 5121048651071505222, guid: 265823d93bffdd86dbd02f4b0e1a8681, type: 3}
+      propertyPath: m_TagString
+      value: robot_mimic
+      objectReference: {fileID: 0}
+    - target: {fileID: 8996577510743517498, guid: 265823d93bffdd86dbd02f4b0e1a8681, type: 3}
+      propertyPath: m_TagString
+      value: robot_mimic
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8712311555380148147, guid: 265823d93bffdd86dbd02f4b0e1a8681, type: 3}
     - {fileID: 2928224601573897109, guid: 265823d93bffdd86dbd02f4b0e1a8681, type: 3}
@@ -1386,7 +1450,7 @@ GameObject:
   - component: {fileID: 235500872}
   m_Layer: 0
   m_Name: Collisions
-  m_TagString: Untagged
+  m_TagString: robot_mimic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1475,7 +1539,7 @@ GameObject:
   - component: {fileID: 263980280}
   m_Layer: 0
   m_Name: Collisions
-  m_TagString: Untagged
+  m_TagString: robot_mimic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1521,7 +1585,7 @@ GameObject:
   - component: {fileID: 308445172}
   m_Layer: 0
   m_Name: fr3_rightfinger
-  m_TagString: Untagged
+  m_TagString: robot_mimic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1636,7 +1700,7 @@ GameObject:
   - component: {fileID: 316704178}
   m_Layer: 0
   m_Name: unnamed
-  m_TagString: Untagged
+  m_TagString: robot_mimic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1682,7 +1746,7 @@ GameObject:
   - component: {fileID: 319864626}
   m_Layer: 0
   m_Name: Visuals
-  m_TagString: Untagged
+  m_TagString: robot_mimic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1727,7 +1791,7 @@ GameObject:
   - component: {fileID: 349423344}
   m_Layer: 0
   m_Name: Collisions
-  m_TagString: Untagged
+  m_TagString: robot_mimic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2004,7 +2068,7 @@ GameObject:
   - component: {fileID: 441265519}
   m_Layer: 0
   m_Name: Visuals
-  m_TagString: Untagged
+  m_TagString: robot_mimic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2139,7 +2203,7 @@ GameObject:
   - component: {fileID: 449582296}
   m_Layer: 0
   m_Name: Visuals
-  m_TagString: Untagged
+  m_TagString: robot_mimic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2182,6 +2246,10 @@ PrefabInstance:
     - target: {fileID: 3450274086717412214, guid: 0e9b40d41d20e4cc199c7a7b1aaa1f61, type: 3}
       propertyPath: m_Name
       value: hand
+      objectReference: {fileID: 0}
+    - target: {fileID: 3450274086717412214, guid: 0e9b40d41d20e4cc199c7a7b1aaa1f61, type: 3}
+      propertyPath: m_TagString
+      value: robot_mimic
       objectReference: {fileID: 0}
     - target: {fileID: 3673855662555450905, guid: 0e9b40d41d20e4cc199c7a7b1aaa1f61, type: 3}
       propertyPath: m_RootOrder
@@ -2226,6 +2294,10 @@ PrefabInstance:
     - target: {fileID: 3673855662555450905, guid: 0e9b40d41d20e4cc199c7a7b1aaa1f61, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4313422164504294388, guid: 0e9b40d41d20e4cc199c7a7b1aaa1f61, type: 3}
+      propertyPath: m_TagString
+      value: robot_mimic
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2343997897013685714, guid: 0e9b40d41d20e4cc199c7a7b1aaa1f61, type: 3}
@@ -2385,7 +2457,7 @@ GameObject:
   - component: {fileID: 546515892}
   m_Layer: 0
   m_Name: unnamed
-  m_TagString: Untagged
+  m_TagString: robot_mimic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2431,7 +2503,7 @@ GameObject:
   - component: {fileID: 556381693}
   m_Layer: 0
   m_Name: unnamed
-  m_TagString: Untagged
+  m_TagString: robot_mimic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2523,7 +2595,7 @@ GameObject:
   - component: {fileID: 561946236}
   m_Layer: 0
   m_Name: unnamed
-  m_TagString: Untagged
+  m_TagString: robot_mimic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2571,7 +2643,7 @@ GameObject:
   - component: {fileID: 563316739}
   m_Layer: 0
   m_Name: fr3_link6_mimic
-  m_TagString: Untagged
+  m_TagString: robot_mimic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2689,7 +2761,7 @@ GameObject:
   - component: {fileID: 589819285}
   m_Layer: 0
   m_Name: fr3_link8
-  m_TagString: Untagged
+  m_TagString: robot_mimic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2909,7 +2981,7 @@ GameObject:
   - component: {fileID: 603826121}
   m_Layer: 0
   m_Name: unnamed
-  m_TagString: Untagged
+  m_TagString: robot_mimic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2925,8 +2997,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 790684998}
+  m_Children: []
   m_Father: {fileID: 887351487}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2957,7 +3028,7 @@ GameObject:
   - component: {fileID: 641626418}
   m_Layer: 0
   m_Name: fr3_link7_mimic
-  m_TagString: Untagged
+  m_TagString: robot_mimic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3073,7 +3144,7 @@ GameObject:
   - component: {fileID: 643072126}
   m_Layer: 0
   m_Name: unnamed
-  m_TagString: Untagged
+  m_TagString: robot_mimic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3119,7 +3190,7 @@ GameObject:
   - component: {fileID: 648787485}
   m_Layer: 0
   m_Name: Visuals
-  m_TagString: Untagged
+  m_TagString: robot_mimic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3227,9 +3298,25 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: ba76722452c9e3298a07ff12dee8fd1f, type: 2}
+    - target: {fileID: 901342971875042107, guid: 68d6b67763aa52e24985b6c5f3440a7d, type: 3}
+      propertyPath: m_TagString
+      value: robot_mimic
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 68d6b67763aa52e24985b6c5f3440a7d, type: 3}
       propertyPath: m_Name
       value: link5
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 68d6b67763aa52e24985b6c5f3440a7d, type: 3}
+      propertyPath: m_TagString
+      value: robot_mimic
+      objectReference: {fileID: 0}
+    - target: {fileID: 1576419377407191253, guid: 68d6b67763aa52e24985b6c5f3440a7d, type: 3}
+      propertyPath: m_TagString
+      value: robot_mimic
+      objectReference: {fileID: 0}
+    - target: {fileID: 2468772454801797645, guid: 68d6b67763aa52e24985b6c5f3440a7d, type: 3}
+      propertyPath: m_TagString
+      value: robot_mimic
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 68d6b67763aa52e24985b6c5f3440a7d, type: 3}
@@ -3250,7 +3337,7 @@ GameObject:
   - component: {fileID: 668953957}
   m_Layer: 0
   m_Name: unnamed
-  m_TagString: Untagged
+  m_TagString: robot_mimic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3390,7 +3477,7 @@ GameObject:
   - component: {fileID: 718625526}
   m_Layer: 0
   m_Name: unnamed
-  m_TagString: Untagged
+  m_TagString: robot_mimic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3848,92 +3935,9 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 1
+  m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: feac9cbbb45dfb61ebeb0463d1389f90, type: 2}
---- !u!1001 &790684997
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 603826120}
-    m_Modifications:
-    - target: {fileID: 3090165198028182701, guid: 964181c98ac6dafbd91f537c6a65d318, type: 3}
-      propertyPath: m_Name
-      value: link0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4826145136472141646, guid: 964181c98ac6dafbd91f537c6a65d318, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4826145136472141646, guid: 964181c98ac6dafbd91f537c6a65d318, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4826145136472141646, guid: 964181c98ac6dafbd91f537c6a65d318, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4826145136472141646, guid: 964181c98ac6dafbd91f537c6a65d318, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4826145136472141646, guid: 964181c98ac6dafbd91f537c6a65d318, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4826145136472141646, guid: 964181c98ac6dafbd91f537c6a65d318, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4826145136472141646, guid: 964181c98ac6dafbd91f537c6a65d318, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4826145136472141646, guid: 964181c98ac6dafbd91f537c6a65d318, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4826145136472141646, guid: 964181c98ac6dafbd91f537c6a65d318, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4826145136472141646, guid: 964181c98ac6dafbd91f537c6a65d318, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4826145136472141646, guid: 964181c98ac6dafbd91f537c6a65d318, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 2258720528499175063, guid: 964181c98ac6dafbd91f537c6a65d318, type: 3}
-    - {fileID: 7742066801420368580, guid: 964181c98ac6dafbd91f537c6a65d318, type: 3}
-  m_SourcePrefab: {fileID: 100100000, guid: 964181c98ac6dafbd91f537c6a65d318, type: 3}
---- !u!4 &790684998 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4826145136472141646, guid: 964181c98ac6dafbd91f537c6a65d318, type: 3}
-  m_PrefabInstance: {fileID: 790684997}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &790684999 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4934534974479532724, guid: 964181c98ac6dafbd91f537c6a65d318, type: 3}
-  m_PrefabInstance: {fileID: 790684997}
-  m_PrefabAsset: {fileID: 0}
---- !u!64 &790685000
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 790684999}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: 34442a5a70ab5c888be540b14f404b7d, type: 2}
 --- !u!1 &801040131
 GameObject:
   m_ObjectHideFlags: 0
@@ -4146,7 +4150,7 @@ GameObject:
   - component: {fileID: 824229194}
   m_Layer: 0
   m_Name: fr3_link4_mimic
-  m_TagString: Untagged
+  m_TagString: robot_mimic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4410,7 +4414,7 @@ GameObject:
   - component: {fileID: 829899628}
   m_Layer: 0
   m_Name: fr3_link3_mimic
-  m_TagString: Untagged
+  m_TagString: robot_mimic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4735,7 +4739,7 @@ GameObject:
   - component: {fileID: 863341628}
   m_Layer: 0
   m_Name: Collisions
-  m_TagString: Untagged
+  m_TagString: robot_mimic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4872,7 +4876,7 @@ GameObject:
   - component: {fileID: 887351488}
   m_Layer: 0
   m_Name: Collisions
-  m_TagString: Untagged
+  m_TagString: robot_mimic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4960,6 +4964,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: link6
       objectReference: {fileID: 0}
+    - target: {fileID: 708641780858068102, guid: e72259da522d5c24e824635d5dd92be3, type: 3}
+      propertyPath: m_TagString
+      value: robot_mimic
+      objectReference: {fileID: 0}
+    - target: {fileID: 2683922767819665924, guid: e72259da522d5c24e824635d5dd92be3, type: 3}
+      propertyPath: m_TagString
+      value: robot_mimic
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6832323093462721348, guid: e72259da522d5c24e824635d5dd92be3, type: 3}
     - {fileID: 5973456445667757047, guid: e72259da522d5c24e824635d5dd92be3, type: 3}
@@ -5000,7 +5012,7 @@ GameObject:
   - component: {fileID: 894036043}
   m_Layer: 0
   m_Name: Collisions
-  m_TagString: Untagged
+  m_TagString: robot_mimic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5043,6 +5055,10 @@ PrefabInstance:
     - target: {fileID: 3690105266851456236, guid: 914ae45e0dcf183859be392abb2c566b, type: 3}
       propertyPath: m_Name
       value: link5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3690105266851456236, guid: 914ae45e0dcf183859be392abb2c566b, type: 3}
+      propertyPath: m_TagString
+      value: robot_mimic
       objectReference: {fileID: 0}
     - target: {fileID: 3893308065838700875, guid: 914ae45e0dcf183859be392abb2c566b, type: 3}
       propertyPath: m_RootOrder
@@ -5087,6 +5103,10 @@ PrefabInstance:
     - target: {fileID: 3893308065838700875, guid: 914ae45e0dcf183859be392abb2c566b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8487819888275774630, guid: 914ae45e0dcf183859be392abb2c566b, type: 3}
+      propertyPath: m_TagString
+      value: robot_mimic
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7992837297660893334, guid: 914ae45e0dcf183859be392abb2c566b, type: 3}
@@ -5508,6 +5528,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: link7
       objectReference: {fileID: 0}
+    - target: {fileID: 6182858599831076197, guid: d0401c05c2e5a080eb2651233e4555ec, type: 3}
+      propertyPath: m_TagString
+      value: robot_mimic
+      objectReference: {fileID: 0}
+    - target: {fileID: 7585843353675338062, guid: d0401c05c2e5a080eb2651233e4555ec, type: 3}
+      propertyPath: m_TagString
+      value: robot_mimic
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2512744252246713752, guid: d0401c05c2e5a080eb2651233e4555ec, type: 3}
     - {fileID: 1144775202066397096, guid: d0401c05c2e5a080eb2651233e4555ec, type: 3}
@@ -5550,7 +5578,7 @@ GameObject:
   - component: {fileID: 1012354076}
   m_Layer: 0
   m_Name: fr3_leftfinger
-  m_TagString: Untagged
+  m_TagString: robot_mimic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5802,7 +5830,7 @@ GameObject:
   - component: {fileID: 1040097082}
   m_Layer: 0
   m_Name: Collisions
-  m_TagString: Untagged
+  m_TagString: robot_mimic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5835,89 +5863,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46398bc5d6905ad429a6d2d973afe002, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1001 &1040431515
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 1832304958}
-    m_Modifications:
-    - target: {fileID: 3090165198028182701, guid: 964181c98ac6dafbd91f537c6a65d318, type: 3}
-      propertyPath: m_Name
-      value: link0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4826145136472141646, guid: 964181c98ac6dafbd91f537c6a65d318, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4826145136472141646, guid: 964181c98ac6dafbd91f537c6a65d318, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4826145136472141646, guid: 964181c98ac6dafbd91f537c6a65d318, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4826145136472141646, guid: 964181c98ac6dafbd91f537c6a65d318, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4826145136472141646, guid: 964181c98ac6dafbd91f537c6a65d318, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4826145136472141646, guid: 964181c98ac6dafbd91f537c6a65d318, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4826145136472141646, guid: 964181c98ac6dafbd91f537c6a65d318, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4826145136472141646, guid: 964181c98ac6dafbd91f537c6a65d318, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4826145136472141646, guid: 964181c98ac6dafbd91f537c6a65d318, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4826145136472141646, guid: 964181c98ac6dafbd91f537c6a65d318, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4826145136472141646, guid: 964181c98ac6dafbd91f537c6a65d318, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 2258720528499175063, guid: 964181c98ac6dafbd91f537c6a65d318, type: 3}
-    - {fileID: 7742066801420368580, guid: 964181c98ac6dafbd91f537c6a65d318, type: 3}
-  m_SourcePrefab: {fileID: 100100000, guid: 964181c98ac6dafbd91f537c6a65d318, type: 3}
---- !u!4 &1040431516 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4826145136472141646, guid: 964181c98ac6dafbd91f537c6a65d318, type: 3}
-  m_PrefabInstance: {fileID: 1040431515}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1040431517 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4934534974479532724, guid: 964181c98ac6dafbd91f537c6a65d318, type: 3}
-  m_PrefabInstance: {fileID: 1040431515}
-  m_PrefabAsset: {fileID: 0}
---- !u!64 &1040431518
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1040431517}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: 34442a5a70ab5c888be540b14f404b7d, type: 2}
 --- !u!1001 &1053336964
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6061,7 +6006,7 @@ GameObject:
   - component: {fileID: 1101602506}
   m_Layer: 0
   m_Name: Visuals
-  m_TagString: Untagged
+  m_TagString: robot_mimic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6227,7 +6172,7 @@ GameObject:
   - component: {fileID: 1103737401}
   m_Layer: 0
   m_Name: unnamed
-  m_TagString: Untagged
+  m_TagString: robot_mimic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6346,7 +6291,7 @@ GameObject:
   - component: {fileID: 1116605533}
   - component: {fileID: 1116605532}
   - component: {fileID: 1116605531}
-  - component: {fileID: 1116605530}
+  - component: {fileID: 1116605534}
   m_Layer: 0
   m_Name: robot_mimic
   m_TagString: robot
@@ -6354,18 +6299,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1116605530
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1116605529}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af7bdfd04a3bc1c4fa84d4cabd56b0d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1116605531
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6421,6 +6354,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 90, y: -90, z: 0}
+--- !u!114 &1116605534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1116605529}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ef000e0e50003a40bd5a969afc9d68b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1146071264
 GameObject:
   m_ObjectHideFlags: 8
@@ -6433,7 +6378,7 @@ GameObject:
   - component: {fileID: 1146071266}
   m_Layer: 0
   m_Name: Collisions
-  m_TagString: Untagged
+  m_TagString: robot_mimic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6568,7 +6513,7 @@ GameObject:
   - component: {fileID: 1181410303}
   m_Layer: 0
   m_Name: Visuals
-  m_TagString: Untagged
+  m_TagString: robot_mimic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6613,7 +6558,7 @@ GameObject:
   - component: {fileID: 1182566365}
   m_Layer: 0
   m_Name: Visuals
-  m_TagString: Untagged
+  m_TagString: robot_mimic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6658,7 +6603,7 @@ GameObject:
   - component: {fileID: 1200331271}
   m_Layer: 0
   m_Name: unnamed
-  m_TagString: Untagged
+  m_TagString: robot_mimic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6767,8 +6712,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.9954372, y: 1, z: 1}
-  m_Center: {x: 0.0022822584, y: 0, z: 0}
+  m_Size: {x: 3.9229262, y: 1, z: 1}
+  m_Center: {x: -1.4614623, y: 0, z: 0}
 --- !u!23 &1205291747
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -6879,7 +6824,7 @@ GameObject:
   - component: {fileID: 1218179670}
   m_Layer: 0
   m_Name: fr3_link1_mimic
-  m_TagString: Untagged
+  m_TagString: robot_mimic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7092,9 +7037,21 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 67daca209af84ed53b2cee8e006f93f1, type: 2}
+    - target: {fileID: 901342971875042107, guid: 01c1229d1dc629af4800765ce0b640e1, type: 3}
+      propertyPath: m_TagString
+      value: robot_mimic
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 01c1229d1dc629af4800765ce0b640e1, type: 3}
       propertyPath: m_Name
       value: finger
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 01c1229d1dc629af4800765ce0b640e1, type: 3}
+      propertyPath: m_TagString
+      value: robot_mimic
+      objectReference: {fileID: 0}
+    - target: {fileID: 1576419377407191253, guid: 01c1229d1dc629af4800765ce0b640e1, type: 3}
+      propertyPath: m_TagString
+      value: robot_mimic
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 01c1229d1dc629af4800765ce0b640e1, type: 3}
@@ -7115,7 +7072,7 @@ GameObject:
   - component: {fileID: 1257999843}
   m_Layer: 0
   m_Name: unnamed
-  m_TagString: Untagged
+  m_TagString: robot_mimic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7207,7 +7164,7 @@ GameObject:
   - component: {fileID: 1323139940}
   m_Layer: 0
   m_Name: Visuals
-  m_TagString: Untagged
+  m_TagString: robot_mimic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7252,7 +7209,7 @@ GameObject:
   - component: {fileID: 1335224237}
   m_Layer: 0
   m_Name: unnamed
-  m_TagString: Untagged
+  m_TagString: robot_mimic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7366,7 +7323,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 1
+  m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 12b3c10cbcd8d0df2b2d2b322a76229a, type: 2}
 --- !u!1 &1370827483
@@ -7381,7 +7338,7 @@ GameObject:
   - component: {fileID: 1370827485}
   m_Layer: 0
   m_Name: Visuals
-  m_TagString: Untagged
+  m_TagString: robot_mimic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7522,9 +7479,21 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 67daca209af84ed53b2cee8e006f93f1, type: 2}
+    - target: {fileID: 901342971875042107, guid: 01c1229d1dc629af4800765ce0b640e1, type: 3}
+      propertyPath: m_TagString
+      value: robot_mimic
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 01c1229d1dc629af4800765ce0b640e1, type: 3}
       propertyPath: m_Name
       value: finger
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 01c1229d1dc629af4800765ce0b640e1, type: 3}
+      propertyPath: m_TagString
+      value: robot_mimic
+      objectReference: {fileID: 0}
+    - target: {fileID: 1576419377407191253, guid: 01c1229d1dc629af4800765ce0b640e1, type: 3}
+      propertyPath: m_TagString
+      value: robot_mimic
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 01c1229d1dc629af4800765ce0b640e1, type: 3}
@@ -7615,7 +7584,7 @@ GameObject:
   - component: {fileID: 1426192886}
   m_Layer: 0
   m_Name: fr3_link5_mimic
-  m_TagString: Untagged
+  m_TagString: robot_mimic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7851,7 +7820,7 @@ GameObject:
   - component: {fileID: 1465664728}
   m_Layer: 0
   m_Name: fr3_link2_mimic
-  m_TagString: Untagged
+  m_TagString: robot_mimic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8013,6 +7982,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: c0eb2e4b6ecde5112a451ef4d8b3a2e0, type: 3}
       propertyPath: m_Name
       value: link2
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c0eb2e4b6ecde5112a451ef4d8b3a2e0, type: 3}
+      propertyPath: m_TagString
+      value: robot_mimic
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c0eb2e4b6ecde5112a451ef4d8b3a2e0, type: 3}
@@ -8280,7 +8253,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 1
+  m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: ecb0c1e6b1a0b7f09ac3335793d33163, type: 2}
 --- !u!1 &1501712621
@@ -8364,7 +8337,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1501712621}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: af7bdfd04a3bc1c4fa84d4cabd56b0d3, type: 3}
   m_Name: 
@@ -8463,7 +8436,7 @@ GameObject:
   - component: {fileID: 1507963736}
   m_Layer: 0
   m_Name: unnamed
-  m_TagString: Untagged
+  m_TagString: robot_mimic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8893,6 +8866,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 81408007}
     m_Modifications:
+    - target: {fileID: -9191475905254707263, guid: 0140b8bfd457cf8febd355ef77f110b2, type: 3}
+      propertyPath: m_TagString
+      value: robot_mimic
+      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0140b8bfd457cf8febd355ef77f110b2, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -8941,10 +8918,26 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: ba76722452c9e3298a07ff12dee8fd1f, type: 2}
+    - target: {fileID: -8423681092522153320, guid: 0140b8bfd457cf8febd355ef77f110b2, type: 3}
+      propertyPath: m_TagString
+      value: robot_mimic
+      objectReference: {fileID: 0}
+    - target: {fileID: -8358889951477119832, guid: 0140b8bfd457cf8febd355ef77f110b2, type: 3}
+      propertyPath: m_TagString
+      value: robot_mimic
+      objectReference: {fileID: 0}
+    - target: {fileID: -7958452814550908976, guid: 0140b8bfd457cf8febd355ef77f110b2, type: 3}
+      propertyPath: m_TagString
+      value: robot_mimic
+      objectReference: {fileID: 0}
     - target: {fileID: -7264643304161535556, guid: 0140b8bfd457cf8febd355ef77f110b2, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: ba76722452c9e3298a07ff12dee8fd1f, type: 2}
+    - target: {fileID: -6076794226375105264, guid: 0140b8bfd457cf8febd355ef77f110b2, type: 3}
+      propertyPath: m_TagString
+      value: robot_mimic
+      objectReference: {fileID: 0}
     - target: {fileID: -5287933700181216399, guid: 0140b8bfd457cf8febd355ef77f110b2, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -8957,14 +8950,38 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: ba76722452c9e3298a07ff12dee8fd1f, type: 2}
+    - target: {fileID: -3362338521625486365, guid: 0140b8bfd457cf8febd355ef77f110b2, type: 3}
+      propertyPath: m_TagString
+      value: robot_mimic
+      objectReference: {fileID: 0}
     - target: {fileID: -3241400911300853931, guid: 0140b8bfd457cf8febd355ef77f110b2, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: ba76722452c9e3298a07ff12dee8fd1f, type: 2}
+    - target: {fileID: -2742608613766194016, guid: 0140b8bfd457cf8febd355ef77f110b2, type: 3}
+      propertyPath: m_TagString
+      value: robot_mimic
+      objectReference: {fileID: 0}
+    - target: {fileID: -2058131768795360264, guid: 0140b8bfd457cf8febd355ef77f110b2, type: 3}
+      propertyPath: m_TagString
+      value: robot_mimic
+      objectReference: {fileID: 0}
     - target: {fileID: -1663525628340895374, guid: 0140b8bfd457cf8febd355ef77f110b2, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: ba76722452c9e3298a07ff12dee8fd1f, type: 2}
+    - target: {fileID: -1571034399289706438, guid: 0140b8bfd457cf8febd355ef77f110b2, type: 3}
+      propertyPath: m_TagString
+      value: robot_mimic
+      objectReference: {fileID: 0}
+    - target: {fileID: -930827064293124949, guid: 0140b8bfd457cf8febd355ef77f110b2, type: 3}
+      propertyPath: m_TagString
+      value: robot_mimic
+      objectReference: {fileID: 0}
+    - target: {fileID: -26790065159936605, guid: 0140b8bfd457cf8febd355ef77f110b2, type: 3}
+      propertyPath: m_TagString
+      value: robot_mimic
+      objectReference: {fileID: 0}
     - target: {fileID: 55291342286754144, guid: 0140b8bfd457cf8febd355ef77f110b2, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -8981,9 +8998,29 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: ba76722452c9e3298a07ff12dee8fd1f, type: 2}
+    - target: {fileID: 901342971875042107, guid: 0140b8bfd457cf8febd355ef77f110b2, type: 3}
+      propertyPath: m_TagString
+      value: robot_mimic
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 0140b8bfd457cf8febd355ef77f110b2, type: 3}
       propertyPath: m_Name
       value: link6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 0140b8bfd457cf8febd355ef77f110b2, type: 3}
+      propertyPath: m_TagString
+      value: robot_mimic
+      objectReference: {fileID: 0}
+    - target: {fileID: 1576419377407191253, guid: 0140b8bfd457cf8febd355ef77f110b2, type: 3}
+      propertyPath: m_TagString
+      value: robot_mimic
+      objectReference: {fileID: 0}
+    - target: {fileID: 2468772454801797645, guid: 0140b8bfd457cf8febd355ef77f110b2, type: 3}
+      propertyPath: m_TagString
+      value: robot_mimic
+      objectReference: {fileID: 0}
+    - target: {fileID: 4458578931032839201, guid: 0140b8bfd457cf8febd355ef77f110b2, type: 3}
+      propertyPath: m_TagString
+      value: robot_mimic
       objectReference: {fileID: 0}
     - target: {fileID: 5259097174956160687, guid: 0140b8bfd457cf8febd355ef77f110b2, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -9001,6 +9038,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: ba76722452c9e3298a07ff12dee8fd1f, type: 2}
+    - target: {fileID: 7618929641657476143, guid: 0140b8bfd457cf8febd355ef77f110b2, type: 3}
+      propertyPath: m_TagString
+      value: robot_mimic
+      objectReference: {fileID: 0}
     - target: {fileID: 7850734403127241072, guid: 0140b8bfd457cf8febd355ef77f110b2, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -9009,6 +9050,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: ba76722452c9e3298a07ff12dee8fd1f, type: 2}
+    - target: {fileID: 8481369391118682733, guid: 0140b8bfd457cf8febd355ef77f110b2, type: 3}
+      propertyPath: m_TagString
+      value: robot_mimic
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0140b8bfd457cf8febd355ef77f110b2, type: 3}
 --- !u!4 &1611995771 stripped
@@ -9028,7 +9073,7 @@ GameObject:
   - component: {fileID: 1612044740}
   m_Layer: 0
   m_Name: unnamed
-  m_TagString: Untagged
+  m_TagString: robot_mimic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9074,7 +9119,7 @@ GameObject:
   - component: {fileID: 1636411359}
   m_Layer: 0
   m_Name: Collisions
-  m_TagString: Untagged
+  m_TagString: robot_mimic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9309,7 +9354,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 1
+  m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 76853a1ea366e9e95b47b37d79730974, type: 2}
 --- !u!1001 &1665735747
@@ -9386,89 +9431,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 385390882df6443998c0fa4cc094677e, type: 3}
   m_PrefabInstance: {fileID: 1665735747}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &1679657997
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 1904228595}
-    m_Modifications:
-    - target: {fileID: 1175960616278172139, guid: 2d21323ad94ca96a6af83aaeb39cae6c, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1175960616278172139, guid: 2d21323ad94ca96a6af83aaeb39cae6c, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1175960616278172139, guid: 2d21323ad94ca96a6af83aaeb39cae6c, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1175960616278172139, guid: 2d21323ad94ca96a6af83aaeb39cae6c, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1175960616278172139, guid: 2d21323ad94ca96a6af83aaeb39cae6c, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1175960616278172139, guid: 2d21323ad94ca96a6af83aaeb39cae6c, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1175960616278172139, guid: 2d21323ad94ca96a6af83aaeb39cae6c, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1175960616278172139, guid: 2d21323ad94ca96a6af83aaeb39cae6c, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1175960616278172139, guid: 2d21323ad94ca96a6af83aaeb39cae6c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1175960616278172139, guid: 2d21323ad94ca96a6af83aaeb39cae6c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1175960616278172139, guid: 2d21323ad94ca96a6af83aaeb39cae6c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7450608590002915621, guid: 2d21323ad94ca96a6af83aaeb39cae6c, type: 3}
-      propertyPath: m_Name
-      value: link1
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 5521989741737493685, guid: 2d21323ad94ca96a6af83aaeb39cae6c, type: 3}
-    - {fileID: 6119041895321780156, guid: 2d21323ad94ca96a6af83aaeb39cae6c, type: 3}
-  m_SourcePrefab: {fileID: 100100000, guid: 2d21323ad94ca96a6af83aaeb39cae6c, type: 3}
---- !u!4 &1679657998 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1175960616278172139, guid: 2d21323ad94ca96a6af83aaeb39cae6c, type: 3}
-  m_PrefabInstance: {fileID: 1679657997}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1679657999 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8879377902026497355, guid: 2d21323ad94ca96a6af83aaeb39cae6c, type: 3}
-  m_PrefabInstance: {fileID: 1679657997}
-  m_PrefabAsset: {fileID: 0}
---- !u!64 &1679658000
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1679657999}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: 9457f248ac7938d33a5fcf0f0921d51f, type: 2}
 --- !u!1 &1680413153
 GameObject:
   m_ObjectHideFlags: 0
@@ -9527,7 +9489,7 @@ GameObject:
   - component: {fileID: 1699499980}
   m_Layer: 0
   m_Name: unnamed
-  m_TagString: Untagged
+  m_TagString: robot_mimic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9618,7 +9580,7 @@ GameObject:
   - component: {fileID: 1756416781}
   m_Layer: 0
   m_Name: Visuals
-  m_TagString: Untagged
+  m_TagString: robot_mimic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9663,7 +9625,7 @@ GameObject:
   - component: {fileID: 1767966397}
   m_Layer: 0
   m_Name: unnamed
-  m_TagString: Untagged
+  m_TagString: robot_mimic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9709,7 +9671,7 @@ GameObject:
   - component: {fileID: 1786508997}
   m_Layer: 0
   m_Name: unnamed
-  m_TagString: Untagged
+  m_TagString: robot_mimic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9755,7 +9717,7 @@ GameObject:
   - component: {fileID: 1794868935}
   m_Layer: 0
   m_Name: Visuals
-  m_TagString: Untagged
+  m_TagString: robot_mimic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9897,10 +9859,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8358889951477119832, guid: 385390882df6443998c0fa4cc094677e, type: 3}
+      propertyPath: m_TagString
+      value: robot_mimic
+      objectReference: {fileID: 0}
     - target: {fileID: -7264643304161535556, guid: 385390882df6443998c0fa4cc094677e, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: ba76722452c9e3298a07ff12dee8fd1f, type: 2}
+    - target: {fileID: -6076794226375105264, guid: 385390882df6443998c0fa4cc094677e, type: 3}
+      propertyPath: m_TagString
+      value: robot_mimic
+      objectReference: {fileID: 0}
     - target: {fileID: -4286396916692950121, guid: 385390882df6443998c0fa4cc094677e, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -9909,13 +9879,37 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: ba76722452c9e3298a07ff12dee8fd1f, type: 2}
+    - target: {fileID: -1571034399289706438, guid: 385390882df6443998c0fa4cc094677e, type: 3}
+      propertyPath: m_TagString
+      value: robot_mimic
+      objectReference: {fileID: 0}
+    - target: {fileID: -930827064293124949, guid: 385390882df6443998c0fa4cc094677e, type: 3}
+      propertyPath: m_TagString
+      value: robot_mimic
+      objectReference: {fileID: 0}
     - target: {fileID: 55291342286754144, guid: 385390882df6443998c0fa4cc094677e, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: ba76722452c9e3298a07ff12dee8fd1f, type: 2}
+    - target: {fileID: 901342971875042107, guid: 385390882df6443998c0fa4cc094677e, type: 3}
+      propertyPath: m_TagString
+      value: robot_mimic
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 385390882df6443998c0fa4cc094677e, type: 3}
       propertyPath: m_Name
       value: link7
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 385390882df6443998c0fa4cc094677e, type: 3}
+      propertyPath: m_TagString
+      value: robot_mimic
+      objectReference: {fileID: 0}
+    - target: {fileID: 1576419377407191253, guid: 385390882df6443998c0fa4cc094677e, type: 3}
+      propertyPath: m_TagString
+      value: robot_mimic
+      objectReference: {fileID: 0}
+    - target: {fileID: 2468772454801797645, guid: 385390882df6443998c0fa4cc094677e, type: 3}
+      propertyPath: m_TagString
+      value: robot_mimic
       objectReference: {fileID: 0}
     - target: {fileID: 5259097174956160687, guid: 385390882df6443998c0fa4cc094677e, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -9929,6 +9923,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: ba76722452c9e3298a07ff12dee8fd1f, type: 2}
+    - target: {fileID: 7618929641657476143, guid: 385390882df6443998c0fa4cc094677e, type: 3}
+      propertyPath: m_TagString
+      value: robot_mimic
+      objectReference: {fileID: 0}
     - target: {fileID: 7850734403127241072, guid: 385390882df6443998c0fa4cc094677e, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -9952,7 +9950,7 @@ GameObject:
   - component: {fileID: 1830784993}
   m_Layer: 0
   m_Name: Collisions
-  m_TagString: Untagged
+  m_TagString: robot_mimic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10013,8 +10011,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1040431516}
+  m_Children: []
   m_Father: {fileID: 897110473}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -10088,7 +10085,7 @@ GameObject:
   - component: {fileID: 1848323100}
   m_Layer: 0
   m_Name: Collisions
-  m_TagString: Untagged
+  m_TagString: robot_mimic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10131,6 +10128,14 @@ PrefabInstance:
     - target: {fileID: 1726014708560317935, guid: 0a45735a1d7a550a5874a17e9d621d57, type: 3}
       propertyPath: m_Name
       value: link2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1726014708560317935, guid: 0a45735a1d7a550a5874a17e9d621d57, type: 3}
+      propertyPath: m_TagString
+      value: robot_mimic
+      objectReference: {fileID: 0}
+    - target: {fileID: 5220805375480271623, guid: 0a45735a1d7a550a5874a17e9d621d57, type: 3}
+      propertyPath: m_TagString
+      value: robot_mimic
       objectReference: {fileID: 0}
     - target: {fileID: 8735348902447703510, guid: 0a45735a1d7a550a5874a17e9d621d57, type: 3}
       propertyPath: m_RootOrder
@@ -10324,13 +10329,33 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: ba76722452c9e3298a07ff12dee8fd1f, type: 2}
+    - target: {fileID: -2742608613766194016, guid: a96f99fa366b7c84d9fb6cd0bfb1f625, type: 3}
+      propertyPath: m_TagString
+      value: robot_mimic
+      objectReference: {fileID: 0}
     - target: {fileID: -1663525628340895374, guid: a96f99fa366b7c84d9fb6cd0bfb1f625, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: ba76722452c9e3298a07ff12dee8fd1f, type: 2}
+    - target: {fileID: -1571034399289706438, guid: a96f99fa366b7c84d9fb6cd0bfb1f625, type: 3}
+      propertyPath: m_TagString
+      value: robot_mimic
+      objectReference: {fileID: 0}
+    - target: {fileID: 901342971875042107, guid: a96f99fa366b7c84d9fb6cd0bfb1f625, type: 3}
+      propertyPath: m_TagString
+      value: robot_mimic
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: a96f99fa366b7c84d9fb6cd0bfb1f625, type: 3}
       propertyPath: m_Name
       value: link3
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a96f99fa366b7c84d9fb6cd0bfb1f625, type: 3}
+      propertyPath: m_TagString
+      value: robot_mimic
+      objectReference: {fileID: 0}
+    - target: {fileID: 2468772454801797645, guid: a96f99fa366b7c84d9fb6cd0bfb1f625, type: 3}
+      propertyPath: m_TagString
+      value: robot_mimic
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a96f99fa366b7c84d9fb6cd0bfb1f625, type: 3}
@@ -10748,7 +10773,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 1
+  m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 9457f248ac7938d33a5fcf0f0921d51f, type: 2}
 --- !u!1001 &1900295075
@@ -10825,7 +10850,7 @@ GameObject:
   - component: {fileID: 1904228596}
   m_Layer: 0
   m_Name: unnamed
-  m_TagString: Untagged
+  m_TagString: robot_mimic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10841,8 +10866,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1679657998}
+  m_Children: []
   m_Father: {fileID: 1146071265}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -10983,6 +11007,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1507963735}
     m_Modifications:
+    - target: {fileID: 1038903314405134017, guid: 040ac00eeef1bc9dcb9bbaab158a3e5f, type: 3}
+      propertyPath: m_TagString
+      value: robot_mimic
+      objectReference: {fileID: 0}
     - target: {fileID: 7174818674606784302, guid: 040ac00eeef1bc9dcb9bbaab158a3e5f, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -11030,6 +11058,10 @@ PrefabInstance:
     - target: {fileID: 8555819709406121470, guid: 040ac00eeef1bc9dcb9bbaab158a3e5f, type: 3}
       propertyPath: m_Name
       value: link3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8555819709406121470, guid: 040ac00eeef1bc9dcb9bbaab158a3e5f, type: 3}
+      propertyPath: m_TagString
+      value: robot_mimic
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8666647590844334667, guid: 040ac00eeef1bc9dcb9bbaab158a3e5f, type: 3}
@@ -11239,7 +11271,7 @@ GameObject:
   - component: {fileID: 1956433046}
   m_Layer: 0
   m_Name: Collisions
-  m_TagString: Untagged
+  m_TagString: robot_mimic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11284,7 +11316,7 @@ GameObject:
   - component: {fileID: 1958500343}
   m_Layer: 0
   m_Name: Visuals
-  m_TagString: Untagged
+  m_TagString: robot_mimic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11331,7 +11363,7 @@ GameObject:
   - component: {fileID: 2010276699}
   m_Layer: 0
   m_Name: fr3_hand
-  m_TagString: Untagged
+  m_TagString: robot_mimic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11495,6 +11527,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 67daca209af84ed53b2cee8e006f93f1, type: 2}
+    - target: {fileID: -6076794226375105264, guid: 2463f07d69c329eb0aa6e0344d52f6e7, type: 3}
+      propertyPath: m_TagString
+      value: robot_mimic
+      objectReference: {fileID: 0}
     - target: {fileID: -5051942403238515949, guid: 2463f07d69c329eb0aa6e0344d52f6e7, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -11507,9 +11543,29 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 67daca209af84ed53b2cee8e006f93f1, type: 2}
+    - target: {fileID: 901342971875042107, guid: 2463f07d69c329eb0aa6e0344d52f6e7, type: 3}
+      propertyPath: m_TagString
+      value: robot_mimic
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 2463f07d69c329eb0aa6e0344d52f6e7, type: 3}
       propertyPath: m_Name
       value: hand
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2463f07d69c329eb0aa6e0344d52f6e7, type: 3}
+      propertyPath: m_TagString
+      value: robot_mimic
+      objectReference: {fileID: 0}
+    - target: {fileID: 1576419377407191253, guid: 2463f07d69c329eb0aa6e0344d52f6e7, type: 3}
+      propertyPath: m_TagString
+      value: robot_mimic
+      objectReference: {fileID: 0}
+    - target: {fileID: 2468772454801797645, guid: 2463f07d69c329eb0aa6e0344d52f6e7, type: 3}
+      propertyPath: m_TagString
+      value: robot_mimic
+      objectReference: {fileID: 0}
+    - target: {fileID: 2636276575349652477, guid: 2463f07d69c329eb0aa6e0344d52f6e7, type: 3}
+      propertyPath: m_TagString
+      value: robot_mimic
       objectReference: {fileID: 0}
     - target: {fileID: 7374791279145423755, guid: 2463f07d69c329eb0aa6e0344d52f6e7, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -11602,7 +11658,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 1
+  m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: cd1fef9f7c3343e188689e69f69d8318, type: 2}
 --- !u!1 &2064323406
@@ -11617,7 +11673,7 @@ GameObject:
   - component: {fileID: 2064323408}
   m_Layer: 0
   m_Name: Plugins
-  m_TagString: Untagged
+  m_TagString: robot_mimic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11792,13 +11848,33 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: ba76722452c9e3298a07ff12dee8fd1f, type: 2}
+    - target: {fileID: -1571034399289706438, guid: a0a12223386c3274da3a12f717fdbb55, type: 3}
+      propertyPath: m_TagString
+      value: robot_mimic
+      objectReference: {fileID: 0}
     - target: {fileID: 55291342286754144, guid: a0a12223386c3274da3a12f717fdbb55, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: ba76722452c9e3298a07ff12dee8fd1f, type: 2}
+    - target: {fileID: 901342971875042107, guid: a0a12223386c3274da3a12f717fdbb55, type: 3}
+      propertyPath: m_TagString
+      value: robot_mimic
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: a0a12223386c3274da3a12f717fdbb55, type: 3}
       propertyPath: m_Name
       value: link4
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a0a12223386c3274da3a12f717fdbb55, type: 3}
+      propertyPath: m_TagString
+      value: robot_mimic
+      objectReference: {fileID: 0}
+    - target: {fileID: 1576419377407191253, guid: a0a12223386c3274da3a12f717fdbb55, type: 3}
+      propertyPath: m_TagString
+      value: robot_mimic
+      objectReference: {fileID: 0}
+    - target: {fileID: 2468772454801797645, guid: a0a12223386c3274da3a12f717fdbb55, type: 3}
+      propertyPath: m_TagString
+      value: robot_mimic
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a0a12223386c3274da3a12f717fdbb55, type: 3}

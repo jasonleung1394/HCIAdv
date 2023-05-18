@@ -20,15 +20,22 @@ public class CheckCollision : MonoBehaviour
     }
 
 
-    private void OnTriggerEnter(Collider other)
-    {
-        LerpToInitialPose lerpToInitialPose = mainScript.GetComponent<LerpToInitialPose>();
-        lerpToInitialPose.Lerp_Index = 2;
-        Debug.Log("entered");
-    }
     private void OnTriggerExit(Collider other)
     {
         LerpToInitialPose lerpToInitialPose = mainScript.GetComponent<LerpToInitialPose>();
         lerpToInitialPose.Lerp_Index = 0;
+    }
+
+
+    private void OnTriggerStay(Collider other)
+    {
+        LerpToInitialPose lerpToInitialPose = mainScript.GetComponent<LerpToInitialPose>();
+        lerpToInitialPose.Lerp_Index = 2;
+        Debug.Log(other.gameObject.tag);
+        if (other.gameObject.tag != "robot_mimic")
+        {
+            lerpToInitialPose.Lerp_Index = 0;
+
+        }
     }
 }
