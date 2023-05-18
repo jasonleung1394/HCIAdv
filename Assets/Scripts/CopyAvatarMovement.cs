@@ -65,9 +65,9 @@ public class CopyAvatarMovement : MonoBehaviour
         lerpToInitialPose = GetComponent<LerpToInitialPose>();
     }
 
-    private Quaternion initial_Arm = Quaternion.Euler((1.59695f / 2) * Mathf.Rad2Deg, 0, 0);
+    private Quaternion initial_Arm = Quaternion.Euler((1.59695f / 2) * Mathf.Rad2Deg, -0.785398163397f* Mathf.Rad2Deg, 0);
 
-    private Quaternion initial_ForeArm = Quaternion.Euler(0, 0, (-1.59695f / 2) * Mathf.Rad2Deg);
+    private Quaternion initial_ForeArm = Quaternion.Euler(0, 0, -2.35619449019f * Mathf.Rad2Deg);
 
     private Quaternion initial_Hand = Quaternion.Euler(0, 0 * Mathf.Rad2Deg, 0);
 

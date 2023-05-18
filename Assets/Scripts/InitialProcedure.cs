@@ -4,6 +4,7 @@ using UnityEngine;
 using Unity.Robotics.ROSTCPConnector;
 using RosMessageTypes.Tf2;
 using RosMessageTypes.Sensor;
+using RosMessageTypes.Franka;
 
 public class InitialProcedure : MonoBehaviour
 {
