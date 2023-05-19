@@ -27,7 +27,7 @@ public class LerpToInitialPose : MonoBehaviour
     void Update(){
         if (lerp_Index ==1)
         {
-            GameObject.Find("Banana Man").GetComponent<Animator>().enabled = false;
+            // GameObject.Find("Right Arm OT").GetComponent<Animator>().enabled = false;
         }
 
     }

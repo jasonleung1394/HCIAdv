@@ -14,6 +14,8 @@ public class CheckCollision : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //         LerpToInitialPose lerpToInitialPose = mainScript.GetComponent<LerpToInitialPose>();
+        // lerpToInitialPose.Lerp_Index = 0;
 
     }
 
@@ -21,6 +23,12 @@ public class CheckCollision : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         LerpToInitialPose lerpToInitialPose = mainScript.GetComponent<LerpToInitialPose>();
-        lerpToInitialPose.Lerp_Index = 1;
+        lerpToInitialPose.Lerp_Index = 2;
+        Debug.Log("entered");
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        LerpToInitialPose lerpToInitialPose = mainScript.GetComponent<LerpToInitialPose>();
+        lerpToInitialPose.Lerp_Index = 0;
     }
 }

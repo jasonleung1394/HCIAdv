@@ -50,7 +50,7 @@ public class InitialProcedure : MonoBehaviour
     void Update()
     {
         LerpToInitialPose lerpToInitialPose = GetComponent<LerpToInitialPose>();
-        if (lerpToInitialPose.Lerp_Index == 0)
+        if (lerpToInitialPose.Lerp_Index != 1 )
         {
             GameObject.Find("Right Arm").transform.localRotation = GameObject.Find("Right Arm OT").transform.localRotation;
             GameObject.Find("Right Forearm").transform.localRotation = GameObject.Find("Right Forearm OT").transform.localRotation;

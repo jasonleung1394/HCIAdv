@@ -9,13 +9,8 @@ public class CopyAvatarMovement : MonoBehaviour
     private GameObject right_arm;
     private GameObject right_forearm;
     private GameObject right_hand;
-    private GameObject fr3_J1;
-    private GameObject fr3_J2;
-    private GameObject fr3_J3;
-    private GameObject fr3_J4;
-    private GameObject fr3_J5;
-    private GameObject fr3_J6;
-    private GameObject fr3_J7;
+    private GameObject fr3_J1, fr3_J2, fr3_J3, fr3_J4, fr3_J5, fr3_J6, fr3_J7;
+    private GameObject fr3_J1_mimic, fr3_J2_mimic, fr3_J3_mimic, fr3_J4_mimic, fr3_J5_mimic, fr3_J6_mimic, fr3_J7_mimic;
 
     private List<float> preFrameAngle;
 
@@ -60,12 +55,20 @@ public class CopyAvatarMovement : MonoBehaviour
         fr3_J6 = GameObject.Find("fr3_link6");
         fr3_J7 = GameObject.Find("fr3_link7");
 
+        fr3_J1_mimic = GameObject.Find("fr3_link1_mimic");
+        fr3_J2_mimic = GameObject.Find("fr3_link2_mimic");
+        fr3_J3_mimic = GameObject.Find("fr3_link3_mimic");
+        fr3_J4_mimic = GameObject.Find("fr3_link4_mimic");
+        fr3_J5_mimic = GameObject.Find("fr3_link5_mimic");
+        fr3_J6_mimic = GameObject.Find("fr3_link6_mimic");
+        fr3_J7_mimic = GameObject.Find("fr3_link7_mimic");
+
         initialPoser();
 
         lerpToInitialPose = GetComponent<LerpToInitialPose>();
     }
 
-    private Quaternion initial_Arm = Quaternion.Euler((1.59695f / 2) * Mathf.Rad2Deg, -0.785398163397f* Mathf.Rad2Deg, 0);
+    private Quaternion initial_Arm = Quaternion.Euler((1.59695f / 2) * Mathf.Rad2Deg, -0.785398163397f * Mathf.Rad2Deg, 0);
 
     private Quaternion initial_ForeArm = Quaternion.Euler(0, 0, -2.35619449019f * Mathf.Rad2Deg);
 
@@ -81,6 +84,9 @@ public class CopyAvatarMovement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+
+        // No Collision
+
         OffsetValue offsetValue = GetComponent<OffsetValue>();
 
         reset_speed += Time.deltaTime * reset_speed;
@@ -118,7 +124,11 @@ public class CopyAvatarMovement : MonoBehaviour
 
         List<float> jointAngles = new List<float> { J1, -J2, J3, J4, -J5, J6, J7 };
         jointAngleConstraint(jointAngles);
-
+        moveMimic(jointAngles);
+        if (lerpToInitialPose.Lerp_Index == 2)
+        {
+            jointAngles = preFrameAngle;
+        }
         preFrameAngle = new List<float>();
         for (int i = 0; i < jointAngles.Count; i++)
         {
@@ -170,94 +180,13 @@ public class CopyAvatarMovement : MonoBehaviour
             * Quaternion.AngleAxis(90f, Vector3.back);
 
 
+
+
+
+        
+
+
     }
-
-
-
-    // public double[] cur_jointAngles { get; set; }
-
-    // /// <summary>
-    // /// no longer required
-    // /// </summary>
-    // /// <param name="jointPos"></param>
-    // /// <returns></returns>
-    // public bool ifPosSynced(double[] jointPos)
-    // {
-    //     bool flag = true;
-
-
-    //     for (int i = 0; i < avatarJointState.Length; i++)
-    //     {
-    //         double diff;
-    //         diff = avatarJointState[i] * Mathf.Deg2Rad - jointPos[i];
-    //         diff = Mathf.Abs((float)diff);
-
-    //         if (diff < 0.2f)
-    //         {
-    //             // close enough
-    //             jointInitFlag[i] = true;
-    //         }
-    //         else
-    //         {
-    //             jointInitFlag[i] = false;
-    //             flag = false;
-    //         }
-    //     }
-
-    //     return flag;
-    // }
-
-    // public float vel_timeIndex;
-
-    // private void jointVelocityConstraint(List<float> jointAngles)
-    // {
-    //     InitialProcedure initialProcedure = GetComponent<InitialProcedure>();
-    //     initialProcedure.overSpeedFlag = true;
-    //     LerpToInitialPose lerpToInitialPose = GetComponent<LerpToInitialPose>();
-
-    //     // list of max || min velocity
-    //     float[] velConstraintVal = new float[] { 2f, 1f, 1.5f, 1.25f, 3f, 1.5f, 3f };
-    //     for (int i = 0; i < velConstraintVal.Length; i++)
-    //     {
-    //         velConstraintVal[i] = velConstraintVal[i];
-    //     }
-    //     if (lerpToInitialPose.Lerp_Index == 0)
-    //     {
-
-    //         for (int i = 0; i < preFrameAngle.Count; i++)
-    //         {
-    //             var currentJointAngle = preFrameAngle[i];
-    //             var desiredJointAngle = jointAngles[i];
-
-    //             var jointDIff = (Mathf.Abs(desiredJointAngle - currentJointAngle));
-
-    //             float jointVel = (Mathf.Abs(desiredJointAngle - currentJointAngle) / Time.deltaTime) * Mathf.Deg2Rad;
-
-    //             // Debug.Log(jointVel + " joint" + (i + 1));
-    //             // Debug.Log(Mathf.Abs(desiredJointAngle - currentJointAngle));
-    //             if (jointVel >= velConstraintVal[i])
-    //             {
-    //                 vel_timeIndex += Time.deltaTime;
-
-    //                 // too fast
-    //                 // jointAngles[i] = jointAngles[i];
-    //                 jointAngles[i] = currentJointAngle + (velConstraintVal[i] * Time.deltaTime);
-    //                 initialProcedure.overSpeedFlag = false;
-    //                 if (vel_timeIndex >= 3f)
-    //                 {
-    //                     // too out of range cant follow up
-    //                     lerpToInitialPose.Lerp_Index = 3;
-    //                     vel_timeIndex = 0;
-    //                 }
-    //             }
-    //             else
-    //             {
-    //                 jointAngles[i] = jointAngles[i];
-    //             }
-    //         }
-    //     }
-    // }s
-
     private void rad2Deg(float[,] radArray)
     {
         for (int i = 0; i < radArray.GetLength(0); i++)
@@ -265,6 +194,36 @@ public class CopyAvatarMovement : MonoBehaviour
             radArray[i, 0] = radArray[i, 0] * Mathf.Rad2Deg;
             radArray[i, 1] = radArray[i, 1] * Mathf.Rad2Deg;
         }
+    }
+
+    void moveMimic(List<float> jointAngles){
+        // fr3_J1.transform.localEulerAngles = new Vector3(0, jointAngles[0], 0);
+        fr3_J1_mimic.transform.localRotation = Quaternion.AngleAxis(-jointAngles[0], Vector3.up);
+
+        fr3_J2_mimic.transform.localRotation =
+            Quaternion.AngleAxis(-jointAngles[1], Vector3.left)
+            * Quaternion.AngleAxis(-90f, Vector3.back);
+
+        fr3_J3_mimic.transform.localRotation =
+            Quaternion.AngleAxis(-jointAngles[2], Vector3.left)
+            * Quaternion.AngleAxis(90f, Vector3.back);
+
+        fr3_J4_mimic.transform.localRotation =
+            Quaternion.AngleAxis(jointAngles[3], Vector3.left)
+            * Quaternion.AngleAxis(90f, Vector3.back);
+
+        fr3_J5_mimic.transform.localRotation =
+            Quaternion.AngleAxis(-jointAngles[4], Vector3.left)
+            * Quaternion.AngleAxis(-90f, Vector3.back);
+
+        fr3_J6_mimic.transform.localRotation =
+            Quaternion.AngleAxis(jointAngles[5], Vector3.left)
+            * Quaternion.AngleAxis(-90f, Vector3.forward);
+
+        fr3_J7_mimic.transform.localRotation =
+            Quaternion.AngleAxis(jointAngles[6], Vector3.left)
+            * Quaternion.AngleAxis(90f, Vector3.back);
+
     }
 
     private void jointAngleConstraint(List<float> jointAngles)
@@ -294,7 +253,7 @@ public class CopyAvatarMovement : MonoBehaviour
             var robotDOF = Mathf.Abs(constraintVal[i, 0] - constraintVal[i, 1]);
             if (lerpToInitialPose.Lerp_Index == 0)
             {
-                jointAngles[i] = jointAngles[i] *  Human_dpi_offset[i];
+                jointAngles[i] = jointAngles[i] * Human_dpi_offset[i];
             }
             if (constraintVal[i, 0] > jointAngles[i] && constraintVal[i, 1] < jointAngles[i]) { }
             else if (constraintVal[i, 0] < jointAngles[i])
