@@ -1,0 +1,7 @@
+{
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.black-formatter"
+    },
+    "python.formatting.provider": "none",
+    "cmake.sourceDirectory": "/home/json2004/catkin_ws/src/franka_ros/franka_ros"
+}

@@ -2,6 +2,7 @@
 
 import sys
 import rospy as ros
+# from franka_control import FrankaControl
 from franka_example_controllers.msg import positions
 from actionlib import SimpleActionClient
 from sensor_msgs.msg import JointState
@@ -77,6 +78,8 @@ def moveAction(data):
 
 ros.init_node('trajectory')
 ros.loginfo("node initialized as trajectory")
+# control = FrankaControl()
+# control.set_collision_behavior(True)
 action = ros.resolve_name('~follow_joint_trajectory')
 client = SimpleActionClient(action, FollowJointTrajectoryAction)
 ros.Subscriber("joint_trajectory", positions,moveAction,queue_size=3)
