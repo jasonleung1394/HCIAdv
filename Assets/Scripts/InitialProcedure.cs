@@ -50,14 +50,24 @@ public class InitialProcedure : MonoBehaviour
     void Update()
     {
         LerpToInitialPose lerpToInitialPose = GetComponent<LerpToInitialPose>();
-        if (lerpToInitialPose.Lerp_Index != 1 )
+        if (lerpToInitialPose.Lerp_Index != 1)
         {
             GameObject.Find("Right Arm").transform.localRotation = GameObject.Find("Right Arm OT").transform.localRotation;
             GameObject.Find("Right Forearm").transform.localRotation = GameObject.Find("Right Forearm OT").transform.localRotation;
             GameObject.Find("Right Hand").transform.localRotation = GameObject.Find("Right Hand OT").transform.localRotation;
+            // GameObject.Find("Right Forearm OT").GetComponent<OptitrackRigidBody>().enabled = true;
+            // GameObject.Find("Right Hand OT").GetComponent<OptitrackRigidBody>().enabled = true;
+            // GameObject.Find("Right Arm OT").GetComponent<OptitrackRigidBody>().enabled = true;
+            GameObject.Find("Right Arm OT").GetComponent<testScript>().enabled = true;
+
         }
         else
         {
+            // GameObject.Find("Right Forearm OT").GetComponent<OptitrackRigidBody>().enabled = false;
+            // GameObject.Find("Right Hand OT").GetComponent<OptitrackRigidBody>().enabled = false;
+            // GameObject.Find("Right Arm OT").GetComponent<OptitrackRigidBody>().enabled = false;
+            GameObject.Find("Right Arm OT").GetComponent<testScript>().enabled = false;
+
             GameObject.Find("Right Arm OT").transform.localRotation = GameObject.Find("Right Arm").transform.localRotation;
             GameObject.Find("Right Forearm OT").transform.localRotation = GameObject.Find("Right Forearm").transform.localRotation;
             GameObject.Find("Right Hand OT").transform.localRotation = GameObject.Find("Right Hand").transform.localRotation;
