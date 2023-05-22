@@ -31,7 +31,7 @@ public class CheckCollision : MonoBehaviour
     {
         LerpToInitialPose lerpToInitialPose = mainScript.GetComponent<LerpToInitialPose>();
         lerpToInitialPose.Lerp_Index = 2;
-        Debug.Log(other.gameObject.tag);
+        // Debug.Log(other.gameObject.tag);
         if (other.gameObject.tag != "robot_mimic")
         {
             lerpToInitialPose.Lerp_Index = 0;

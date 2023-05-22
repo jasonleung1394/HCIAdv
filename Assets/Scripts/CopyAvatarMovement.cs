@@ -99,28 +99,28 @@ public class CopyAvatarMovement : MonoBehaviour
             Mathf.Atan2(
                 2 * (arm_rotation.x * arm_rotation.w),
                 1 - 2 * (arm_rotation.x * arm_rotation.x)
-            ) * Mathf.Rad2Deg + offsetValue.arm_yaw * Mathf.Rad2Deg;
+            ) * Mathf.Rad2Deg;
         J2 =
             Mathf.Atan2(
                 2 * (arm_rotation.z * arm_rotation.w),
                 1 - 2 * (arm_rotation.z * arm_rotation.z)
-            ) * Mathf.Rad2Deg + offsetValue.arm_pitch * Mathf.Rad2Deg;
+            ) * Mathf.Rad2Deg;
 
         J3 =
             Mathf.Atan2(
                 2 * (arm_rotation.y * arm_rotation.w),
                 1 - 2 * (arm_rotation.y * arm_rotation.y)
-            ) * Mathf.Rad2Deg + offsetValue.arm_roll * Mathf.Rad2Deg;
+            ) * Mathf.Rad2Deg ;
         Vector3 forearm_axis;
         float forearm_angle;
         forearm_rotation.ToAngleAxis(out forearm_angle, out forearm_axis);
-        J4 = right_forearm.transform.localEulerAngles.z + offsetValue.forearm_pitch * Mathf.Rad2Deg;
-        J5 = forearm_angle * forearm_axis.y + offsetValue.forearm_roll * Mathf.Rad2Deg;
+        J4 = right_forearm.transform.localEulerAngles.z ;
+        J5 = forearm_angle * forearm_axis.y ;
         Vector3 hand_axis;
         float hand_angle;
         hand_rotation.ToAngleAxis(out hand_angle, out hand_axis);
-        J6 = hand_angle * hand_axis.z + offsetValue.hand_pitch * Mathf.Rad2Deg;
-        J7 = hand_angle * hand_axis.y + offsetValue.hand_roll * Mathf.Rad2Deg;
+        J6 = hand_angle * hand_axis.z ;
+        J7 = hand_angle * hand_axis.y ;
 
         List<float> jointAngles = new List<float> { J1, -J2, J3, J4, -J5, J6, J7 };
         jointAngleConstraint(jointAngles);
@@ -178,13 +178,6 @@ public class CopyAvatarMovement : MonoBehaviour
         fr3_J7.transform.localRotation =
             Quaternion.AngleAxis(jointAngles[6], Vector3.left)
             * Quaternion.AngleAxis(90f, Vector3.back);
-
-
-
-
-
-        
-
 
     }
     private void rad2Deg(float[,] radArray)
