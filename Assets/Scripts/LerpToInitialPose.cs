@@ -23,16 +23,16 @@ public class LerpToInitialPose : MonoBehaviour
         hand_transform = GameObject.Find("Right Hand").transform;
 
     }
-    // private Quaternion initial_Arm = Quaternion.Euler(0,0,0);
+    private Quaternion initial_Arm = Quaternion.Euler(0,0,0);
 
-    // private Quaternion initial_ForeArm = Quaternion.Euler(0,0,0);
+    private Quaternion initial_ForeArm = Quaternion.Euler(0,0,0);
 
-    // private Quaternion initial_Hand = Quaternion.Euler(0,0,0);
-    private Quaternion initial_Arm = Quaternion.Euler((1.59695f / 2) * Mathf.Rad2Deg,0, 0.785398163397f* Mathf.Rad2Deg);
+    private Quaternion initial_Hand = Quaternion.Euler(0,0,0);
+    // private Quaternion initial_Arm = Quaternion.Euler((1.59695f / 2) * Mathf.Rad2Deg, 0, 0f);
 
-    private Quaternion initial_ForeArm = Quaternion.Euler(0, 0, -2.35619449019f * Mathf.Rad2Deg + 0.4461f * Mathf.Rad2Deg);
+    // private Quaternion initial_ForeArm = Quaternion.Euler(0, 0, -2.35619449019f * Mathf.Rad2Deg + 0.4461f * Mathf.Rad2Deg);
 
-    private Quaternion initial_Hand = Quaternion.Euler(0, 0.785398163397f * Mathf.Rad2Deg, 1.57079632679f* Mathf.Rad2Deg - 0.8521f * Mathf.Rad2Deg);
+    // private Quaternion initial_Hand = Quaternion.Euler(0, 0.785398163397f * Mathf.Rad2Deg, 1.57079632679f * Mathf.Rad2Deg - 0.8521f * Mathf.Rad2Deg);
 
     public Quaternion RosArm;
     public Quaternion RosForeArm;
@@ -46,7 +46,7 @@ public class LerpToInitialPose : MonoBehaviour
 
         if (Lerp_Index == 1)
         {
-            once =1;
+            once = 1;
             arm_transform.localRotation = Quaternion.Lerp(arm_transform.localRotation, initial_Arm, lerpSpeed * Time.deltaTime);
             foreArm_transform.localRotation = Quaternion.Lerp(foreArm_transform.localRotation, initial_ForeArm, lerpSpeed * Time.deltaTime);
             hand_transform.localRotation = Quaternion.Lerp(hand_transform.localRotation, initial_Hand, lerpSpeed * Time.deltaTime);
@@ -59,7 +59,7 @@ public class LerpToInitialPose : MonoBehaviour
             reset_text.text = "";
             if (once == 1)
             {
-                GetComponent<JointStatePublisher>().publish_once =true;
+                GetComponent<JointStatePublisher>().publish_once = true;
                 once = 0;
             }
         }

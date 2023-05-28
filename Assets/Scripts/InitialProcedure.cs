@@ -23,6 +23,7 @@ public class InitialProcedure : MonoBehaviour
 
         indicator_man = GameObject.Find("indicator_man");
         banana_man = GameObject.Find("Banana Man");
+        
     }
 
     // void syncJointState()

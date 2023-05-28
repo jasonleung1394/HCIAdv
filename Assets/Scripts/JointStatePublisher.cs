@@ -80,6 +80,7 @@ public class JointStatePublisher : MonoBehaviour
         double[] jointPos = new double[7];
         jointPos = jointAngles_double;
         jointPos[2] = -jointPos[2];
+        jointPos[4] = -jointPos[4];
         var movedDis = Vector3.Distance(prev_handLocation, GameObject.Find("Right Hand").transform.position);
         if (publishType_Index == 0 && !publish_once)
         {

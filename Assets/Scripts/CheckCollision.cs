@@ -27,8 +27,6 @@ public class CheckCollision : MonoBehaviour
         // copyAvatarMovement.angleStatusIndexs.ToList().ForEach(element => Debug.Log($"==>{element}"));
         // Debug.Log(collidersList.Count == 0);
         angleViolation = copyAvatarMovement.angleStatusIndexs.All(element => element == 0);
-
-        Debug.Log(lerpToInitialPose.Lerp_Index);
         if (collidersList.Count == 0 && angleViolation && lerpToInitialPose.Lerp_Index != 1)
         {
             lerpToInitialPose.Lerp_Index = 0;

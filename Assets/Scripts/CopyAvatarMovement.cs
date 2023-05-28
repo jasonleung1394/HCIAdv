@@ -100,7 +100,7 @@ public class CopyAvatarMovement : MonoBehaviour
             Mathf.Atan2(
                 2 * (arm_rotation.z * arm_rotation.w),
                 1 - 2 * (arm_rotation.z * arm_rotation.z)
-            ) * Mathf.Rad2Deg;
+            ) * Mathf.Rad2Deg + offsetValue.arm_pitch;
 
         J3 =
             Mathf.Atan2(
@@ -111,14 +111,14 @@ public class CopyAvatarMovement : MonoBehaviour
         float forearm_angle;
         forearm_rotation.ToAngleAxis(out forearm_angle, out forearm_axis);
         J4 = right_forearm.transform.localEulerAngles.z - 0.4461f * Mathf.Rad2Deg;
-        J5 = forearm_angle * forearm_axis.y;
+        J5 = right_forearm.transform.localEulerAngles.y;
         Vector3 hand_axis;
         float hand_angle;
         hand_rotation.ToAngleAxis(out hand_angle, out hand_axis);
         J6 = hand_angle * hand_axis.z + 0.8521f * Mathf.Rad2Deg;
-        J7 = hand_angle * hand_axis.y;
+        J7 = right_hand.transform.localEulerAngles.x;
 
-        List<float> jointAngles = new List<float> { J1, -J2, J3, J4, -J5, J6, J7 };
+        List<float> jointAngles = new List<float> { J1, -J2, J3, J4, J5, J6, J7 };
         moveMimic(jointAngles);
         if (preFrameAngle != null)
         {
@@ -167,7 +167,7 @@ public class CopyAvatarMovement : MonoBehaviour
             * Quaternion.AngleAxis(90f, Vector3.back);
 
         fr3_J5.transform.localRotation =
-            Quaternion.AngleAxis(-jointAngles[4], Vector3.left)
+            Quaternion.AngleAxis(jointAngles[4], Vector3.left)
             * Quaternion.AngleAxis(-90f, Vector3.back);
 
         fr3_J6.transform.localRotation =
@@ -206,7 +206,7 @@ public class CopyAvatarMovement : MonoBehaviour
             * Quaternion.AngleAxis(90f, Vector3.back);
 
         fr3_J5_mimic.transform.localRotation =
-            Quaternion.AngleAxis(-jointAngles[4], Vector3.left)
+            Quaternion.AngleAxis(jointAngles[4], Vector3.left)
             * Quaternion.AngleAxis(-90f, Vector3.back);
 
         fr3_J6_mimic.transform.localRotation =
@@ -244,11 +244,9 @@ public class CopyAvatarMovement : MonoBehaviour
             {
                 jointAngles[i] = jointAngles[i] * Human_dpi_offset[i];
             }
-
             jointAngles[i] %= 360f;
             if (jointAngles[i] > 180f && i != 5)
                 jointAngles[i] -= 360f;
-            jointAngles[i] = Mathf.Clamp(jointAngles[i], -180f, 180f);
 
             var curPre = preFrameAngle[i];
             var curAn = jointAngles[i];
