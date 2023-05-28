@@ -66,13 +66,9 @@ public class CopyAvatarMovement : MonoBehaviour
         initialPoser();
 
         lerpToInitialPose = GetComponent<LerpToInitialPose>();
+        angleStatusIndexs = new int[7];
     }
 
-    private Quaternion initial_Arm = Quaternion.Euler((1.59695f / 2) * Mathf.Rad2Deg, -0.785398163397f * Mathf.Rad2Deg, 0);
-
-    private Quaternion initial_ForeArm = Quaternion.Euler(0, 0, -2.35619449019f * Mathf.Rad2Deg);
-
-    private Quaternion initial_Hand = Quaternion.Euler(0, 0 * Mathf.Rad2Deg, 0);
 
 
     void initialPoser()
@@ -82,7 +78,7 @@ public class CopyAvatarMovement : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
 
         // No Collision
@@ -110,21 +106,24 @@ public class CopyAvatarMovement : MonoBehaviour
             Mathf.Atan2(
                 2 * (arm_rotation.y * arm_rotation.w),
                 1 - 2 * (arm_rotation.y * arm_rotation.y)
-            ) * Mathf.Rad2Deg ;
+            ) * Mathf.Rad2Deg;
         Vector3 forearm_axis;
         float forearm_angle;
         forearm_rotation.ToAngleAxis(out forearm_angle, out forearm_axis);
-        J4 = right_forearm.transform.localEulerAngles.z ;
-        J5 = forearm_angle * forearm_axis.y ;
+        J4 = right_forearm.transform.localEulerAngles.z - 0.4461f * Mathf.Rad2Deg;
+        J5 = forearm_angle * forearm_axis.y;
         Vector3 hand_axis;
         float hand_angle;
         hand_rotation.ToAngleAxis(out hand_angle, out hand_axis);
-        J6 = hand_angle * hand_axis.z ;
-        J7 = hand_angle * hand_axis.y ;
+        J6 = hand_angle * hand_axis.z + 0.8521f * Mathf.Rad2Deg;
+        J7 = hand_angle * hand_axis.y;
 
         List<float> jointAngles = new List<float> { J1, -J2, J3, J4, -J5, J6, J7 };
-        jointAngleConstraint(jointAngles);
         moveMimic(jointAngles);
+        if (preFrameAngle != null)
+        {
+            jointAngleConstraint(jointAngles);
+        }
         if (lerpToInitialPose.Lerp_Index == 2)
         {
             jointAngles = preFrameAngle;
@@ -189,7 +188,8 @@ public class CopyAvatarMovement : MonoBehaviour
         }
     }
 
-    void moveMimic(List<float> jointAngles){
+    void moveMimic(List<float> jointAngles)
+    {
         // fr3_J1.transform.localEulerAngles = new Vector3(0, jointAngles[0], 0);
         fr3_J1_mimic.transform.localRotation = Quaternion.AngleAxis(-jointAngles[0], Vector3.up);
 
@@ -219,6 +219,7 @@ public class CopyAvatarMovement : MonoBehaviour
 
     }
 
+    public int[] angleStatusIndexs;
     private void jointAngleConstraint(List<float> jointAngles)
     {
         float[,] constraintVal = new float[,]
@@ -237,33 +238,52 @@ public class CopyAvatarMovement : MonoBehaviour
         rad2Deg(constraintVal);
         for (int i = 0; i < jointAngles.Count; i++)
         {
-            if (jointAngles[i] > 180f && i != 5)
-            {
-                jointAngles[i] = jointAngles[i] - 360f;
-            }
-
             // total DOF of Robot
             var robotDOF = Mathf.Abs(constraintVal[i, 0] - constraintVal[i, 1]);
             if (lerpToInitialPose.Lerp_Index == 0)
             {
                 jointAngles[i] = jointAngles[i] * Human_dpi_offset[i];
             }
-            if (constraintVal[i, 0] > jointAngles[i] && constraintVal[i, 1] < jointAngles[i]) { }
-            else if (constraintVal[i, 0] < jointAngles[i])
+
+            jointAngles[i] %= 360f;
+            if (jointAngles[i] > 180f && i != 5)
+                jointAngles[i] -= 360f;
+            jointAngles[i] = Mathf.Clamp(jointAngles[i], -180f, 180f);
+
+            var curPre = preFrameAngle[i];
+            var curAn = jointAngles[i];
+
+            if (curAn < constraintVal[i, 1] && curAn > -180f && angleStatusIndexs[i] == 0)
             {
-                // larger than max
-                jointAngles[i] = constraintVal[i, 0];
-                // Debug.Log("joint " + (i + 1f) + "  out of Range");
+                // not assigned yet pass min
+                angleStatusIndexs[i] = -1;
             }
-            else if (constraintVal[i, 1] > jointAngles[i])
+            else if (curAn > constraintVal[i, 0] && curAn < 180f && angleStatusIndexs[i] == 0)
             {
-                // lower than min
+                // not assigned yet passed max
+                angleStatusIndexs[i] = 1;
+            }
+
+            if (angleStatusIndexs[i] == 1)
+            {
+                if (curAn > constraintVal[i, 0] - 10f && curAn < constraintVal[i, 0])
+                {
+                    angleStatusIndexs[i] = 0;
+                }
+                jointAngles[i] = constraintVal[i, 0];
+            }
+            else if (angleStatusIndexs[i] == -1)
+            {
+                if (curAn < constraintVal[i, 1] + 10f && curAn > constraintVal[i, 1])
+                {
+                    angleStatusIndexs[i] = 0;
+                }
                 jointAngles[i] = constraintVal[i, 1];
             }
-            else
-            {
-                // how?
-            }
+            // Debug.Log(angleStatusIndexs[1]);
+
+            // Debug.Log("joint " + (1 + 1) + " :" + jointAngles[1]);
+
         }
     }
 }

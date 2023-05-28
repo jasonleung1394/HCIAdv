@@ -6,6 +6,7 @@ TagManager:
   tags:
   - robot
   - robot_mimic
+  - robot_tip
   layers:
   - Default
   - TransparentFX

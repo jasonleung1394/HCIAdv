@@ -81,6 +81,7 @@ public class OptitrackRigidBody : MonoBehaviour
     void UpdatePose()
     {
         OptitrackRigidBodyState rbState = StreamingClient.GetLatestRigidBodyState( RigidBodyId, NetworkCompensation);
+        rbState.Pose.Orientation = new Quaternion(-rbState.Pose.Orientation.y,-rbState.Pose.Orientation.x,-rbState.Pose.Orientation.z,rbState.Pose.Orientation.w);
         if ( rbState != null )
         {
             this.transform.localPosition = rbState.Pose.Position;

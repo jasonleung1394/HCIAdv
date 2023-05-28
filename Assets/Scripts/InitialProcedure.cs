@@ -72,16 +72,12 @@ public class InitialProcedure : MonoBehaviour
             GameObject.Find("Right Forearm OT").transform.localRotation = GameObject.Find("Right Forearm").transform.localRotation;
             GameObject.Find("Right Hand OT").transform.localRotation = GameObject.Find("Right Hand").transform.localRotation;
         }
+        JointStatePublisher jointStatePublisher = GetComponent<JointStatePublisher>();
+        jointStatePublisher.PublishJointState(publishType_Index);
     }
 
     public int publishType_Index = 0;
 
-    void FixedUpdate()
-    {
-
-        JointStatePublisher jointStatePublisher = GetComponent<JointStatePublisher>();
-        jointStatePublisher.PublishJointState(publishType_Index);
-    }
     private GameObject indicator_man;
     private GameObject banana_man;
     /// <summary>
