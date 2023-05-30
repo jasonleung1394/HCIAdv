@@ -26,8 +26,6 @@ public class CopyAvatarMovement : MonoBehaviour
     public Vector3 AvatarForeArm_Offset { get; set; }
     public Vector3 AvatarHand_Offset { get; set; }
 
-    private float[] initialPose = new float[] { 0, 0, 0f, -1.59695f, 0, 2.53075f, 0 };
-
     private float J1,
         J2,
         J3,
@@ -95,7 +93,7 @@ public class CopyAvatarMovement : MonoBehaviour
             Mathf.Atan2(
                 2 * (arm_rotation.x * arm_rotation.w),
                 1 - 2 * (arm_rotation.x * arm_rotation.x)
-            ) * Mathf.Rad2Deg;
+            ) * Mathf.Rad2Deg + offsetValue.arm_yaw;
         J2 =
             Mathf.Atan2(
                 2 * (arm_rotation.z * arm_rotation.w),
@@ -106,17 +104,17 @@ public class CopyAvatarMovement : MonoBehaviour
             Mathf.Atan2(
                 2 * (arm_rotation.y * arm_rotation.w),
                 1 - 2 * (arm_rotation.y * arm_rotation.y)
-            ) * Mathf.Rad2Deg;
+            ) * Mathf.Rad2Deg + offsetValue.arm_pitch;
         Vector3 forearm_axis;
         float forearm_angle;
         forearm_rotation.ToAngleAxis(out forearm_angle, out forearm_axis);
-        J4 = right_forearm.transform.localEulerAngles.z - 0.4461f * Mathf.Rad2Deg;
-        J5 = right_forearm.transform.localEulerAngles.y;
+        J4 = right_forearm.transform.localEulerAngles.z - 0.4461f * Mathf.Rad2Deg + offsetValue.forearm_pitch;
+        J5 = right_forearm.transform.localEulerAngles.y + offsetValue.forearm_roll;
         Vector3 hand_axis;
         float hand_angle;
         hand_rotation.ToAngleAxis(out hand_angle, out hand_axis);
         J6 = hand_angle * hand_axis.z + 0.8521f * Mathf.Rad2Deg;
-        J7 = right_hand.transform.localEulerAngles.x;
+        J7 = right_forearm.transform.localEulerAngles.x + offsetValue.hand_roll;
 
         List<float> jointAngles = new List<float> { J1, -J2, J3, J4, J5, J6, J7 };
         moveMimic(jointAngles);

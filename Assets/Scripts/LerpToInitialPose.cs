@@ -23,16 +23,16 @@ public class LerpToInitialPose : MonoBehaviour
         hand_transform = GameObject.Find("Right Hand").transform;
 
     }
-    private Quaternion initial_Arm = Quaternion.Euler(0,0,0);
+    // private Quaternion initial_Arm = Quaternion.Euler(0,0,0);
 
-    private Quaternion initial_ForeArm = Quaternion.Euler(0,0,0);
+    // private Quaternion initial_ForeArm = Quaternion.Euler(0,0,0);
 
-    private Quaternion initial_Hand = Quaternion.Euler(0,0,0);
-    // private Quaternion initial_Arm = Quaternion.Euler((1.59695f / 2) * Mathf.Rad2Deg, 0, 0f);
+    // private Quaternion initial_Hand = Quaternion.Euler(0,0,0);
+    private Quaternion initial_Arm = Quaternion.Euler((1.59695f / 2) * Mathf.Rad2Deg, 0, 0f);
 
-    // private Quaternion initial_ForeArm = Quaternion.Euler(0, 0, -2.35619449019f * Mathf.Rad2Deg + 0.4461f * Mathf.Rad2Deg);
+    private Quaternion initial_ForeArm = Quaternion.Euler(0, 0, -2.35619449019f * Mathf.Rad2Deg + 0.4461f * Mathf.Rad2Deg);
 
-    // private Quaternion initial_Hand = Quaternion.Euler(0, 0.785398163397f * Mathf.Rad2Deg, 1.57079632679f * Mathf.Rad2Deg - 0.8521f * Mathf.Rad2Deg);
+    private Quaternion initial_Hand = Quaternion.Euler(0, 0.785398163397f * Mathf.Rad2Deg, 1.57079632679f * Mathf.Rad2Deg - 0.8521f * Mathf.Rad2Deg);
 
     public Quaternion RosArm;
     public Quaternion RosForeArm;

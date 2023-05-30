@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Robotics.ROSTCPConnector;
-using Unity.Robotics.Core;
 using RosMessageTypes.Franka;
 using RosMessageTypes.Sensor;
 using RosMessageTypes.Std;
@@ -24,12 +23,6 @@ public class JointStatePublisher : MonoBehaviour
     public Transform fr3;
     private float timeElapsed;
 
-    private TimeStamp clockMsg;
-    public TimeStamp clockMsg_prop
-    {
-        get { return clockMsg; }
-        set { clockMsg = value; }
-    }
     private uint sequence;
     double PublishPeriodSeconds => 1.0f / 30f;
     double m_LastPublishTimeSeconds;
@@ -38,8 +31,6 @@ public class JointStatePublisher : MonoBehaviour
     public List<double[]> jointStateBuffer = new List<double[]>();
     private OffsetValue offsetValue;
     private LerpToInitialPose lerpToInitialPose;
-    bool ShouldPublishMessage =>
-        Clock.NowTimeInSeconds > m_LastPublishTimeSeconds + PublishPeriodSeconds;
 
     // Start is called before the first frame update
     void Start()
@@ -48,15 +39,9 @@ public class JointStatePublisher : MonoBehaviour
         ros.RegisterPublisher<JointCommandMsg>(topic_name);
         ros.RegisterPublisher<PositionsMsg>("joint_trajectory");
 
-        m_LastPublishTimeSeconds = Clock.time + PublishPeriodSeconds;
         offsetValue = GetComponent<OffsetValue>();
         lerpToInitialPose = GetComponent<LerpToInitialPose>();
     }
-    void syncClock(JointStateMsg JointStateMsg)
-    {
-        clockMsg_prop = JointStateMsg.header.stamp;
-    }
-
     void getSeq(TFMessageMsg tF)
     {
         // Debug.Log(tF.transforms[0]);
@@ -69,7 +54,6 @@ public class JointStatePublisher : MonoBehaviour
     {
 
         LerpToInitialPose lerpToInitialPose = GetComponent<LerpToInitialPose>();
-        ros.Subscribe<JointStateMsg>("joint_states", syncClock);
 
         string[] jointNames = new string[7];
         for (int i = 0; i < 7; i++)

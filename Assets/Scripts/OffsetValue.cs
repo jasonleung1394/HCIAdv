@@ -33,26 +33,26 @@ public class OffsetValue : MonoBehaviour
 
 
     [Header("Robot Posing Offset Value")]
-    [Range(-2.3093f, 2.3093f)]
+    [Range(0f,90f)]
     public float arm_yaw = 0;
 
-    [Range(0,90)]
+    [Range(0f,90f)]
     public float arm_pitch = 0;
 
-    [Range(-2.4937f, 2.4937f)]
+    [Range(0f,90f)]
     public float arm_roll = 0;
 
-    [Range(-2.7478f, 0)]
+    [Range(0f,90f)]
     public float forearm_pitch = 0;
 
-    [Range(-2.4800f, 2.4800f)]
+    [Range(0f,90f)]
     public float forearm_roll = 0;
 
-    [Range(0.8521f, 4.2094f)]
+    [Range(0f,90f)]
     // public float hand_pitch = 2.53075f;
     public float hand_pitch = 0f;
 
-    [Range(-2.6895f, 2.6895f)]
+    [Range(0f,90f)]
     public float hand_roll = 0;
 
     // Start is called before the first frame update

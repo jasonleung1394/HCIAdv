@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Unity.Robotics.ROSTCPConnector;
-using Unity.Robotics.Core;
 using RosMessageTypes.FrankaGripper;
 using RosMessageTypes.Actionlib;
 using RosMessageTypes.Std;
