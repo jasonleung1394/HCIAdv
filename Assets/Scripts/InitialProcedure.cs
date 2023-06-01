@@ -58,7 +58,7 @@ public class InitialProcedure : MonoBehaviour
             GameObject.Find("Right Hand").transform.localRotation = GameObject.Find("Right Hand OT").transform.localRotation;
             // GameObject.Find("Right Forearm OT").GetComponent<OptitrackRigidBody>().enabled = true;
             // GameObject.Find("Right Hand OT").GetComponent<OptitrackRigidBody>().enabled = true;
-            GameObject.Find("Right Arm OT").GetComponent<OptitrackRigidBody>().enabled = true;
+            // GameObject.Find("Right Arm OT").GetComponent<OptitrackRigidBody>().enabled = true;
             GameObject.Find("Right Arm OT").GetComponent<testScript>().enabled = true;
 
         }
@@ -66,7 +66,7 @@ public class InitialProcedure : MonoBehaviour
         {
             // GameObject.Find("Right Forearm OT").GetComponent<OptitrackRigidBody>().enabled = false;
             // GameObject.Find("Right Hand OT").GetComponent<OptitrackRigidBody>().enabled = false;
-            GameObject.Find("Right Arm OT").GetComponent<OptitrackRigidBody>().enabled = false;
+            // GameObject.Find("Right Arm OT").GetComponent<OptitrackRigidBody>().enabled = false;
             GameObject.Find("Right Arm OT").GetComponent<testScript>().enabled = false;
 
             GameObject.Find("Right Arm OT").transform.localRotation = GameObject.Find("Right Arm").transform.localRotation;

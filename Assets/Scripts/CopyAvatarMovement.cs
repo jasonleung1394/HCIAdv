@@ -117,6 +117,15 @@ public class CopyAvatarMovement : MonoBehaviour
         J7 = right_forearm.transform.localEulerAngles.x + offsetValue.hand_roll;
 
         List<float> jointAngles = new List<float> { J1, -J2, J3, J4, J5, J6, J7 };
+        offsetValue = GetComponent<OffsetValue>();
+        float[] Human_dpi_offset = { offsetValue.human_arm_yaw, offsetValue.human_arm_pitch, offsetValue.human_arm_roll, offsetValue.human_forearm_pitch, offsetValue.human_forearm_roll, offsetValue.human_hand_pitch, offsetValue.human_hand_roll };
+        if (lerpToInitialPose.Lerp_Index == 0)
+        {
+            for (int i = 0; i < jointAngles.Count; i++)
+            {
+                jointAngles[i] = jointAngles[i] * Human_dpi_offset[i];
+            }
+        }
         moveMimic(jointAngles);
         if (preFrameAngle != null)
         {
@@ -231,17 +240,13 @@ public class CopyAvatarMovement : MonoBehaviour
             { 2.6895f, -2.6895f } // 154 ~ -154
         };
         LerpToInitialPose lerpToInitialPose = GetComponent<LerpToInitialPose>();
-        OffsetValue offsetValue = GetComponent<OffsetValue>();
-        float[] Human_dpi_offset = { offsetValue.human_arm_yaw, offsetValue.human_arm_pitch, offsetValue.human_arm_roll, offsetValue.human_forearm_pitch, offsetValue.human_forearm_roll, offsetValue.human_hand_pitch, offsetValue.human_hand_roll };
+
         rad2Deg(constraintVal);
         for (int i = 0; i < jointAngles.Count; i++)
         {
             // total DOF of Robot
             var robotDOF = Mathf.Abs(constraintVal[i, 0] - constraintVal[i, 1]);
-            if (lerpToInitialPose.Lerp_Index == 0)
-            {
-                jointAngles[i] = jointAngles[i] * Human_dpi_offset[i];
-            }
+
             jointAngles[i] %= 360f;
             if (jointAngles[i] > 180f && i != 5)
                 jointAngles[i] -= 360f;
