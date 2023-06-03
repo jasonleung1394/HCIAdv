@@ -1,4 +1,0 @@
-float64 width
-GraspEpsilon epsilon
-float64 speed
-float64 force
