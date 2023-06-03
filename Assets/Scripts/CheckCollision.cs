@@ -22,10 +22,6 @@ public class CheckCollision : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //         LerpToInitialPose lerpToInitialPose = mainScript.GetComponent<LerpToInitialPose>();
-        // lerpToInitialPose.Lerp_Index = 0;
-        // copyAvatarMovement.angleStatusIndexs.ToList().ForEach(element => Debug.Log($"==>{element}"));
-        // Debug.Log(collidersList.Count == 0);
         angleViolation = copyAvatarMovement.angleStatusIndexs.All(element => element == 0);
         if (collidersList.Count == 0 && angleViolation && lerpToInitialPose.Lerp_Index != 1)
         {
@@ -33,8 +29,6 @@ public class CheckCollision : MonoBehaviour
         }
     }
     private bool angleViolation;
-
-
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.tag == "robot_mimic")

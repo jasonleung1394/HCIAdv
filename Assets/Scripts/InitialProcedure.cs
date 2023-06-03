@@ -23,31 +23,9 @@ public class InitialProcedure : MonoBehaviour
 
         indicator_man = GameObject.Find("indicator_man");
         banana_man = GameObject.Find("Banana Man");
-        
+
     }
 
-    // void syncJointState()
-    // {
-    //     ros.Subscribe<JointStateMsg>(JointState_TopicName, getJointState);
-    // }
-
-
-    // void getJointState(JointStateMsg jointStateMsg)
-    // {
-    //     double[] JointPosition = jointStateMsg.position;
-    //     CopyAvatarMovement copyAvatarMovement = GetComponent<CopyAvatarMovement>();
-
-    //     if (copyAvatarMovement.ifPosSynced(JointPosition))
-    //     {
-    //         jointStateSynced = true;
-    //     }
-    //     else
-    //     {
-    //         jointStateSynced = false;
-    //     }
-    // }
-
-    // Update is called once per frame
     void Update()
     {
         LerpToInitialPose lerpToInitialPose = GetComponent<LerpToInitialPose>();
@@ -81,38 +59,10 @@ public class InitialProcedure : MonoBehaviour
 
     private GameObject indicator_man;
     private GameObject banana_man;
+
     /// <summary>
-    /// No longer required
+    /// scene debug information
     /// </summary>
-    /// <returns></returns>
-    private bool syncTrackingToUnity()
-    {
-        bool sync_result = true;
-
-        Transform[] Banana_man_Transforms = { GameObject.Find("Right Arm").transform, GameObject.Find("Right Forearm").transform, GameObject.Find("Right Hand").transform };
-        Transform[] indicator_man_Transforms = { GameObject.Find("Right Arm OT").transform, GameObject.Find("Right Forearm OT").transform, GameObject.Find("Right Hand OT").transform };
-
-        for (int i = 0; i < Banana_man_Transforms.Length; i++)
-        {
-            var Banana_localR = Banana_man_Transforms[i].localRotation;
-            var Indicator_localR = indicator_man_Transforms[i].localRotation;
-            var diffX = Mathf.Abs(Banana_localR.eulerAngles.x - Indicator_localR.eulerAngles.x);
-            var diffY = Mathf.Abs(Banana_localR.eulerAngles.y - Indicator_localR.eulerAngles.y);
-            var diffZ = Mathf.Abs(Banana_localR.eulerAngles.z - Indicator_localR.eulerAngles.z);
-            if (diffX >= 10f || diffY >= 10f || diffZ >= 10f)
-            {
-                Debug.DrawRay(indicator_man_Transforms[i].position, Banana_man_Transforms[i].up, Color.red);
-                sync_result = false;
-            }
-            else
-            {
-                Debug.DrawRay(indicator_man_Transforms[i].position, Banana_man_Transforms[i].up, Color.green);
-            }
-        }
-
-        return sync_result;
-    }
-
     private void OnGUI()
     {
         CopyAvatarMovement copyAvatarMovement = GetComponent<CopyAvatarMovement>();
@@ -120,20 +70,6 @@ public class InitialProcedure : MonoBehaviour
 
         ButtonAction buttonAction = GetComponent<ButtonAction>();
         int GripperState_Index = buttonAction.GripperState_Index;
-        // string jointInitText = "";
-        // for (int i = 0; i < jointInitFlag.Length; i++)
-        // {
-        //     if (jointInitFlag[i] != true)
-        //     {
-        //         jointInitText += "Joint " + (i + 1) + " Is Not In Starting Position \n";
-        //     }
-        //     else
-        //     {
-        //         jointInitText += "Joint " + (i + 1) + " Is Good To Go\n";
-        //     }
-        // }
-        // GUI.Label(new Rect(700, 5, 500, 1000), "Checking sync between Unity To ROS");
-        // GUI.Label(new Rect(700, 10, 500, 1000), jointInitText);
         GUI.Label(new Rect(700, 150, 500, 1000), "Is the movement overspeed? -- " + !overSpeedFlag);
         GUI.Label(new Rect(700, 600, 500, 1000), GripperState_Index == 0 ? "Gripper is Closed" : "Gripper is Open");
     }

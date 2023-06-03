@@ -78,7 +78,6 @@ public class CopyAvatarMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         // No Collision
 
         OffsetValue offsetValue = GetComponent<OffsetValue>();
@@ -227,6 +226,10 @@ public class CopyAvatarMovement : MonoBehaviour
     }
 
     public int[] angleStatusIndexs;
+    /// <summary>
+    /// Constraint the angle value, if negative, only at negative constraint will unlock the motion
+    /// </summary>
+    /// <param name="jointAngles"></param>
     private void jointAngleConstraint(List<float> jointAngles)
     {
         float[,] constraintVal = new float[,]
@@ -281,9 +284,6 @@ public class CopyAvatarMovement : MonoBehaviour
                 }
                 jointAngles[i] = constraintVal[i, 1];
             }
-            // Debug.Log(angleStatusIndexs[1]);
-
-            // Debug.Log("joint " + (1 + 1) + " :" + jointAngles[1]);
 
         }
     }

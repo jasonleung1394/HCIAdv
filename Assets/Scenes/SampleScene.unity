@@ -11957,6 +11957,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6402012375109679170}
+  - component: {fileID: 6402012375109679171}
   m_Layer: 0
   m_Name: Right Forearm OT
   m_TagString: Untagged
@@ -12510,6 +12511,21 @@ Transform:
   m_Father: {fileID: 4746327789929940127}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6402012375109679171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 841396682952571501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89cc7d28ad1fd2e4faf77c512e62426d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StreamingClient: {fileID: 0}
+  RigidBodyId: 4
+  NetworkCompensation: 1
 --- !u!1 &6582565419241450236
 GameObject:
   m_ObjectHideFlags: 0

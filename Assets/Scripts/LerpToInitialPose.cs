@@ -43,6 +43,10 @@ public class LerpToInitialPose : MonoBehaviour
     public Quaternion RosHand;
 
     private int once = 0;
+
+    /// <summary>
+    /// reads from scene per frame, load corresponding settings base on the passed in Index
+    /// </summary>
     void Update()
     {
         initial_Arm = Quaternion.Euler((1.59695f / 2) * Mathf.Rad2Deg + offsetValue.arm_yaw, 0 + offsetValue.arm_roll, 0f + offsetValue.arm_pitch);
