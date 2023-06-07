@@ -9,6 +9,7 @@ using RosMessageTypes.Std;
 using RosMessageTypes.BuiltinInterfaces;
 using RosMessageTypes.Sensor;
 using UnityEngine.SceneManagement;
+using Microsoft.MixedReality.Toolkit.UI;
 
 public class ButtonAction : MonoBehaviour
 {
@@ -17,6 +18,8 @@ public class ButtonAction : MonoBehaviour
     public Button syncUnityToRosBtn;
     public Button syncRosToUnityBtn;
     public Button GripperActionBtn;
+
+    public Button ARResetBtn;
 
     private int _gripperState_Index = 0; //Suppose close is 0, open is 1
     public int GripperState_Index
@@ -32,12 +35,14 @@ public class ButtonAction : MonoBehaviour
 
         ros.RegisterPublisher<MoveActionGoalMsg>("/franka_gripper/move/goal");
         ros.RegisterPublisher<GraspActionGoalMsg>("/franka_gripper/grasp/goal");
+
     }
 
     /// <summary>
     /// Name changed into reset scene in Unity Scene
     /// </summary>
-    void SyncUnityToRos()
+    [SerializeField]
+    public void SyncUnityToRos()
     {
         // sync action needs to be a lerp
         JointStatePublisher jointStatePublisher = GetComponent<JointStatePublisher>();
